@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable camelcase, @typescript-eslint/naming-convention */
 /* eslint no-unused-vars: ["warn", { "argsIgnorePattern": "^_" }] */
 /* eslint @typescript-eslint/no-unused-vars: ["warn", { "argsIgnorePattern": "^_" }] */
@@ -8,7 +6,7 @@ import {
   buildSignedTx,
   buildUnsignedRawTx,
 } from '@onekeyfe/blockchain-libs/dist/provider/chains/stc/provider';
-import { starcoin_types, utils } from '@starcoin/starcoin';
+import { encoding, starcoin_types, utils } from '@starcoin/starcoin';
 
 import { HardwareSDK, deviceUtils } from '@onekeyhq/kit/src/utils/hardware';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
@@ -29,6 +27,7 @@ import type {
 } from '@onekeyfe/blockchain-libs/dist/types/provider';
 
 const PATH_PREFIX = `m/44'/${COIN_TYPE}'/0'/0'`;
+const CURVE_NAME = 'ed25519';
 
 export class KeyringHardware extends KeyringHardwareBase {
   async signTransaction(
@@ -132,75 +131,37 @@ export class KeyringHardware extends KeyringHardwareBase {
   async prepareAccounts(
     params: IPrepareHardwareAccountsParams,
   ): Promise<Array<DBSimpleAccount>> {
-    const { type, indexes, names } = params;
-    const paths = indexes.map((index) => `${PATH_PREFIX}/${index}'`);
-    const isSearching = type === 'SEARCH_ACCOUNTS';
-    const showOnOneKey = false;
+    const { indexes, names } = params;
     await this.getHardwareSDKInstance();
     const { connectId, deviceId } = await this.getHardwareInfo();
     const passphraseState = await this.getWalletPassphraseState();
 
-    let pubkeys: Array<string> = [];
-    if (!isSearching) {
-      let response;
-      try {
-        response = await HardwareSDK.starcoinGetPublicKey(connectId, deviceId, {
-          bundle: paths.map((path) => ({ path, showOnOneKey })),
-          ...passphraseState,
-        });
-      } catch (error: any) {
-        debugLogger.common.error(error);
-        throw new OneKeyHardwareError(error);
-      }
-
-      if (!response.success) {
-        debugLogger.common.error(response.payload);
-        throw deviceUtils.convertDeviceError(response.payload);
-      }
-
-      pubkeys = response.payload
-        .map((result) => result.public_key)
-        .filter((item: string | undefined): item is string => !!item);
-    }
-
-    let addressesResponse;
+    let response;
     try {
-      addressesResponse = await HardwareSDK.starcoinGetAddress(
-        connectId,
-        deviceId,
-        {
-          bundle: paths.map((path) => ({ path, showOnOneKey })),
-          ...passphraseState,
-        },
-      );
+      response = await HardwareSDK.batchGetPublicKey(connectId, deviceId, {
+        showOnOneKey: false,
+        ecdsaCurveName: CURVE_NAME,
+        paths: indexes.map((index) => `${PATH_PREFIX}/${index}'`),
+        ...passphraseState,
+      });
     } catch (error: any) {
       debugLogger.common.error(error);
       throw new OneKeyHardwareError(error);
     }
-    if (!addressesResponse.success) {
-      debugLogger.common.error(addressesResponse.payload);
-      throw deviceUtils.convertDeviceError(addressesResponse.payload);
+    if (!response.success) {
+      debugLogger.common.error(response.payload);
+      throw deviceUtils.convertDeviceError(response.payload);
     }
 
-    const ret = [];
-    let index = 0;
-    for (const addressInfo of addressesResponse.payload) {
-      const { address, path } = addressInfo;
-      if (address) {
-        const name = (names || [])[index] || `STC #${indexes[index] + 1}`;
-        ret.push({
-          id: `${this.walletId}--${path}`,
-          name,
-          type: AccountType.SIMPLE,
-          path,
-          coinType: COIN_TYPE,
-          pub: pubkeys[index] || '',
-          address,
-        });
-        index += 1;
-      }
-    }
-    return ret;
+    return response.payload.map(({ path, publicKey }, index) => ({
+      id: `${this.walletId}--${path}`,
+      name: (names || [])[index] || `STC #${indexes[index] + 1}`,
+      type: AccountType.SIMPLE,
+      path,
+      coinType: COIN_TYPE,
+      pub: publicKey,
+      address: encoding.publicKeyToAddress(publicKey),
+    }));
   }
 
   async getAddress(params: IGetAddressParams): Promise<string> {

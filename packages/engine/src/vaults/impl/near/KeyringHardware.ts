@@ -23,6 +23,7 @@ import type {
 } from '../../types';
 
 const PATH_PREFIX = `m/44'/${COIN_TYPE}'`;
+const CURVE_NAME = 'ed25519';
 
 // Hardware mistakenly returns a near implicit address with 0x prefix, this
 // workaround is to remove the prefix.
@@ -88,42 +89,38 @@ export class KeyringHardware extends KeyringHardwareBase {
     params: IPrepareHardwareAccountsParams,
   ): Promise<Array<DBSimpleAccount>> {
     const { indexes, names } = params;
-    const paths = indexes.map((index) => `${PATH_PREFIX}/${index}'`);
-    const showOnOneKey = false;
     await this.getHardwareSDKInstance();
     const { connectId, deviceId } = await this.getHardwareInfo();
     const passphraseState = await this.getWalletPassphraseState();
 
-    let addressesResponse;
+    let response;
     try {
-      addressesResponse = await HardwareSDK.nearGetAddress(
-        connectId,
-        deviceId,
-        {
-          bundle: paths.map((path) => ({ path, showOnOneKey })),
-          ...passphraseState,
-        },
-      );
+      response = await HardwareSDK.batchGetPublicKey(connectId, deviceId, {
+        showOnOneKey: false,
+        ecdsaCurveName: CURVE_NAME,
+        paths: indexes.map((index) => `${PATH_PREFIX}/${index}'`),
+        ...passphraseState,
+      });
     } catch (error: any) {
       debugLogger.common.error(error);
       throw new OneKeyHardwareError(error);
     }
-    if (!addressesResponse.success) {
-      debugLogger.common.error(addressesResponse.payload);
-      throw deviceUtils.convertDeviceError(addressesResponse.payload);
+    if (!response.success) {
+      debugLogger.common.error(response.payload);
+      throw deviceUtils.convertDeviceError(response.payload);
     }
 
-    return addressesResponse.payload
-      .map(({ address, path }, index) => ({
+    return response.payload
+      .map(({ path, publicKey }, index) => ({
         id: `${this.walletId}--${path}`,
         name: (names || [])[index] || `NEAR #${indexes[index] + 1}`,
         type: AccountType.SIMPLE,
         path,
         coinType: COIN_TYPE,
         pub: `ed25519:${baseEncode(
-          Buffer.from(correctHardwareAddressRet(address ?? ''), 'hex'),
+          Buffer.from(correctHardwareAddressRet(publicKey ?? ''), 'hex'),
         )}`,
-        address: correctHardwareAddressRet(address ?? ''),
+        address: correctHardwareAddressRet(publicKey ?? ''),
       }))
       .filter(({ address }) => !!address);
   }

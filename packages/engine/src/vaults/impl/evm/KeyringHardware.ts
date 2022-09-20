@@ -23,6 +23,7 @@ import {
 import type { IUnsignedMessageEvm } from './Vault';
 
 const PATH_PREFIX = `m/44'/${COIN_TYPE}'/0'/0`;
+const CURVE_NAME = 'secp256k1';
 
 export class KeyringHardware extends KeyringHardwareBase {
   async signTransaction(unsignedTx: UnsignedTx): Promise<SignedTx> {
@@ -69,65 +70,34 @@ export class KeyringHardware extends KeyringHardwareBase {
     const passphraseState = await this.getWalletPassphraseState();
     const { indexes, names, type } = params;
 
-    let addressInfos;
-    if (type === 'SEARCH_ACCOUNTS') {
-      // When searching for accounts, we only get the PATH_PREFIX's xpub
-      // and derive the addresses to reduce the number of calls to the device
-      // therefore better performance.
-      let response;
-      try {
-        response = await HardwareSDK.evmGetPublicKey(connectId, deviceId, {
-          path: PATH_PREFIX,
-          showOnOneKey: false,
-          ...passphraseState,
-        });
-      } catch (e: any) {
-        debugLogger.engine.error(e);
-        throw new OneKeyHardwareError(e);
-      }
-
-      if (!response.success) {
-        throw deviceUtils.convertDeviceError(response.payload);
-      }
-      const { xpub } = response.payload;
-      const node = ethers.utils.HDNode.fromExtendedKey(xpub);
-      addressInfos = indexes.map((index) => ({
-        path: `${PATH_PREFIX}/${index}`,
-        info: engineUtils.fixAddressCase({
-          address: node.derivePath(`${index}`).address,
-          impl: IMPL_EVM,
-        }),
-      }));
-    } else {
-      const paths = indexes.map((index) => `${PATH_PREFIX}/${index}`);
-      addressInfos = await OneKeyHardware.getXpubs(
-        IMPL_EVM,
-        paths,
-        'address',
-        type,
-        connectId,
-        deviceId,
-        passphraseState,
-      );
-    }
-
-    const ret = [];
-    let index = 0;
-    for (const info of addressInfos) {
-      const { path, info: address } = info;
-      const name = (names || [])[index] || `EVM #${indexes[index] + 1}`;
-      ret.push({
-        id: `${this.walletId}--${path}`,
-        name,
-        type: AccountType.SIMPLE,
-        path,
-        coinType: COIN_TYPE,
-        pub: '',
-        address,
+    let response;
+    try {
+      response = await HardwareSDK.batchGetPublicKey(connectId, deviceId, {
+        showOnOneKey: false,
+        ecdsaCurveName: CURVE_NAME,
+        paths: indexes.map((index) => `${PATH_PREFIX}/${index}`),
+        ...passphraseState,
       });
-      index += 1;
+    } catch (e: any) {
+      debugLogger.engine.error(e);
+      throw new OneKeyHardwareError(e);
     }
-    return ret;
+    if (!response.success) {
+      throw deviceUtils.convertDeviceError(response.payload);
+    }
+
+    return response.payload.map(async ({ path, publicKey }, idx) => ({
+      id: `${this.walletId}--${path}`,
+      name: (names || [])[idx] || `EVM #${indexes[idx] + 1}`,
+      type: AccountType.SIMPLE,
+      path,
+      coinType: COIN_TYPE,
+      pub: publicKey,
+      address: await this.engine.providerManager.addressFromPub(
+        this.networkId,
+        publicKey,
+      ),
+    }));
   }
 
   async getAddress(params: IGetAddressParams): Promise<string> {

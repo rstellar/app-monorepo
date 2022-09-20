@@ -14,6 +14,8 @@ import { NotImplemented, OneKeyHardwareError } from '../../../errors';
 import { AccountType, DBSimpleAccount } from '../../../types/account';
 import { KeyringHardwareBase } from '../../keyring/KeyringHardwareBase';
 
+import { publicKeyToAddress } from './utils';
+
 import type {
   IGetAddressParams,
   IPrepareHardwareAccountsParams,
@@ -23,6 +25,7 @@ import type { IEncodedTxTron } from './types';
 import type { TronTransactionContract } from '@onekeyfe/hd-core';
 
 const PATH_PREFIX = `m/44'/${COIN_TYPE}'/0'/0`;
+const CURVE_NAME = 'secp256k1';
 
 export class KeyringHardware extends KeyringHardwareBase {
   override async signTransaction(
@@ -109,42 +112,36 @@ export class KeyringHardware extends KeyringHardwareBase {
     params: IPrepareHardwareAccountsParams,
   ): Promise<Array<DBSimpleAccount>> {
     const { indexes, names } = params;
-    const paths = indexes.map((index) => `${PATH_PREFIX}/${index}`);
-    const showOnOneKey = false;
     await this.getHardwareSDKInstance();
     const { connectId, deviceId } = await this.getHardwareInfo();
     const passphraseState = await this.getWalletPassphraseState();
 
-    let addressesResponse;
+    let response;
     try {
-      addressesResponse = await HardwareSDK.tronGetAddress(
-        connectId,
-        deviceId,
-        {
-          bundle: paths.map((path) => ({ path, showOnOneKey })),
-          ...passphraseState,
-        },
-      );
+      response = await HardwareSDK.batchGetPublicKey(connectId, deviceId, {
+        showOnOneKey: false,
+        ecdsaCurveName: CURVE_NAME,
+        paths: indexes.map((index) => `${PATH_PREFIX}/${index}`),
+        ...passphraseState,
+      });
     } catch (error: any) {
       debugLogger.common.error(error);
       throw new OneKeyHardwareError(error);
     }
-    if (!addressesResponse.success) {
-      debugLogger.common.error(addressesResponse.payload);
-      throw deviceUtils.convertDeviceError(addressesResponse.payload);
+    if (!response.success) {
+      debugLogger.common.error(response.payload);
+      throw deviceUtils.convertDeviceError(response.payload);
     }
 
-    return addressesResponse.payload
-      .map(({ address, path }, index) => ({
-        id: `${this.walletId}--${path}`,
-        name: (names || [])[index] || `TRON #${indexes[index] + 1}`,
-        type: AccountType.SIMPLE,
-        path,
-        coinType: COIN_TYPE,
-        pub: '', // no public key info from hardware
-        address: address ?? '',
-      }))
-      .filter(({ address }) => !!address);
+    return response.payload.map(({ path, publicKey }, index) => ({
+      id: `${this.walletId}--${path}`,
+      name: (names || [])[index] || `TRON #${indexes[index] + 1}`,
+      type: AccountType.SIMPLE,
+      path,
+      coinType: COIN_TYPE,
+      pub: publicKey,
+      address: publicKeyToAddress(publicKey),
+    }));
   }
 
   override async getAddress(params: IGetAddressParams): Promise<string> {
