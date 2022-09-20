@@ -73,7 +73,6 @@ export class KeyringHardware extends KeyringHardwareBase {
     let response;
     try {
       response = await HardwareSDK.batchGetPublicKey(connectId, deviceId, {
-        showOnOneKey: false,
         ecdsaCurveName: CURVE_NAME,
         paths: indexes.map((index) => `${PATH_PREFIX}/${index}`),
         ...passphraseState,
@@ -86,18 +85,22 @@ export class KeyringHardware extends KeyringHardwareBase {
       throw deviceUtils.convertDeviceError(response.payload);
     }
 
-    return response.payload.map(async ({ path, publicKey }, idx) => ({
-      id: `${this.walletId}--${path}`,
-      name: (names || [])[idx] || `EVM #${indexes[idx] + 1}`,
-      type: AccountType.SIMPLE,
-      path,
-      coinType: COIN_TYPE,
-      pub: publicKey,
-      address: await this.engine.providerManager.addressFromPub(
-        this.networkId,
-        publicKey,
-      ),
-    }));
+    const unresolvedRet = response.payload.map(
+      async ({ path, publicKey }, idx) => ({
+        id: `${this.walletId}--${path}`,
+        name: (names || [])[idx] || `EVM #${indexes[idx] + 1}`,
+        type: AccountType.SIMPLE,
+        path,
+        coinType: COIN_TYPE,
+        pub: publicKey,
+        address: await this.engine.providerManager.addressFromPub(
+          this.networkId,
+          publicKey,
+        ),
+      }),
+    );
+    const result = await Promise.all(unresolvedRet);
+    return result;
   }
 
   async getAddress(params: IGetAddressParams): Promise<string> {
