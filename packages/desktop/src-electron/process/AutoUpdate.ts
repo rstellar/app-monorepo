@@ -1,4 +1,7 @@
+import path from 'path';
+
 import { app, ipcMain } from 'electron';
+import isDev from 'electron-is-dev';
 import logger from 'electron-log';
 import { CancellationToken, autoUpdater } from 'electron-updater';
 
@@ -30,6 +33,19 @@ function isNetworkError(errorObject: Error) {
 }
 
 const init = ({ mainWindow, store }: Dependencies) => {
+  if (isDev) {
+    Object.defineProperty(app, 'isPackaged', {
+      get() {
+        return true;
+      },
+    });
+
+    autoUpdater.updateConfigPath = path.join(
+      __dirname,
+      '../../dev-app-update.yml',
+    );
+  }
+
   // Enable feature on FE once it's ready
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.webContents.send('update/enable');
@@ -98,6 +114,15 @@ const init = ({ mainWindow, store }: Dependencies) => {
         version: latestVersion.version,
         isNetworkError: true,
       });
+    }
+    if (
+      err.toString().startsWith('TypeError: Object has been destroyed') ||
+      err
+        .toString()
+        .startsWith('Could not get code signature for running application')
+    ) {
+      app.relaunch();
+      app.exit();
     }
   });
 
@@ -181,9 +206,9 @@ const init = ({ mainWindow, store }: Dependencies) => {
     // Removing listeners & closing window (https://github.com/electron-userland/electron-builder/issues/1604)
     app.removeAllListeners('window-all-closed');
     mainWindow.removeAllListeners('close');
-    mainWindow.close();
+    // mainWindow.close();
 
-    autoUpdater.quitAndInstall();
+    autoUpdater.quitAndInstall(true, true);
   });
 
   ipcMain.on('update/settings', (_, settings: UpdateSettings) => {
