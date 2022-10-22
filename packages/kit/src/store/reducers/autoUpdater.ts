@@ -1,5 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
+import showInstallPopup from '@onekeyhq/kit/src/views/Me/AboutSection/showInstallPopup';
+
 import { DesktopVersion, VersionInfo } from '../../utils/updates/type';
 
 export type UpdateError = {
@@ -24,7 +26,8 @@ export interface AutoUpdaterState {
     | 'not-available'
     | 'downloading'
     | 'ready'
-    | 'error';
+    | 'error'
+    | 'install';
   skip?: string;
   progress: UpdateProgress;
   latest?: VersionInfo | DesktopVersion;
@@ -83,6 +86,10 @@ export const autoUpdaterSlice = createSlice({
         state.state = 'available';
       }
     },
+    install(state) {
+      state.state = 'install';
+      showInstallPopup();
+    },
     setUpdateWindow(state, action: PayloadAction<UpdateWindow>) {
       state.window = action.payload;
     },
@@ -99,6 +106,7 @@ export const {
   ready,
   skip,
   error,
+  install,
   setUpdateWindow,
 } = autoUpdaterSlice.actions;
 

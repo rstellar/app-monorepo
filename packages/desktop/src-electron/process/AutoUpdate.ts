@@ -204,6 +204,7 @@ const init = ({ mainWindow, store }: Dependencies) => {
     logger.info('auto-updater', 'Installation request');
 
     // Removing listeners & closing window (https://github.com/electron-userland/electron-builder/issues/1604)
+    mainWindow.webContents.send(`update/install`);
     app.removeAllListeners('window-all-closed');
     mainWindow.removeAllListeners('close');
     // mainWindow.close();

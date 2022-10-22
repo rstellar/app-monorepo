@@ -11,6 +11,7 @@ import {
   checking,
   downloading,
   error,
+  install,
   notAvailable,
   ready,
 } from '@onekeyhq/kit/src/store/reducers/autoUpdater';
@@ -236,7 +237,7 @@ class AppUpdates {
       );
       dispatch(downloading(progress));
     });
-    window.desktopApi.on('update/downloaded', ({ version }) => {
+    window.desktopApi?.on?.('update/downloaded', ({ version }) => {
       debugLogger.autoUpdate.debug('update/downloaded');
       dispatch(ready({ version }));
       dispatch(
@@ -245,6 +246,9 @@ class AppUpdates {
           updateLatestTimeStamp: null,
         }),
       );
+    });
+    window.desktopApi?.on?.('update/install', () => {
+      dispatch(install());
     });
   }
 }

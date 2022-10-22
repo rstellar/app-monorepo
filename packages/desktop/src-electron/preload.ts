@@ -99,6 +99,7 @@ const validChannels = [
   'update/error',
   'update/downloading',
   'update/downloaded',
+  'update/install',
 ];
 
 const desktopApi = {
