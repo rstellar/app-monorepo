@@ -1,7 +1,7 @@
 import RootSiblingsManager from 'react-native-root-siblings';
 
 import { Box, Modal, Spinner, Typography } from '@onekeyhq/components';
-// import { formatMessage } from '@onekeyhq/components/src/Provider';
+import { formatMessage } from '@onekeyhq/components/src/Provider';
 
 export default function showInstallPopup() {
   const modalPopup = (
@@ -9,7 +9,7 @@ export default function showInstallPopup() {
       <Box h="100%" justifyContent="center" alignItems="center">
         <Spinner size="lg" />
         <Typography.DisplayMedium mt={6}>
-          Install and relaunch
+          {formatMessage({ id: 'action__install_and_relaunch' })}
         </Typography.DisplayMedium>
       </Box>
     </Modal>

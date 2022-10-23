@@ -209,7 +209,7 @@ const init = ({ mainWindow, store }: Dependencies) => {
     mainWindow.removeAllListeners('close');
     // mainWindow.close();
 
-    autoUpdater.quitAndInstall(true, true);
+    autoUpdater.quitAndInstall();
   });
 
   ipcMain.on('update/settings', (_, settings: UpdateSettings) => {
