@@ -39,13 +39,11 @@ const init = ({ mainWindow, store }: Dependencies) => {
         return true;
       },
     });
-
     autoUpdater.updateConfigPath = path.join(
       __dirname,
       '../../dev-app-update.yml',
     );
   }
-
   // Enable feature on FE once it's ready
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.webContents.send('update/enable');
@@ -204,12 +202,13 @@ const init = ({ mainWindow, store }: Dependencies) => {
     logger.info('auto-updater', 'Installation request');
 
     // Removing listeners & closing window (https://github.com/electron-userland/electron-builder/issues/1604)
-    mainWindow.webContents.send(`update/install`);
-    app.removeAllListeners('window-all-closed');
-    mainWindow.removeAllListeners('close');
-    // mainWindow.close();
-
-    autoUpdater.quitAndInstall();
+    setImmediate(() => {
+      app.removeAllListeners('window-all-closed');
+      mainWindow.removeAllListeners('close');
+      mainWindow.close();
+      autoUpdater.quitAndInstall();
+      app.exit();
+    });
   });
 
   ipcMain.on('update/settings', (_, settings: UpdateSettings) => {
