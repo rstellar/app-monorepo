@@ -181,6 +181,7 @@ function createMainWindow() {
     mainWindow = null;
     isAppReady = false;
     console.log('set isAppReady on browserWindow closed', isAppReady);
+    logger.info('browserWindow.on-closed');
   });
 
   browserWindow.webContents.on('devtools-opened', () => {
@@ -282,6 +283,7 @@ function createMainWindow() {
 
   browserWindow.on('hide', () => {
     browserWindow.webContents.send('appState', 'background');
+    logger.info('browserWindow.on-hide');
   });
 
   // Prevents clicking on links to open new Windows
@@ -340,9 +342,11 @@ function createMainWindow() {
   browserWindow.on('close', (event: Event) => {
     // hide() instead of close() on MAC
     if (isMac) {
+      logger.info('browserWindow.on-close');
       event.preventDefault();
       if (!browserWindow.isDestroyed()) {
         browserWindow.hide();
+        logger.info('browserWindow.hide call on close callback');
         // browserWindow.minimize();
       }
     }
@@ -363,13 +367,16 @@ function quitOrMinimizeApp(event?: Event) {
   // to stay active until the user quits explicitly with Cmd + Q
   if (isMac) {
     // **** renderer app will reload after minimize, and keytar not working.
+    logger.info('call quitOrMinimizeApp');
     event?.preventDefault();
     if (!mainWindow?.isDestroyed()) {
       mainWindow?.hide();
+      logger.info('call quitOrMinimizeApp: mainWindow hide');
     }
     // ****
     // app.quit();
   } else {
+    logger.info('call quitOrMinimizeApp: app quit');
     app.quit();
   }
 }
@@ -378,6 +385,7 @@ if (!singleInstance && !process.mas) {
   quitOrMinimizeApp();
 } else {
   app.on('second-instance', (e, argv) => {
+    logger.info('second-instance');
     if (mainWindow) {
       if (mainWindow.isMinimized()) mainWindow.restore();
       showMainWindow();
@@ -410,16 +418,19 @@ app.on('activate', () => {
 });
 
 app.on('before-quit', () => {
+  logger.info('before-quit listener');
   if (mainWindow) {
     mainWindow?.removeAllListeners();
     mainWindow?.removeAllListeners('close');
     mainWindow?.close();
+    logger.info('before-quit listener: mainwindow call');
   }
   disposeContextMenu();
 });
 
 // Quit when all windows are closed.
 app.on('window-all-closed', (event: Event) => {
+  logger.info('window-all-closed listener');
   quitOrMinimizeApp(event);
 });
 

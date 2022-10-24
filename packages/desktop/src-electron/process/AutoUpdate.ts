@@ -198,6 +198,8 @@ const init = ({ mainWindow, store }: Dependencies) => {
       .catch(() => logger.info('auto-updater', 'Update cancelled'));
   });
 
+  let t0: number;
+  let t1: number;
   ipcMain.on('update/install', () => {
     logger.info('auto-updater', 'Installation request');
 
@@ -207,8 +209,18 @@ const init = ({ mainWindow, store }: Dependencies) => {
       mainWindow.removeAllListeners('close');
       mainWindow.close();
 
+      t0 = performance.now();
       autoUpdater.quitAndInstall();
     });
+  });
+
+  app.on('before-quit', () => {
+    t1 = performance.now();
+    console.log('t1: ', t1);
+    console.log('t0: ', t0);
+    logger.info(
+      `auto-update before-quit, performance: ${t1 - t0} milliseconds.`,
+    );
   });
 
   ipcMain.on('update/settings', (_, settings: UpdateSettings) => {
