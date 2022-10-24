@@ -206,8 +206,8 @@ const init = ({ mainWindow, store }: Dependencies) => {
       app.removeAllListeners('window-all-closed');
       mainWindow.removeAllListeners('close');
       mainWindow.close();
+
       autoUpdater.quitAndInstall();
-      app.exit();
     });
   });
 
