@@ -56,6 +56,7 @@ const init = ({ mainWindow, store }: Dependencies) => {
 
   autoUpdater.autoDownload = false;
   autoUpdater.autoInstallOnAppQuit = false;
+  logger.transports.file.level = 'debug';
   autoUpdater.logger = logger;
 
   logger.info(
