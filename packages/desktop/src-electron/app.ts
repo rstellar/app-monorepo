@@ -22,10 +22,10 @@ import logger from 'electron-log';
 import * as store from './libs/store';
 import initProcess, { restartBridge } from './process/index';
 
-import type { PrefType } from './preload';
+// import type { PrefType } from './preload';
 
-const ONEKEY_APP_DEEP_LINK_NAME = 'onekey-wallet';
-const WALLET_CONNECT_DEEP_LINK_NAME = 'wc';
+// const ONEKEY_APP_DEEP_LINK_NAME = 'onekey-wallet';
+// const WALLET_CONNECT_DEEP_LINK_NAME = 'wc';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
 const config = new Config() as
@@ -39,9 +39,9 @@ const configKeys = {
 };
 
 // https://github.com/sindresorhus/electron-context-menu
-const disposeContextMenu = contextMenu({
-  showSaveImageAs: true,
-});
+// const disposeContextMenu = contextMenu({
+//   showSaveImageAs: true,
+// });
 
 const APP_NAME = 'OneKey Wallet';
 let mainWindow: BrowserWindow | null;
@@ -55,7 +55,7 @@ const staticPath = isDev
 // static path
 const preloadJsUrl = path.join(staticPath, 'preload.js');
 
-const isMac = process.platform === 'darwin';
+// const isMac = process.platform === 'darwin';
 const isWin = process.platform === 'win32';
 
 export type IDesktopOpenUrlEventData = {
@@ -73,43 +73,43 @@ function showMainWindow() {
   mainWindow.focus();
 }
 
-const emitter = new EventEmitter();
+// const emitter = new EventEmitter();
 let isAppReady = false;
-function handleDeepLinkUrl(
-  event: Event | null,
-  url: string,
-  argv?: string[],
-  isColdStartup?: boolean,
-) {
-  const eventData: IDesktopOpenUrlEventData = {
-    url,
-    argv,
-    isColdStartup,
-    platform: process.platform,
-  };
+// function handleDeepLinkUrl(
+//   event: Event | null,
+//   url: string,
+//   argv?: string[],
+//   isColdStartup?: boolean,
+// ) {
+//   const eventData: IDesktopOpenUrlEventData = {
+//     url,
+//     argv,
+//     isColdStartup,
+//     platform: process.platform,
+//   };
 
-  console.log('handleDeepLinkUrl >>>> ', eventData);
+//   console.log('handleDeepLinkUrl >>>> ', eventData);
 
-  const sendEventData = () => {
-    isAppReady = true;
-    if (mainWindow) {
-      showMainWindow();
-      if (process.env.NODE_ENV !== 'production') {
-        mainWindow.webContents.send('OPEN_URL_DEEP_LINK_MESSAGE', eventData);
-      }
-      mainWindow.webContents.send('event-open-url', eventData);
-    }
-  };
-  if (isAppReady && mainWindow) {
-    sendEventData();
-  } else {
-    emitter.once('ready', () => sendEventData());
-  }
+//   const sendEventData = () => {
+//     isAppReady = true;
+//     if (mainWindow) {
+//       showMainWindow();
+//       if (process.env.NODE_ENV !== 'production') {
+//         mainWindow.webContents.send('OPEN_URL_DEEP_LINK_MESSAGE', eventData);
+//       }
+//       mainWindow.webContents.send('event-open-url', eventData);
+//     }
+//   };
+//   if (isAppReady && mainWindow) {
+//     sendEventData();
+//   } else {
+//     emitter.once('ready', () => sendEventData());
+//   }
 
-  if (event) {
-    event?.preventDefault();
-  }
-}
+//   if (event) {
+//     event?.preventDefault();
+//   }
+// }
 
 function createMainWindow() {
   const display = screen.getPrimaryDisplay();
@@ -158,12 +158,12 @@ function createMainWindow() {
 
   browserWindow.loadURL(src);
 
-  // Protocol handler for win32
-  if (isWin || isMac) {
-    // Keep only command line / deep linked arguments
-    const deeplinkingUrl = process.argv[1];
-    handleDeepLinkUrl(null, deeplinkingUrl, process.argv, true);
-  }
+  // // Protocol handler for win32
+  // if (isWin || isMac) {
+  //   // Keep only command line / deep linked arguments
+  //   const deeplinkingUrl = process.argv[1];
+  //   handleDeepLinkUrl(null, deeplinkingUrl, process.argv, true);
+  // }
 
   browserWindow.webContents.on('did-finish-load', () => {
     console.log('browserWindow >>>> did-finish-load');
@@ -174,22 +174,22 @@ function createMainWindow() {
     });
   });
 
-  browserWindow.on('resize', () => {
-    config?.set(configKeys.winBounds, browserWindow.getBounds());
-  });
-  browserWindow.on('closed', () => {
-    mainWindow = null;
-    isAppReady = false;
-    console.log('set isAppReady on browserWindow closed', isAppReady);
-    logger.info('browserWindow.on-closed');
-  });
+  // browserWindow.on('resize', () => {
+  //   config?.set(configKeys.winBounds, browserWindow.getBounds());
+  // });
+  // browserWindow.on('closed', () => {
+  //   mainWindow = null;
+  //   isAppReady = false;
+  //   console.log('set isAppReady on browserWindow closed', isAppReady);
+  //   logger.info('browserWindow.on-closed');
+  // });
 
-  browserWindow.webContents.on('devtools-opened', () => {
-    browserWindow.focus();
-    setImmediate(() => {
-      browserWindow.focus();
-    });
-  });
+  // browserWindow.webContents.on('devtools-opened', () => {
+  //   browserWindow.focus();
+  //   setImmediate(() => {
+  //     browserWindow.focus();
+  //   });
+  // });
 
   // dom-ready is fired after ipcMain:app/ready
   browserWindow.webContents.on('dom-ready', () => {
@@ -202,70 +202,70 @@ function createMainWindow() {
     return { action: 'deny' };
   });
 
-  ipcMain.on('app/ready', () => {
-    isAppReady = true;
-    console.log('set isAppReady on ipcMain app/ready', isAppReady);
-    emitter.emit('ready');
-  });
-  ipcMain.on('app/reload', () => {
-    app.relaunch();
-    app.exit(0);
-    disposeContextMenu();
-  });
+  // ipcMain.on('app/ready', () => {
+  //   isAppReady = true;
+  //   console.log('set isAppReady on ipcMain app/ready', isAppReady);
+  //   emitter.emit('ready');
+  // });
+  // ipcMain.on('app/reload', () => {
+  //   app.relaunch();
+  //   app.exit(0);
+  //   disposeContextMenu();
+  // });
 
-  ipcMain.on('app/openPrefs', (_event, prefType: PrefType) => {
-    const platform = os.type();
-    if (platform === 'Darwin') {
-      shell.openPath('/System/Library/PreferencePanes/Security.prefPane');
-    } else if (platform === 'Windows_NT') {
-      // ref https://docs.microsoft.com/en-us/windows/uwp/launch-resume/launch-settings-app
-      if (prefType === 'camera') {
-        shell.openExternal('ms-settings:privacy-webcam');
-      }
-      // BlueTooth is not supported on desktop currently
-    } else {
-      // Linux ??
-    }
-  });
+  // ipcMain.on('app/openPrefs', (_event, prefType: PrefType) => {
+  //   const platform = os.type();
+  //   if (platform === 'Darwin') {
+  //     shell.openPath('/System/Library/PreferencePanes/Security.prefPane');
+  //   } else if (platform === 'Windows_NT') {
+  //     // ref https://docs.microsoft.com/en-us/windows/uwp/launch-resume/launch-settings-app
+  //     if (prefType === 'camera') {
+  //       shell.openExternal('ms-settings:privacy-webcam');
+  //     }
+  //     // BlueTooth is not supported on desktop currently
+  //   } else {
+  //     // Linux ??
+  //   }
+  // });
 
-  ipcMain.on('app/toggleMaximizeWindow', () => {
-    if (browserWindow.isMaximized()) {
-      // Restore the original window size
-      browserWindow.unmaximize();
-    } else {
-      // Maximized window
-      browserWindow.maximize();
-    }
-  });
+  // ipcMain.on('app/toggleMaximizeWindow', () => {
+  //   if (browserWindow.isMaximized()) {
+  //     // Restore the original window size
+  //     browserWindow.unmaximize();
+  //   } else {
+  //     // Maximized window
+  //     browserWindow.maximize();
+  //   }
+  // });
 
-  ipcMain.on('app/canPromptTouchID', (event) => {
-    const result = systemPreferences?.canPromptTouchID?.();
-    event.returnValue = !!result;
-  });
+  // ipcMain.on('app/canPromptTouchID', (event) => {
+  //   const result = systemPreferences?.canPromptTouchID?.();
+  //   event.returnValue = !!result;
+  // });
 
-  ipcMain.on('app/promptTouchID', async (event, msg: string) => {
-    try {
-      await systemPreferences.promptTouchID(msg);
-      event.reply('app/promptTouchID/res', { success: true });
-    } catch (e: any) {
-      event.reply('app/promptTouchID/res', {
-        success: false,
-        error: e.message,
-      });
-    }
-  });
+  // ipcMain.on('app/promptTouchID', async (event, msg: string) => {
+  //   try {
+  //     await systemPreferences.promptTouchID(msg);
+  //     event.reply('app/promptTouchID/res', { success: true });
+  //   } catch (e: any) {
+  //     event.reply('app/promptTouchID/res', {
+  //       success: false,
+  //       error: e.message,
+  //     });
+  //   }
+  // });
 
-  ipcMain.on('app/reloadBridgeProcess', (event) => {
-    logger.debug('reloadBridgeProcess receive');
-    restartBridge();
-    event.reply('app/reloadBridgeProcess', true);
-  });
+  // ipcMain.on('app/reloadBridgeProcess', (event) => {
+  //   logger.debug('reloadBridgeProcess receive');
+  //   restartBridge();
+  //   event.reply('app/reloadBridgeProcess', true);
+  // });
 
-  ipcMain.on('app/restoreMainWindow', (event) => {
-    logger.debug('restoreMainWindow receive');
-    browserWindow.show();
-    event.reply('app/restoreMainWindow', true);
-  });
+  // ipcMain.on('app/restoreMainWindow', (event) => {
+  //   logger.debug('restoreMainWindow receive');
+  //   browserWindow.show();
+  //   event.reply('app/restoreMainWindow', true);
+  // });
 
   // reset appState to undefined  to avoid screen lock.
   browserWindow.on('enter-full-screen', () => {
@@ -281,10 +281,10 @@ function createMainWindow() {
     browserWindow.webContents.send('appState', 'active');
   });
 
-  browserWindow.on('hide', () => {
-    browserWindow.webContents.send('appState', 'background');
-    logger.info('browserWindow.on-hide');
-  });
+  // browserWindow.on('hide', () => {
+  //   browserWindow.webContents.send('appState', 'background');
+  //   logger.info('browserWindow.on-hide');
+  // });
 
   // Prevents clicking on links to open new Windows
   app.on('web-contents-created', (event, contents) => {
@@ -339,18 +339,18 @@ function createMainWindow() {
     );
   }
 
-  browserWindow.on('close', (event: Event) => {
-    // hide() instead of close() on MAC
-    if (isMac) {
-      logger.info('browserWindow.on-close');
-      event.preventDefault();
-      if (!browserWindow.isDestroyed()) {
-        browserWindow.hide();
-        logger.info('browserWindow.hide call on close callback');
-        // browserWindow.minimize();
-      }
-    }
-  });
+  // browserWindow.on('close', (event: Event) => {
+  //   // hide() instead of close() on MAC
+  //   if (isMac) {
+  //     logger.info('browserWindow.on-close');
+  //     event.preventDefault();
+  //     if (!browserWindow.isDestroyed()) {
+  //       browserWindow.hide();
+  //       logger.info('browserWindow.hide call on close callback');
+  //       // browserWindow.minimize();
+  //     }
+  //   }
+  // });
 
   return browserWindow;
 }
@@ -362,43 +362,43 @@ function init() {
 const singleInstance = app.requestSingleInstanceLock();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function quitOrMinimizeApp(event?: Event) {
-  // On OS X it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
-  if (isMac) {
-    // **** renderer app will reload after minimize, and keytar not working.
-    logger.info('call quitOrMinimizeApp');
-    event?.preventDefault();
-    if (!mainWindow?.isDestroyed()) {
-      mainWindow?.hide();
-      logger.info('call quitOrMinimizeApp: mainWindow hide');
-    }
-    // ****
-    // app.quit();
-  } else {
-    logger.info('call quitOrMinimizeApp: app quit');
-    app.quit();
-  }
-}
+// function quitOrMinimizeApp(event?: Event) {
+//   // On OS X it is common for applications and their menu bar
+//   // to stay active until the user quits explicitly with Cmd + Q
+//   if (isMac) {
+//     // **** renderer app will reload after minimize, and keytar not working.
+//     logger.info('call quitOrMinimizeApp');
+//     event?.preventDefault();
+//     if (!mainWindow?.isDestroyed()) {
+//       mainWindow?.hide();
+//       logger.info('call quitOrMinimizeApp: mainWindow hide');
+//     }
+//     // ****
+//     // app.quit();
+//   } else {
+//     logger.info('call quitOrMinimizeApp: app quit');
+//     app.quit();
+//   }
+// }
 
 if (!singleInstance && !process.mas) {
-  quitOrMinimizeApp();
+  // quitOrMinimizeApp();
 } else {
-  app.on('second-instance', (e, argv) => {
-    logger.info('second-instance');
-    if (mainWindow) {
-      if (mainWindow.isMinimized()) mainWindow.restore();
-      showMainWindow();
+  // app.on('second-instance', (e, argv) => {
+  //   logger.info('second-instance');
+  //   if (mainWindow) {
+  //     if (mainWindow.isMinimized()) mainWindow.restore();
+  //     showMainWindow();
 
-      // Protocol handler for win32
-      // argv: An array of the second instance’s (command line / deep linked) arguments
-      if (isWin || isMac) {
-        // Keep only command line / deep linked arguments
-        const deeplinkingUrl = argv[1];
-        handleDeepLinkUrl(null, deeplinkingUrl, argv, true);
-      }
-    }
-  });
+  //     // Protocol handler for win32
+  //     // argv: An array of the second instance’s (command line / deep linked) arguments
+  //     if (isWin || isMac) {
+  //       // Keep only command line / deep linked arguments
+  //       const deeplinkingUrl = argv[1];
+  //       handleDeepLinkUrl(null, deeplinkingUrl, argv, true);
+  //     }
+  //   }
+  // });
 
   app.name = APP_NAME;
   app.on('ready', () => {
@@ -419,23 +419,23 @@ app.on('activate', () => {
 
 app.on('before-quit', () => {
   logger.info('before-quit listener');
-  if (mainWindow) {
-    mainWindow?.removeAllListeners();
-    mainWindow?.removeAllListeners('close');
-    mainWindow?.close();
-    logger.info('before-quit listener: mainwindow call');
-  }
-  disposeContextMenu();
+  // if (mainWindow) {
+  //   mainWindow?.removeAllListeners();
+  //   mainWindow?.removeAllListeners('close');
+  //   mainWindow?.close();
+  //   logger.info('before-quit listener: mainwindow call');
+  // }
+  // disposeContextMenu();
 });
 
 // Quit when all windows are closed.
 app.on('window-all-closed', (event: Event) => {
   logger.info('window-all-closed listener');
-  quitOrMinimizeApp(event);
+  // quitOrMinimizeApp(event);
 });
 
 // Closing the cause context: https://onekeyhq.atlassian.net/browse/OK-8096
-app.commandLine.appendSwitch('disable-features', 'CrossOriginOpenerPolicy');
+// app.commandLine.appendSwitch('disable-features', 'CrossOriginOpenerPolicy');
 
 if (isDev) {
   app.commandLine.appendSwitch('ignore-certificate-errors');
@@ -446,37 +446,37 @@ if (isDev) {
 // register deeplink for desktop
 //  https://www.electronjs.org/docs/latest/tutorial/launch-app-from-url-in-another-app
 if (process.defaultApp) {
-  if (process.argv.length >= 2) {
-    app.setAsDefaultProtocolClient(
-      ONEKEY_APP_DEEP_LINK_NAME,
-      process.execPath,
-      // reassign args to argv[1]  ?
-      [path.resolve(process.argv[1])],
-    );
-  }
+  // if (process.argv.length >= 2) {
+  //   app.setAsDefaultProtocolClient(
+  //     ONEKEY_APP_DEEP_LINK_NAME,
+  //     process.execPath,
+  //     // reassign args to argv[1]  ?
+  //     [path.resolve(process.argv[1])],
+  //   );
+  // }
 } else {
-  app.setAsDefaultProtocolClient(ONEKEY_APP_DEEP_LINK_NAME);
+  // app.setAsDefaultProtocolClient(ONEKEY_APP_DEEP_LINK_NAME);
 }
-if (!app.isDefaultProtocolClient(WALLET_CONNECT_DEEP_LINK_NAME)) {
-  // Define custom protocol handler. Deep linking works on packaged versions of the application!
-  app.setAsDefaultProtocolClient(WALLET_CONNECT_DEEP_LINK_NAME);
-}
-// also define `protocols` at packages/desktop/electron-builder.config.js
-if (!app.isDefaultProtocolClient(ONEKEY_APP_DEEP_LINK_NAME)) {
-  // Define custom protocol handler. Deep linking works on packaged versions of the application!
-  app.setAsDefaultProtocolClient(ONEKEY_APP_DEEP_LINK_NAME);
-}
+// if (!app.isDefaultProtocolClient(WALLET_CONNECT_DEEP_LINK_NAME)) {
+//   // Define custom protocol handler. Deep linking works on packaged versions of the application!
+//   app.setAsDefaultProtocolClient(WALLET_CONNECT_DEEP_LINK_NAME);
+// }
+// // also define `protocols` at packages/desktop/electron-builder.config.js
+// if (!app.isDefaultProtocolClient(ONEKEY_APP_DEEP_LINK_NAME)) {
+//   // Define custom protocol handler. Deep linking works on packaged versions of the application!
+//   app.setAsDefaultProtocolClient(ONEKEY_APP_DEEP_LINK_NAME);
+// }
 
-if (isWin) {
-  app.setAppUserModelId(APP_NAME);
-}
+// if (isWin) {
+//   app.setAppUserModelId(APP_NAME);
+// }
 
 // https://github.com/oikonomopo/electron-deep-linking-mac-win/blob/master/main.js
 app.on('will-finish-launching', () => {
   // app.off('open-url', handleDeepLinkUrl);
   // ** Protocol handler for osx
   // deeplink: Handle the protocol. In this case, we choose to show an Error Box.
-  app.on('open-url', handleDeepLinkUrl);
+  // app.on('open-url', handleDeepLinkUrl);
 });
 
 console.log(' ========= Desktop main app start!!!!!!!!!!!!!  ========== ');
