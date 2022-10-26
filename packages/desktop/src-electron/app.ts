@@ -166,6 +166,7 @@ function createMainWindow() {
   // }
 
   browserWindow.webContents.on('did-finish-load', () => {
+    logger.info('browserWindow >>>> did-finish-load');
     console.log('browserWindow >>>> did-finish-load');
     browserWindow.webContents.send('SET_ONEKEY_DESKTOP_GLOBALS', {
       resourcesPath: (global as any).resourcesPath,
@@ -175,6 +176,7 @@ function createMainWindow() {
   });
 
   browserWindow.on('resize', () => {
+    logger.info('resize');
     config?.set(configKeys.winBounds, browserWindow.getBounds());
   });
   browserWindow.on('closed', () => {
@@ -185,6 +187,7 @@ function createMainWindow() {
   });
 
   browserWindow.webContents.on('devtools-opened', () => {
+    logger.info('devtools-opened');
     browserWindow.focus();
     setImmediate(() => {
       browserWindow.focus();
@@ -195,9 +198,11 @@ function createMainWindow() {
   browserWindow.webContents.on('dom-ready', () => {
     isAppReady = true;
     console.log('set isAppReady on browserWindow dom-ready', isAppReady);
+    logger.info('set isAppReady on browserWindow dom-ready', isAppReady);
   });
 
   browserWindow.webContents.setWindowOpenHandler(({ url }) => {
+    logger.info('browserWindow.webContents.setWindowOpenHandler');
     shell.openExternal(url);
     return { action: 'deny' };
   });
@@ -206,14 +211,17 @@ function createMainWindow() {
     isAppReady = true;
     console.log('set isAppReady on ipcMain app/ready', isAppReady);
     emitter.emit('ready');
+    logger.info('app/ready');
   });
   ipcMain.on('app/reload', () => {
+    logger.info('app/reload');
     app.relaunch();
     app.exit(0);
     disposeContextMenu();
   });
 
   ipcMain.on('app/openPrefs', (_event, prefType: PrefType) => {
+    logger.info('app/openPrefs');
     // const platform = os.type();
     // if (platform === 'Darwin') {
     //   shell.openPath('/System/Library/PreferencePanes/Security.prefPane');
@@ -236,10 +244,12 @@ function createMainWindow() {
     //   // Maximized window
     //   browserWindow.maximize();
     // }
+    logger.info('app/toggleMaximizeWindow');
   });
 
   ipcMain.on('app/canPromptTouchID', (event) => {
     // const result = systemPreferences?.canPromptTouchID?.();
+    logger.info('app/canPromptTouchID');
     event.returnValue = !!false;
   });
 
@@ -248,6 +258,7 @@ function createMainWindow() {
     //   await systemPreferences.promptTouchID(msg);
     //   event.reply('app/promptTouchID/res', { success: true });
     // } catch (e: any) {
+    logger.info('app/promptTouchID');
     event.reply('app/promptTouchID/res', {
       success: false,
       error: 'not support',
@@ -270,14 +281,17 @@ function createMainWindow() {
   // reset appState to undefined  to avoid screen lock.
   browserWindow.on('enter-full-screen', () => {
     browserWindow.webContents.send('appState', undefined);
+    logger.info('enter-full-screen');
   });
 
   // reset appState to undefined  to avoid screen lock.
   browserWindow.on('leave-full-screen', () => {
+    logger.info('leave-full-screen');
     browserWindow.webContents.send('appState', undefined);
   });
 
   browserWindow.on('show', () => {
+    logger.info('show!$$');
     browserWindow.webContents.send('appState', 'active');
   });
 
@@ -288,6 +302,7 @@ function createMainWindow() {
 
   // Prevents clicking on links to open new Windows
   app.on('web-contents-created', (event, contents) => {
+    logger.info('web-contents-created');
     // if (contents.getType() === 'webview') {
     //   contents.on('new-window', (newWindowEvent: Event) => {
     //     newWindowEvent.preventDefault();
@@ -331,6 +346,7 @@ function createMainWindow() {
     browserWindow.webContents.on(
       'did-fail-load',
       (_, __, ___, validatedURL) => {
+        logger.info('browserWindow >>>> did-fail-load');
         const redirectPath = validatedURL.replace(`${PROTOCOL}://`, '');
         if (validatedURL.startsWith(PROTOCOL) && !redirectPath.includes('.')) {
           browserWindow.loadURL(src);
@@ -405,6 +421,7 @@ if (!singleInstance && !process.mas) {
     if (!mainWindow) {
       mainWindow = createMainWindow();
     }
+    logger.info('ready');
     init();
     showMainWindow();
   });
@@ -414,6 +431,7 @@ app.on('activate', () => {
   if (!mainWindow) {
     mainWindow = createMainWindow();
   }
+  logger.info('active');
   showMainWindow();
 });
 
@@ -473,6 +491,7 @@ if (process.defaultApp) {
 
 // https://github.com/oikonomopo/electron-deep-linking-mac-win/blob/master/main.js
 app.on('will-finish-launching', () => {
+  logger.info('will-finish-launching');
   // app.off('open-url', handleDeepLinkUrl);
   // ** Protocol handler for osx
   // deeplink: Handle the protocol. In this case, we choose to show an Error Box.
