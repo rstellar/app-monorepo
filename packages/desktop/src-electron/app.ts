@@ -39,9 +39,9 @@ const configKeys = {
 };
 
 // https://github.com/sindresorhus/electron-context-menu
-// const disposeContextMenu = contextMenu({
-//   showSaveImageAs: true,
-// });
+const disposeContextMenu = contextMenu({
+  showSaveImageAs: true,
+});
 
 const APP_NAME = 'OneKey Wallet';
 let mainWindow: BrowserWindow | null;
@@ -73,7 +73,7 @@ function showMainWindow() {
   mainWindow.focus();
 }
 
-// const emitter = new EventEmitter();
+const emitter = new EventEmitter();
 let isAppReady = false;
 // function handleDeepLinkUrl(
 //   event: Event | null,
@@ -202,16 +202,16 @@ function createMainWindow() {
     return { action: 'deny' };
   });
 
-  // ipcMain.on('app/ready', () => {
-  //   isAppReady = true;
-  //   console.log('set isAppReady on ipcMain app/ready', isAppReady);
-  //   emitter.emit('ready');
-  // });
-  // ipcMain.on('app/reload', () => {
-  //   app.relaunch();
-  //   app.exit(0);
-  //   disposeContextMenu();
-  // });
+  ipcMain.on('app/ready', () => {
+    isAppReady = true;
+    console.log('set isAppReady on ipcMain app/ready', isAppReady);
+    emitter.emit('ready');
+  });
+  ipcMain.on('app/reload', () => {
+    app.relaunch();
+    app.exit(0);
+    disposeContextMenu();
+  });
 
   // ipcMain.on('app/openPrefs', (_event, prefType: PrefType) => {
   //   const platform = os.type();
