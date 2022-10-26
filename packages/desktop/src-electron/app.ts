@@ -22,7 +22,7 @@ import logger from 'electron-log';
 import * as store from './libs/store';
 import initProcess, { restartBridge } from './process/index';
 
-// import type { PrefType } from './preload';
+import type { PrefType } from './preload';
 
 // const ONEKEY_APP_DEEP_LINK_NAME = 'onekey-wallet';
 // const WALLET_CONNECT_DEEP_LINK_NAME = 'wc';
@@ -174,22 +174,22 @@ function createMainWindow() {
     });
   });
 
-  // browserWindow.on('resize', () => {
-  //   config?.set(configKeys.winBounds, browserWindow.getBounds());
-  // });
-  // browserWindow.on('closed', () => {
-  //   mainWindow = null;
-  //   isAppReady = false;
-  //   console.log('set isAppReady on browserWindow closed', isAppReady);
-  //   logger.info('browserWindow.on-closed');
-  // });
+  browserWindow.on('resize', () => {
+    config?.set(configKeys.winBounds, browserWindow.getBounds());
+  });
+  browserWindow.on('closed', () => {
+    mainWindow = null;
+    isAppReady = false;
+    console.log('set isAppReady on browserWindow closed', isAppReady);
+    logger.info('browserWindow.on-closed');
+  });
 
-  // browserWindow.webContents.on('devtools-opened', () => {
-  //   browserWindow.focus();
-  //   setImmediate(() => {
-  //     browserWindow.focus();
-  //   });
-  // });
+  browserWindow.webContents.on('devtools-opened', () => {
+    browserWindow.focus();
+    setImmediate(() => {
+      browserWindow.focus();
+    });
+  });
 
   // dom-ready is fired after ipcMain:app/ready
   browserWindow.webContents.on('dom-ready', () => {
@@ -213,47 +213,47 @@ function createMainWindow() {
     disposeContextMenu();
   });
 
-  // ipcMain.on('app/openPrefs', (_event, prefType: PrefType) => {
-  //   const platform = os.type();
-  //   if (platform === 'Darwin') {
-  //     shell.openPath('/System/Library/PreferencePanes/Security.prefPane');
-  //   } else if (platform === 'Windows_NT') {
-  //     // ref https://docs.microsoft.com/en-us/windows/uwp/launch-resume/launch-settings-app
-  //     if (prefType === 'camera') {
-  //       shell.openExternal('ms-settings:privacy-webcam');
-  //     }
-  //     // BlueTooth is not supported on desktop currently
-  //   } else {
-  //     // Linux ??
-  //   }
-  // });
+  ipcMain.on('app/openPrefs', (_event, prefType: PrefType) => {
+    const platform = os.type();
+    if (platform === 'Darwin') {
+      shell.openPath('/System/Library/PreferencePanes/Security.prefPane');
+    } else if (platform === 'Windows_NT') {
+      // ref https://docs.microsoft.com/en-us/windows/uwp/launch-resume/launch-settings-app
+      if (prefType === 'camera') {
+        shell.openExternal('ms-settings:privacy-webcam');
+      }
+      // BlueTooth is not supported on desktop currently
+    } else {
+      // Linux ??
+    }
+  });
 
-  // ipcMain.on('app/toggleMaximizeWindow', () => {
-  //   if (browserWindow.isMaximized()) {
-  //     // Restore the original window size
-  //     browserWindow.unmaximize();
-  //   } else {
-  //     // Maximized window
-  //     browserWindow.maximize();
-  //   }
-  // });
+  ipcMain.on('app/toggleMaximizeWindow', () => {
+    if (browserWindow.isMaximized()) {
+      // Restore the original window size
+      browserWindow.unmaximize();
+    } else {
+      // Maximized window
+      browserWindow.maximize();
+    }
+  });
 
-  // ipcMain.on('app/canPromptTouchID', (event) => {
-  //   const result = systemPreferences?.canPromptTouchID?.();
-  //   event.returnValue = !!result;
-  // });
+  ipcMain.on('app/canPromptTouchID', (event) => {
+    const result = systemPreferences?.canPromptTouchID?.();
+    event.returnValue = !!result;
+  });
 
-  // ipcMain.on('app/promptTouchID', async (event, msg: string) => {
-  //   try {
-  //     await systemPreferences.promptTouchID(msg);
-  //     event.reply('app/promptTouchID/res', { success: true });
-  //   } catch (e: any) {
-  //     event.reply('app/promptTouchID/res', {
-  //       success: false,
-  //       error: e.message,
-  //     });
-  //   }
-  // });
+  ipcMain.on('app/promptTouchID', async (event, msg: string) => {
+    try {
+      await systemPreferences.promptTouchID(msg);
+      event.reply('app/promptTouchID/res', { success: true });
+    } catch (e: any) {
+      event.reply('app/promptTouchID/res', {
+        success: false,
+        error: e.message,
+      });
+    }
+  });
 
   // ipcMain.on('app/reloadBridgeProcess', (event) => {
   //   logger.debug('reloadBridgeProcess receive');
