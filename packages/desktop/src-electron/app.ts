@@ -214,45 +214,45 @@ function createMainWindow() {
   });
 
   ipcMain.on('app/openPrefs', (_event, prefType: PrefType) => {
-    const platform = os.type();
-    if (platform === 'Darwin') {
-      shell.openPath('/System/Library/PreferencePanes/Security.prefPane');
-    } else if (platform === 'Windows_NT') {
-      // ref https://docs.microsoft.com/en-us/windows/uwp/launch-resume/launch-settings-app
-      if (prefType === 'camera') {
-        shell.openExternal('ms-settings:privacy-webcam');
-      }
-      // BlueTooth is not supported on desktop currently
-    } else {
-      // Linux ??
-    }
+    // const platform = os.type();
+    // if (platform === 'Darwin') {
+    //   shell.openPath('/System/Library/PreferencePanes/Security.prefPane');
+    // } else if (platform === 'Windows_NT') {
+    //   // ref https://docs.microsoft.com/en-us/windows/uwp/launch-resume/launch-settings-app
+    //   if (prefType === 'camera') {
+    //     shell.openExternal('ms-settings:privacy-webcam');
+    //   }
+    //   // BlueTooth is not supported on desktop currently
+    // } else {
+    //   // Linux ??
+    // }
   });
 
   ipcMain.on('app/toggleMaximizeWindow', () => {
-    if (browserWindow.isMaximized()) {
-      // Restore the original window size
-      browserWindow.unmaximize();
-    } else {
-      // Maximized window
-      browserWindow.maximize();
-    }
+    // if (browserWindow.isMaximized()) {
+    //   // Restore the original window size
+    //   browserWindow.unmaximize();
+    // } else {
+    //   // Maximized window
+    //   browserWindow.maximize();
+    // }
   });
 
   ipcMain.on('app/canPromptTouchID', (event) => {
-    const result = systemPreferences?.canPromptTouchID?.();
-    event.returnValue = !!result;
+    // const result = systemPreferences?.canPromptTouchID?.();
+    event.returnValue = !!false;
   });
 
-  ipcMain.on('app/promptTouchID', async (event, msg: string) => {
-    try {
-      await systemPreferences.promptTouchID(msg);
-      event.reply('app/promptTouchID/res', { success: true });
-    } catch (e: any) {
-      event.reply('app/promptTouchID/res', {
-        success: false,
-        error: e.message,
-      });
-    }
+  ipcMain.on('app/promptTouchID', (event, msg: string) => {
+    // try {
+    //   await systemPreferences.promptTouchID(msg);
+    //   event.reply('app/promptTouchID/res', { success: true });
+    // } catch (e: any) {
+    event.reply('app/promptTouchID/res', {
+      success: false,
+      error: 'not support',
+    });
+    // }
   });
 
   // ipcMain.on('app/reloadBridgeProcess', (event) => {
