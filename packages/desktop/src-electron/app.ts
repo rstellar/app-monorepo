@@ -288,11 +288,11 @@ function createMainWindow() {
 
   // Prevents clicking on links to open new Windows
   app.on('web-contents-created', (event, contents) => {
-    if (contents.getType() === 'webview') {
-      contents.on('new-window', (newWindowEvent: Event) => {
-        newWindowEvent.preventDefault();
-      });
-    }
+    // if (contents.getType() === 'webview') {
+    //   contents.on('new-window', (newWindowEvent: Event) => {
+    //     newWindowEvent.preventDefault();
+    //   });
+    // }
   });
 
   const filter = {

@@ -215,6 +215,11 @@ const init = ({ mainWindow, store }: Dependencies) => {
     });
   });
 
+  // @ts-ignore
+  app.on('before-quit-for-update', () => {
+    console.log('before-quit-for-update');
+  });
+
   app.on('before-quit', () => {
     t1 = performance.now();
     console.log('t1: ', t1);
