@@ -37,8 +37,8 @@ export const restartBridge = async () => {
   await bridgeInstance?.restart();
 };
 
-const init = async ({ mainWindow, store }: Dependencies) => {
-  await launchBridge();
+const init = ({ mainWindow, store }: Dependencies) => {
+  // await launchBridge();
   autoUpdateInit({ mainWindow, store });
 };
 
