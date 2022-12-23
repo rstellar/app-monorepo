@@ -34,7 +34,7 @@ const NativeWebView = forwardRef(
       receiveHandler,
       onSrcChange,
       onLoadProgress,
-      injectedJavaScriptBeforeContentLoaded,
+      injectedJavaScriptBeforeContentLoaded = '',
       onMessage,
       ...props
     }: NativeWebViewProps,
@@ -90,17 +90,22 @@ const NativeWebView = forwardRef(
         ref={webviewRef}
         // injectedJavaScript={injectedNative}
         injectedJavaScriptBeforeContentLoaded={
-          injectedJavaScriptBeforeContentLoaded || ''
+          injectedJavaScriptBeforeContentLoaded
         }
         // the video element must also include the `playsinline` attribute
         allowsInlineMediaPlayback
         // disable video autoplay
+        allowFileAccess
+        allowFileAccessFromFileURLs
+        allowUniversalAccessFromFileURLs
+        allowingReadAccessToURL="file://"
         mediaPlaybackRequiresUserAction
         source={{ uri: src }}
         onMessage={webviewOnMessage}
         renderError={() => (
           <ErrorView onRefresh={() => webviewRef.current?.reload()} />
         )}
+        originWhitelist={['*']}
         {...props}
       />
     );

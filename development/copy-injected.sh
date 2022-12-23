@@ -10,7 +10,12 @@ cp ./node_modules/@onekeyfe/cross-inpage-provider-injected/dist/injected/injecte
 cp ./packages/ext/src/entry/injected.js ./packages/ext/src/entry/injected.text-js
 
 # copy to Native injectedCode
-cp ./node_modules/@onekeyfe/cross-inpage-provider-injected/dist/injected/injectedNative.js   ./packages/kit/src/components/WebView/injectedNative.text-js
+mkdir -p ./packages/app/android/app/src/main/assets/inject
+mkdir -p ./packages/app/ios/OneKeyWallet/inject
+cp ./node_modules/@onekeyfe/cross-inpage-provider-injected/dist/injected/injectedNative.js  ./packages/app/android/app/src/main/assets/inject/injectedNative.js
+cp ./node_modules/@onekeyfe/cross-inpage-provider-injected/dist/injected/injectedNative.js  ./packages/app/ios/OneKeyWallet/inject/injectedNative.js
+
+
 
 # copy index html
 cp ./packages/shared/src/web/index.html.ejs ./packages/shared/src/web/index.html

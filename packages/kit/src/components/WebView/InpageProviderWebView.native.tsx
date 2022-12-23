@@ -9,7 +9,6 @@ import { Center, Spinner } from '@onekeyhq/components';
 // injected hot-reload cache update: 21334400088746
 // eslint-disable-next-line import/order
 // @ts-ignore
-import injectedNativeCode from './injectedNative.text-js';
 import { NativeWebView } from './NativeWebView';
 
 import type { InpageProviderWebViewProps } from './types';
@@ -24,7 +23,7 @@ const InpageProviderWebView: FC<InpageProviderWebViewProps> = forwardRef(
       receiveHandler,
       onNavigationStateChange,
       nativeWebviewSource,
-      nativeInjectedJavaScriptBeforeContentLoaded,
+      nativeInjectedJavaScriptBeforeContentLoaded = '',
       isSpinnerLoading,
       onContentLoaded,
       onOpenWindow,
@@ -54,19 +53,14 @@ const InpageProviderWebView: FC<InpageProviderWebViewProps> = forwardRef(
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return props;
     }, [androidLayerType, nativeWebviewSource, onOpenWindow]);
-    const nativeInjectedJsCode = useMemo(() => {
-      let code: string = injectedNativeCode || '';
-      if (nativeInjectedJavaScriptBeforeContentLoaded) {
-        code += `
-        ;(function() {
-            ;
-            ${nativeInjectedJavaScriptBeforeContentLoaded}
-            ;
-        })();
-        `;
-      }
-      return code;
-    }, [nativeInjectedJavaScriptBeforeContentLoaded]);
+    const nativeInjectedJsCode = `
+    ;(function() {
+        ;
+        document.write('<script src="file://android_asset/inject/injectNative.js"></script>');
+        ${nativeInjectedJavaScriptBeforeContentLoaded}
+        ;
+    })();
+    `;
 
     const progressLoading = useMemo(() => {
       if (progress < 100) {
