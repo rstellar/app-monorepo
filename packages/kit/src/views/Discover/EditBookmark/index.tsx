@@ -35,7 +35,7 @@ export const EditBookmark = () => {
     (data: { name: string; url: string }) => {
       if (bookmarks) {
         const urls = bookmarks.map(item => item.url.toLowerCase());
-        if (urls.includes(data.url.toLowerCase())) {
+        if (data.url !== bookmark.url && urls.includes(data.url.toLowerCase())) {
           ToastManager.show({
             title: intl.formatMessage({ id: 'form__url_already_exists' }),
           }, { type: 'error' });

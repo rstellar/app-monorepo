@@ -112,7 +112,6 @@ class ServicDiscover extends ServiceBase {
   @backgroundMethod()
   async fetchUrlInfo(input: string) {
     let { baseUrl } = this;
-    baseUrl = 'http://192.168.2.9:9000/discover';
     const url = `${baseUrl}/url_info`;
     const res = await this.client.post(url, { url: input });
     const data = res.data as UrlInfo;
