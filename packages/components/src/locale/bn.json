@@ -1364,6 +1364,7 @@
   "form__updated": "আপডেট করা হয়েছে",
   "form__updating_resource": "সংস্থান আপডেট করা হচ্ছে...",
   "form__url": "URL",
+  "form__url_already_exists": "URL-এ আগে থেকেই আছে.",
   "form__use_for_uppercase": "জন্য ব্যবহার করা",
   "form__use_removed_api": "সরানো API ব্যবহার করুন",
   "form__use_removed_api_desc": "যখন একটি ওয়েবসাইট অপসারণ window.web3 API ব্যবহার করার চেষ্টা করে",

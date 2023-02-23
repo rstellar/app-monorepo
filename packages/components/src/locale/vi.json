@@ -1364,6 +1364,7 @@
   "form__updated": "Đã cập nhật",
   "form__updating_resource": "Đang cập nhật tài nguyên ...",
   "form__url": "URL",
+  "form__url_already_exists": "URL đã tồn tại.",
   "form__use_for_uppercase": "ĐƯỢC SỬ DỤNG CHO",
   "form__use_removed_api": "Sử dụng API đã xóa",
   "form__use_removed_api_desc": "Khi một trang web cố gắng sử dụng API window.web3 đã bị loại bỏ",

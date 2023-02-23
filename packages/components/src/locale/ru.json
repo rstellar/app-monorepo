@@ -1364,6 +1364,7 @@
   "form__updated": "Обновлено",
   "form__updating_resource": "Обновление ресурсов...",
   "form__url": "URL-адрес",
+  "form__url_already_exists": "URL-адрес уже существует.",
   "form__use_for_uppercase": "ИСПОЛЬЗОВАТЬ ДЛЯ",
   "form__use_removed_api": "Использовать удаленный API",
   "form__use_removed_api_desc": "Когда веб-сайт пытается использовать удаленный API window.web3",

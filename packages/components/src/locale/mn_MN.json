@@ -1364,6 +1364,7 @@
   "form__updated": "Шинэчлэгдсэн",
   "form__updating_resource": "Нөөцүүдийг шинэчилж байна...",
   "form__url": "URL",
+  "form__url_already_exists": "URL аль хэдийн байгаа.",
   "form__use_for_uppercase": "ХЭРЭГЛЭЭРЭЙ",
   "form__use_removed_api": "Устгасан API ашиглах",
   "form__use_removed_api_desc": "Вэбсайт устгагдсан window.web3 API-г ашиглахыг оролдох үед",

@@ -1364,6 +1364,7 @@
   "form__updated": "อัปเดต",
   "form__updating_resource": "กำลังอัปเดตทรัพยากร...",
   "form__url": "URL",
+  "form__url_already_exists": "มี URL อยู่แล้ว",
   "form__use_for_uppercase": "ใช้เพื่อ",
   "form__use_removed_api": "ใช้ API ที่ถูกลบออก",
   "form__use_removed_api_desc": "เมื่อเว็บไซต์พยายามใช้ window.web3 API . ที่ถูกลบ",

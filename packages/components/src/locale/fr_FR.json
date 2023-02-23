@@ -1364,6 +1364,7 @@
   "form__updated": "Actualisé",
   "form__updating_resource": "Mise à jour des ressources...",
   "form__url": "URL",
+  "form__url_already_exists": "L'URL existe déjà.",
   "form__use_for_uppercase": "UTILISER POUR",
   "form__use_removed_api": "Utiliser l'API supprimée",
   "form__use_removed_api_desc": "Lorsqu'un site web tente d'utiliser la fenêtre supprimée.web3 API",

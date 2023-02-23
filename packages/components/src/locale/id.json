@@ -1364,6 +1364,7 @@
   "form__updated": "Diperbarui",
   "form__updating_resource": "Memperbarui sumber daya...",
   "form__url": "URL",
+  "form__url_already_exists": "URL sudah ada.",
   "form__use_for_uppercase": "DIGUNAKAN UNTUK",
   "form__use_removed_api": "Gunakan API yang Dihapus",
   "form__use_removed_api_desc": "Ketika sebuah situs web mencoba menggunakan API window.web3 yang dihapus",

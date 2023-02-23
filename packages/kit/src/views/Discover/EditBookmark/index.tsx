@@ -9,6 +9,7 @@ import backgroundApiProxy from '../../../background/instance/backgroundApiProxy'
 
 import type { DiscoverModalRoutes, DiscoverRoutesParams } from '../type';
 import type { RouteProp } from '@react-navigation/native';
+import { useAppSelector } from '../../../hooks';
 
 type RouteProps = RouteProp<
   DiscoverRoutesParams,
@@ -18,6 +19,7 @@ type RouteProps = RouteProp<
 export const EditBookmark = () => {
   const intl = useIntl();
   const navigation = useNavigation();
+  const bookmarks = useAppSelector(s => s.discover.bookmarks)
   const route = useRoute<RouteProps>();
   const { bookmark } = route.params;
   const {
@@ -31,6 +33,15 @@ export const EditBookmark = () => {
 
   const onPress = useCallback(
     (data: { name: string; url: string }) => {
+      if (bookmarks) {
+        const urls = bookmarks.map(item => item.url.toLowerCase());
+        if (urls.includes(data.url.toLowerCase())) {
+          ToastManager.show({
+            title: intl.formatMessage({ id: 'form__url_already_exists' }),
+          }, { type: 'error' });
+          return 
+        }
+      }
       backgroundApiProxy.serviceDiscover.editFavorite({
         id: bookmark.id,
         url: data.url,
@@ -67,6 +78,10 @@ export const EditBookmark = () => {
                   id: 'form__field_is_required',
                 }),
               },
+              maxLength: {
+                value: 32,
+                message: intl.formatMessage({ id: 'form__account_name_invalid_characters_limit' }, { '0': 32 })
+              }
             }}
           >
             <Form.Input
@@ -87,6 +102,10 @@ export const EditBookmark = () => {
                   id: 'form__field_is_required',
                 }),
               },
+              maxLength: {
+                value: 500,
+                message: intl.formatMessage({ id: 'form__account_name_invalid_characters_limit' }, { '0': 500 })
+              } 
             }}
           >
             <Form.Input

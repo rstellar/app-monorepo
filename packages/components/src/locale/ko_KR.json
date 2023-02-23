@@ -1364,6 +1364,7 @@
   "form__updated": "업데이트됨",
   "form__updating_resource": "리소스 업데이트 중...",
   "form__url": "URL",
+  "form__url_already_exists": "URL이 이미 존재합니다.",
   "form__use_for_uppercase": "를 위해 사용하십시오",
   "form__use_removed_api": "제거된 API 사용",
   "form__use_removed_api_desc": "제거된 window.web3 API를 웹사이트에서 사용하려고 할 때",
