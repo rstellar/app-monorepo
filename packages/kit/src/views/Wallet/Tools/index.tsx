@@ -92,8 +92,8 @@ const data: DataItem[] = [
     title: 'title__bulksender',
     description: 'title__bulksender_desc',
     filter: ({ network }) =>
-      !!network?.settings?.supportBatchTransfer &&
-      !!batchTransferContractAddress[network?.id],
+      network?.settings?.supportBatchTransfer &&
+      network?.settings?.supportBatchTransfer.length > 0,
   },
   {
     key: 'explorer',
