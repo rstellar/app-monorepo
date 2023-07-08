@@ -21,7 +21,6 @@ import { Tabs } from '@onekeyhq/components/src/CollapsibleTabView';
 import type { LocaleIds } from '@onekeyhq/components/src/locale';
 import type { ThemeToken } from '@onekeyhq/components/src/Provider/theme';
 import { isAllNetworks } from '@onekeyhq/engine/src/managers/network';
-import { batchTransferContractAddress } from '@onekeyhq/engine/src/presets/batchTransferContractAddress';
 import type { Account } from '@onekeyhq/engine/src/types/account';
 import type { Network } from '@onekeyhq/engine/src/types/network';
 import {
@@ -92,8 +91,10 @@ const data: DataItem[] = [
     title: 'title__bulksender',
     description: 'title__bulksender_desc',
     filter: ({ network }) =>
-      network?.settings?.supportBatchTransfer &&
-      network?.settings?.supportBatchTransfer.length > 0,
+      !!(
+        network?.settings?.supportBatchTransfer &&
+        network?.settings?.supportBatchTransfer.length > 0
+      ),
   },
   {
     key: 'explorer',
