@@ -23,7 +23,6 @@ import { SendModalRoutes } from './enums';
 
 import type { WalletService } from '../../components/WalletConnect/types';
 import type { WalletConnectClientForDapp } from '../../components/WalletConnect/WalletConnectClientForDapp';
-import type { BulkSenderTypeEnum } from '../BulkSender/types';
 import type { InjectedConnectorInfo } from '../ExternalAccount/injectedConnectors';
 import type { SwapQuoteTx } from '../Swap/typings';
 import type { IWalletConnectSession } from '@walletconnect/types';
@@ -317,7 +316,6 @@ export type BatchSendConfirmParams = BatchSendConfirmShared & {
   feeInfoUseFeeInTx: boolean;
   feeInfoEditable: boolean;
   transferCount: number;
-  transferType: BulkSenderTypeEnum;
   skipSaveHistory?: boolean;
 };
 

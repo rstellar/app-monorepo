@@ -40,7 +40,6 @@ import { useActiveSideAccount, useNativeToken } from '../../../hooks';
 import { useFormOnChangeDebounced } from '../../../hooks/useFormOnChangeDebounced';
 import { useSingleToken } from '../../../hooks/useTokens';
 import { ModalRoutes, RootRoutes } from '../../../routes/routesEnum';
-import { BulkSenderTypeEnum } from '../../BulkSender/types';
 import { BaseSendModal } from '../components/BaseSendModal';
 import NFTView from '../components/NFTView';
 import { SendModalRoutes } from '../types';
@@ -296,7 +295,6 @@ function PreSendAddress() {
                 nftInfos,
               },
               transferCount: transferInfos.length,
-              transferType: BulkSenderTypeEnum.NFT,
               onModalClose: closeModal,
             },
           },
