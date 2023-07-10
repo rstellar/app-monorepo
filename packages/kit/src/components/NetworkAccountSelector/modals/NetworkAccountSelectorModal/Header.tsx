@@ -45,9 +45,15 @@ type NavigationProps = NativeStackNavigationProp<
 function Header({
   accountSelectorInfo,
   showCustomLegacyHeader,
+  hideCreateAccount,
+  multiSelect,
+  selectedAccounts,
 }: {
   accountSelectorInfo: ReturnType<typeof useAccountSelectorInfo>;
   showCustomLegacyHeader?: boolean;
+  hideCreateAccount?: boolean;
+  selectedAccounts?: string[];
+  multiSelect?: boolean;
 }) {
   const intl = useIntl();
   const { firstTimeShowCheckRPCNodeTooltip } = useStatus();
@@ -186,7 +192,12 @@ function Header({
         ) : null}
       </Box>
       <Box flexDirection="row" alignItems="center">
-        <WalletSelectDropdown accountSelectorInfo={accountSelectorInfo} />
+        <WalletSelectDropdown
+          accountSelectorInfo={accountSelectorInfo}
+          hideCreateAccount={hideCreateAccount}
+          multiSelect={multiSelect}
+          selectedAccounts={selectedAccounts}
+        />
       </Box>
     </Box>
   );
