@@ -32,6 +32,8 @@ type NavigationProps = NativeStackNavigationProp<TabRoutesParams>;
 function TxDetailStatusInfoBox(props: Props) {
   const { decodedTx, isSendConfirm, tokensInTx } = props;
 
+  console.log(decodedTx);
+
   const navigation = useNavigation<NavigationProps>();
 
   const intl = useIntl();
@@ -82,7 +84,7 @@ function TxDetailStatusInfoBox(props: Props) {
             {(decodedTx.createdAt || decodedTx.updatedAt) && (
               <Text typography="Body2" color="text-subdued">
                 {dayjs(decodedTx.createdAt || decodedTx.updatedAt).format(
-                  'MMM DD YYYY, HH:MM',
+                  'MMM DD YYYY, HH:mm',
                 )}
               </Text>
             )}
