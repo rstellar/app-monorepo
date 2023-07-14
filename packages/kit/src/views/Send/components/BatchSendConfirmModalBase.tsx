@@ -148,15 +148,18 @@ function BatchSendConfirmModalBase(props: IBatchTxsConfirmViewProps) {
           isAccountNotMatched={isAccountNotMatched}
         />
       )}
-      <Box mb={3}>
-        <Alert
-          dismiss={false}
-          title={intl.formatMessage({
-            id: 'content__do_not_transfer_to_any_exchange_accounts_to_avoid_loss_of_assets',
-          })}
-          alertType="warn"
-        />
-      </Box>
+      {!isManyToN && (
+        <Box mb={3}>
+          <Alert
+            dismiss={false}
+            title={intl.formatMessage({
+              id: 'content__do_not_transfer_to_any_exchange_accounts_to_avoid_loss_of_assets',
+            })}
+            alertType="warn"
+          />
+        </Box>
+      )}
+
       {feeInput && <Box mb={3}>{feeInput}</Box>}
       {tokenTransferInfo && <Box mb={3}>{tokenTransferInfo}</Box>}
       {!isSingleTransformMode && (

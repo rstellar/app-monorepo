@@ -179,6 +179,7 @@ export type ITransferInfo = {
   selectedUtxos?: string[]; // coin control
   coinControlDisabled?: boolean;
   coinSelectAlgorithm?: ICoinSelectAlgorithm;
+  txInterval?: string;
 };
 export type IApproveInfo = {
   from: string; // token owner
