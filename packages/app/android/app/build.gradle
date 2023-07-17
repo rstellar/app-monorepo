@@ -294,6 +294,8 @@ dependencies {
         implementation jscFlavor
     }
 
+    implementation project(':@shopify-flash-list')
+
     implementation project(path: ':lib-keys-secret')
     implementation project(':lib-tabview')
 

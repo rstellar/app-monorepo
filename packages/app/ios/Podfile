@@ -82,6 +82,7 @@ target 'OneKeyWallet' do
   pod 'JXPagingView/Pager'
   pod 'JXCategoryView'
   pod "GCDWebServer", "~> 3.5.3"
+  pod 'RNFlashList', :path => '../../../node_modules/@shopify/flash-list'
 
   post_install do |installer|
     react_native_post_install(

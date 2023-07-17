@@ -635,6 +635,8 @@ PODS:
     - Firebase/Performance (= 8.15.0)
     - React-Core
     - RNFBApp
+  - RNFlashList (1.5.0):
+    - React-Core
   - RNFS (2.20.0):
     - React-Core
   - RNGestureHandler (2.10.1):
@@ -804,6 +806,7 @@ DEPENDENCIES:
   - "RNFBApp (from `../../../node_modules/@react-native-firebase/app`)"
   - "RNFBCrashlytics (from `../../../node_modules/@react-native-firebase/crashlytics`)"
   - "RNFBPerf (from `../../../node_modules/@react-native-firebase/perf`)"
+  - "RNFlashList (from `../../../node_modules/@shopify/flash-list`)"
   - RNFS (from `../../../node_modules/react-native-fs`)
   - RNGestureHandler (from `../../../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../../../node_modules/react-native-reanimated`)
@@ -1031,6 +1034,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/@react-native-firebase/crashlytics"
   RNFBPerf:
     :path: "../../../node_modules/@react-native-firebase/perf"
+  RNFlashList:
+    :path: "../../../node_modules/@shopify/flash-list"
   RNFS:
     :path: "../../../node_modules/react-native-fs"
   RNGestureHandler:
@@ -1170,6 +1175,7 @@ SPEC CHECKSUMS:
   RNFBApp: e4439717c23252458da2b41b81b4b475c86f90c4
   RNFBCrashlytics: 94e1f78e2a9aa9e02edbfb0d3f1f0921ce00094b
   RNFBPerf: b85b621a4d15905847e8627a6aa67ad894e8e166
+  RNFlashList: 25b0e092b4470c84db0386d4f5316dc34123bb6d
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNGestureHandler: 42ec7c28dd02d540ed6c9159c57a98ff016492dc
   RNReanimated: 77fbf24fd94c940c82ceb67f6d4571db3d2c04fe
@@ -1183,6 +1189,6 @@ SPEC CHECKSUMS:
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
   ZXingObjC: fdbb269f25dd2032da343e06f10224d62f537bdb
 
-PODFILE CHECKSUM: 378641444e16b53374eb08f9204e4c8f404b5843
+PODFILE CHECKSUM: 6fd354b53bf7d636480f6b7d9e696caa475d85a1
 
 COCOAPODS: 1.12.1

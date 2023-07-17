@@ -1,14 +1,24 @@
-import { FlatList } from 'native-base';
+import React from 'react';
 
-import type { IFlatListProps } from 'native-base/lib/typescript/components/basic/FlatList/types';
+import { FlashList } from '@shopify/flash-list';
 
-export type FlatListProps<T = unknown> = IFlatListProps<T>;
+import type {
+  FlashListProps,
+  ListRenderItem as FlashListRenderItem,
+} from '@shopify/flash-list/src/FlashListProps';
+import type { IBoxProps } from 'native-base';
+
+export type FlatListProps<T = unknown> = FlashListProps<T> & IBoxProps;
+
 // @ts-ignore
-FlatList.defaultProps = {
-  testID: 'FlatList-default',
+FlashList.defaultProps = {
   // @ts-ignore
-  ...(FlatList.defaultProps || {}),
+  testID: 'FlashList-default',
+  // @ts-ignore
+  ...(FlashList.defaultProps || {}),
 };
 
-export default FlatList;
-export const FlatListRef = FlatList;
+export default FlashList;
+
+export const FlatListRef = FlashList;
+export type ListRenderItem<T = unknown> = FlashListRenderItem<T>;

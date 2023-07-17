@@ -189,7 +189,7 @@ const NFTList: FC<NFTListProps> = ({
       contentContainerStyle={{
         paddingLeft: 16,
         paddingBottom: listItems.length ? 16 : 0,
-        marginTop: 24,
+        // marginTop: 24,
       }}
       key={flatListKey}
       data={collections}

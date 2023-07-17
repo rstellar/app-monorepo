@@ -10,6 +10,7 @@ import {
   IconButton,
   useUserDevice,
 } from '@onekeyhq/components';
+import type { ListRenderItem } from '@onekeyhq/components/src/FlatList';
 
 import { HomeRoutes } from '../../routes/routesEnum';
 import { MARKET_FAVORITES_CATEGORYID } from '../../store/reducers/market';
@@ -31,12 +32,7 @@ import { useMarketList } from './hooks/useMarketList';
 import type { HomeRoutesParams } from '../../routes/types';
 import type { MarketCategory } from '../../store/reducers/market';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import type {
-  FlatList as FlatListType,
-  ListRenderItem,
-  NativeScrollEvent,
-  NativeSyntheticEvent,
-} from 'react-native';
+import type { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
 
 type NavigationProps = NativeStackNavigationProp<HomeRoutesParams>;
 
@@ -58,7 +54,7 @@ const MarketList: FC = () => {
     return ListHeadTags;
   }, [isVerticalLayout, size]);
   const navigation = useNavigation<NavigationProps>();
-  const scrollRef = useRef<FlatListType>(null);
+  const scrollRef = useRef<FlatList<string>>(null);
   const renderItem: ListRenderItem<string> = useCallback(
     ({ item }) =>
       isVerticalLayout ? (
@@ -117,15 +113,11 @@ const MarketList: FC = () => {
   );
 
   return (
-    <>
+    <Box mt={3} px={isVerticalLayout ? 2 : 3} bg="background-default">
       <FlatList
-        flex={1}
-        mt={3}
-        px={isVerticalLayout ? 2 : 3}
         refreshing={refreshing}
         onRefresh={onRefresh}
         ref={scrollRef}
-        bg="background-default"
         onScroll={onScroll}
         contentContainerStyle={{
           paddingBottom: 24,
@@ -136,7 +128,7 @@ const MarketList: FC = () => {
         data={
           // eslint-disable-next-line no-nested-ternary
           showRecomended
-            ? null
+            ? []
             : selectedCategory?.coingeckoIds?.length
             ? selectedCategory.coingeckoIds
             : MARKET_FAKE_SKELETON_LIST_ARRAY
@@ -168,7 +160,7 @@ const MarketList: FC = () => {
           }}
         />
       )}
-    </>
+    </Box>
   );
 };
 

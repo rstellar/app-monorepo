@@ -93,7 +93,9 @@ const Container: ForwardRefRenderFunction<
   );
 };
 
-const renderScrollComponent = (props: any) => <NestedScrollView {...props} />;
+const renderScrollComponent = (props: any) => (
+  <NestedScrollView {...props} style={{ flex: 1 }} />
+);
 
 export const Tabs = {
   Container: forwardRef(Container),
@@ -101,7 +103,8 @@ export const Tabs = {
   Tab: __DEV__ ? ({ children }) => <>{children}</> : Fragment,
   FlatList: ({ contentContainerStyle, ...props }: any) => (
     <FlatList
-      contentContainerStyle={[contentContainerStyle, { minHeight: '100%' }]}
+      style={{ flex: 1 }}
+      contentContainerStyle={[contentContainerStyle]}
       {...props}
       renderScrollComponent={renderScrollComponent}
     />
@@ -109,7 +112,8 @@ export const Tabs = {
   ScrollView,
   SectionList: ({ contentContainerStyle, ...props }: any) => (
     <SectionList
-      contentContainerStyle={[contentContainerStyle, { minHeight: '100%' }]}
+      style={{ flex: 1 }}
+      contentContainerStyle={[contentContainerStyle]}
       {...props}
       renderScrollComponent={renderScrollComponent}
     />

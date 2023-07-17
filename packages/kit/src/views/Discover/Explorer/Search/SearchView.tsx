@@ -20,6 +20,7 @@ import {
   Typography,
 } from '@onekeyhq/components';
 import { FlatListRef } from '@onekeyhq/components/src/FlatList';
+import type { FlatListProps } from '@onekeyhq/components/src/FlatList';
 import useClickDocumentClose from '@onekeyhq/components/src/hooks/useClickDocumentClose';
 import { useDropdownPosition } from '@onekeyhq/components/src/hooks/useDropdownPosition';
 import { useDebounce } from '@onekeyhq/kit/src/hooks';
@@ -34,7 +35,6 @@ import type {
   SearchViewProps,
   SearchViewRef,
 } from '../explorerUtils';
-import type { FlatListProps } from 'react-native';
 
 const SearchView = forwardRef<SearchViewRef, SearchViewProps>(
   (

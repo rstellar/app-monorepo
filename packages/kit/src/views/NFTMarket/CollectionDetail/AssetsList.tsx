@@ -395,11 +395,13 @@ const AssetsList = ({
       style={{
         padding,
       }}
-      contentContainerStyle={{
-        width: '100%',
-        maxWidth: MAX_PAGE_CONTAINER_WIDTH,
-        alignSelf: 'center',
-      }}
+      contentContainerStyle={
+        {
+          // width: '100%',
+          // maxWidth: MAX_PAGE_CONTAINER_WIDTH,
+          // alignSelf: 'center',
+        }
+      }
       columnWrapperStyle={{
         marginHorizontal: isSmallScreen ? -4 : -12,
         paddingBottom: isSmallScreen ? 16 : 24,

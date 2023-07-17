@@ -27,6 +27,7 @@ import expo.modules.ReactNativeHostWrapper;
 import so.onekey.app.wallet.utils.Utils;
 
 import io.csie.kudo.reactnative.v8.executor.V8ExecutorFactory;
+import com.shopify.reactnative.flash_list.ReactNativeFlashListPackage;
 
 public class MainApplication extends Application implements ReactApplication {
   private final ReactNativeHost mReactNativeHost = new ReactNativeHostWrapper(
@@ -44,6 +45,7 @@ public class MainApplication extends Application implements ReactApplication {
         // Packages that cannot be autolinked yet can be added manually here, for example:
         // packages.add(new MyReactNativePackage());
         packages.add(new MainReactNativePackage());
+        packages.add(new ReactNativeFlashListPackage());
         return packages;
       }
 

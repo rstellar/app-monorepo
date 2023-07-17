@@ -366,7 +366,8 @@ const ToolsPage: FC = () => {
       keyExtractor={(_item) => _item.key}
       numColumns={isVertical ? undefined : 2}
       contentContainerStyle={{
-        marginVertical: 24,
+        // marginVertical: 24,
+        paddingVertical: 24,
         paddingHorizontal: isVertical ? 32 : 16,
       }}
       renderItem={({ item, index }) => (
