@@ -16,6 +16,7 @@ import { isAllNetworks } from '@onekeyhq/engine/src/managers/network';
 import { isLightningNetworkByNetworkId } from '@onekeyhq/shared/src/engine/engineConsts';
 
 import { useTokenDetailInfo, useTokenPositionInfo } from '../../hooks';
+import { isSupportStakingType } from '../Staking/utils';
 import { SwapPlugins } from '../Swap/Plugins/Swap';
 import { TxHistoryListView } from '../TxHistory/TxHistoryListView';
 
@@ -85,11 +86,17 @@ const TokenDetail: FC<TokenDetailViewProps> = () => {
 
   const headerHeight = useMemo(() => {
     let height = isVerticalLayout ? 210 : 194;
-    if (detailInfo?.ethereumNativeToken && !isAllNetworks(networkId)) {
+    if (
+      isSupportStakingType({
+        networkId: detailInfo?.defaultToken?.networkId,
+        tokenIdOnNetwork: detailInfo?.defaultToken?.tokenIdOnNetwork,
+      }) &&
+      !isAllNetworks(networkId)
+    ) {
       height += 132;
     }
     return height;
-  }, [networkId, detailInfo?.ethereumNativeToken, isVerticalLayout]);
+  }, [networkId, detailInfo, isVerticalLayout]);
 
   const headerTitle = useCallback(() => {
     if (!isVerticalLayout) {
