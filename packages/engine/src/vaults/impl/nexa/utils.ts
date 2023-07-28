@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import BN from 'bn.js';
 
-import { InvalidAddress } from '../../../errors';
+import { InvalidAddress } from '@onekeyhq/shared/src/errors/appErrors';
+
 import { hash160, sha256 } from '../../../secret/hash';
 
 import {

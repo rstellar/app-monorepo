@@ -25,9 +25,6 @@ import {
   getTimeStamp,
 } from '@onekeyhq/kit/src/utils/helper';
 import { log } from '@onekeyhq/shared/src/crashlytics/index.web';
-import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
-import { memoizee } from '@onekeyhq/shared/src/utils/cacheUtils';
-
 import {
   InsufficientBalance,
   InvalidAddress,
@@ -35,7 +32,10 @@ import {
   NotImplemented,
   OneKeyError,
   OneKeyInternalError,
-} from '../../../errors';
+} from '@onekeyhq/shared/src/errors/appErrors';
+import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
+import { memoizee } from '@onekeyhq/shared/src/utils/cacheUtils';
+
 import {
   IDecodedTxActionType,
   IDecodedTxDirection,

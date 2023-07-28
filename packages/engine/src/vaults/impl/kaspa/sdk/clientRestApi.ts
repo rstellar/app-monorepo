@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import { get } from 'lodash';
 
-import { OneKeyInternalError } from '@onekeyhq/engine/src/errors';
+import { OneKeyInternalError } from '@onekeyhq/shared/src/errors/appErrors';
 
 import { submitTransactionFromString } from './transaction';
 

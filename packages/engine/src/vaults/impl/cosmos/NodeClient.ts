@@ -1,6 +1,9 @@
 import Axios from 'axios';
 
-import { OneKeyError, OneKeyInternalError } from '@onekeyhq/engine/src/errors';
+import {
+  OneKeyError,
+  OneKeyInternalError,
+} from '@onekeyhq/shared/src/errors/appErrors';
 
 import type {
   AccountInfo,

@@ -13,8 +13,6 @@ import {
   Typography,
   useForm,
 } from '@onekeyhq/components';
-import type { OneKeyError } from '@onekeyhq/engine/src/errors';
-import { OneKeyErrorClassNames } from '@onekeyhq/engine/src/errors';
 import type { GoPlusAddressSecurity } from '@onekeyhq/engine/src/types/goplus';
 import { GoPlusSupportApis } from '@onekeyhq/engine/src/types/goplus';
 import type { INFTAsset, NFTAsset } from '@onekeyhq/engine/src/types/nft';
@@ -26,6 +24,8 @@ import type {
 } from '@onekeyhq/engine/src/vaults/types';
 import { makeTimeoutPromise } from '@onekeyhq/shared/src/background/backgroundUtils';
 import { isLightningNetworkByImpl } from '@onekeyhq/shared/src/engine/engineConsts';
+import { OneKeyErrorClassNames } from '@onekeyhq/shared/src/errors/appErrors';
+import type { OneKeyError } from '@onekeyhq/shared/src/errors/appErrors';
 
 import backgroundApiProxy from '../../../background/instance/backgroundApiProxy';
 import AddressInput from '../../../components/AddressInput';

@@ -5,13 +5,13 @@ import { BCS, TransactionBuilder, TxnBuilderTypes } from 'aptos';
 import { get } from 'lodash';
 
 import type { UnsignedTx } from '@onekeyhq/engine/src/types/provider';
-
 import {
   InvalidAccount,
   OneKeyError,
   OneKeyHardwareError,
   OneKeyInternalError,
-} from '../../../errors';
+} from '@onekeyhq/shared/src/errors/appErrors';
+
 import { IDecodedTxActionType } from '../../types';
 import { hexlify, stripHexPrefix } from '../../utils/hexUtils';
 

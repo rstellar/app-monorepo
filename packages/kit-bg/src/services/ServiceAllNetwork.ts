@@ -2,10 +2,6 @@ import { debounce } from 'lodash';
 
 import simpleDb from '@onekeyhq/engine/src/dbs/simple/simpleDb';
 import {
-  AllNetworksMinAccountsError,
-  AllNetworksUpto3LimitsError,
-} from '@onekeyhq/engine/src/errors';
-import {
   allNetworksAccountRegex,
   generateFakeAllnetworksAccount,
   getWalletIdFromAccountId,
@@ -37,6 +33,10 @@ import {
   IMPL_SOL,
   INDEX_PLACEHOLDER,
 } from '@onekeyhq/shared/src/engine/engineConsts';
+import {
+  AllNetworksMinAccountsError,
+  AllNetworksUpto3LimitsError,
+} from '@onekeyhq/shared/src/errors/appErrors';
 import {
   AppEventBusNames,
   appEventBus,

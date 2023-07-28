@@ -10,10 +10,13 @@ import {
   IMPL_DOT,
   IMPL_XMR,
 } from '@onekeyhq/shared/src/engine/engineConsts';
+import * as errors from '@onekeyhq/shared/src/errors/appErrors';
+import {
+  OneKeyValidatorError,
+  OneKeyValidatorTip,
+} from '@onekeyhq/shared/src/errors/appErrors';
 import platformEnv from '@onekeyhq/shared/src/platformEnv';
 
-import * as errors from './errors';
-import { OneKeyValidatorError, OneKeyValidatorTip } from './errors';
 import * as limits from './limits';
 import {
   decodePassword,

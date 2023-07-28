@@ -2,7 +2,6 @@ import { groupBy } from 'lodash';
 
 import simpleDb from '@onekeyhq/engine/src/dbs/simple/simpleDb';
 import { getFiatEndpoint } from '@onekeyhq/engine/src/endpoint';
-import { OneKeyInternalError } from '@onekeyhq/engine/src/errors';
 import * as nft from '@onekeyhq/engine/src/managers/nft';
 import { getNFTListKey } from '@onekeyhq/engine/src/managers/nft';
 import type { Account } from '@onekeyhq/engine/src/types/account';
@@ -30,6 +29,7 @@ import {
   backgroundMethod,
 } from '@onekeyhq/shared/src/background/backgroundDecorators';
 import { OnekeyNetwork } from '@onekeyhq/shared/src/config/networkIds';
+import { OneKeyInternalError } from '@onekeyhq/shared/src/errors/appErrors';
 
 import ServiceBase from './ServiceBase';
 

@@ -12,9 +12,8 @@ import type {
   IBtcUTXOInfo,
   ICollectUTXOsOptions,
 } from '@onekeyhq/engine/src/vaults/utils/btcForkChain/types';
+import { TransferValueTooSmall } from '@onekeyhq/shared/src/errors/appErrors';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
-
-import { TransferValueTooSmall } from '../../../../errors';
 
 import type { AxiosError, AxiosInstance } from 'axios';
 

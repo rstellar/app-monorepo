@@ -20,7 +20,6 @@ import {
   VStack,
 } from '@onekeyhq/components';
 import { getClipboard } from '@onekeyhq/components/src/utils/ClipboardUtils';
-import type { OneKeyError } from '@onekeyhq/engine/src/errors';
 import { batchTransferContractAddress } from '@onekeyhq/engine/src/presets/batchTransferContractAddress';
 import { INSCRIPTION_PADDING_SATS_VALUES } from '@onekeyhq/engine/src/vaults/impl/btc/inscribe/consts';
 import type { ISignedTxPro } from '@onekeyhq/engine/src/vaults/types';
@@ -39,6 +38,7 @@ import type {
   HomeRoutesParams,
   RootRoutesParams,
 } from '@onekeyhq/kit/src/routes/types';
+import type { OneKeyError } from '@onekeyhq/shared/src/errors/appErrors';
 import platformEnv from '@onekeyhq/shared/src/platformEnv';
 
 import walletConnectUtils from '../../components/WalletConnect/utils/walletConnectUtils';

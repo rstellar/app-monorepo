@@ -35,6 +35,12 @@ import {
   getSupportedImpls,
   isLightningNetwork,
 } from '@onekeyhq/shared/src/engine/engineConsts';
+import {
+  AccountAlreadyExists,
+  NotImplemented,
+  OneKeyHardwareError,
+  OneKeyInternalError,
+} from '@onekeyhq/shared/src/errors/appErrors';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 import timelinePerfTrace, {
   ETimelinePerfNames,
@@ -48,12 +54,6 @@ import type { IOneKeyDeviceFeatures } from '@onekeyhq/shared/types';
 import { DbApi } from './dbs';
 import { DEFAULT_VERIFY_STRING, checkPassword } from './dbs/base';
 import simpleDb from './dbs/simple/simpleDb';
-import {
-  AccountAlreadyExists,
-  NotImplemented,
-  OneKeyHardwareError,
-  OneKeyInternalError,
-} from './errors';
 import {
   generateFakeAllnetworksAccount,
   getWalletIdFromAccountId,

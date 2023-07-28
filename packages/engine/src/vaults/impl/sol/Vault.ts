@@ -31,16 +31,16 @@ import type {
 } from '@onekeyhq/engine/src/types/provider';
 import { getTimeDurationMs, wait } from '@onekeyhq/kit/src/utils/helper';
 import { HISTORY_CONSTS } from '@onekeyhq/shared/src/engine/engineConsts';
-import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
-import { memoizee } from '@onekeyhq/shared/src/utils/cacheUtils';
-
-import simpleDb from '../../../dbs/simple/simpleDb';
 import {
   InvalidAddress,
   NotImplemented,
   OneKeyInternalError,
   PendingQueueTooLong,
-} from '../../../errors';
+} from '@onekeyhq/shared/src/errors/appErrors';
+import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
+import { memoizee } from '@onekeyhq/shared/src/utils/cacheUtils';
+
+import simpleDb from '../../../dbs/simple/simpleDb';
 import { getAccountNameInfoByImpl } from '../../../managers/impl';
 import {
   createOutputActionFromNFTTransaction,

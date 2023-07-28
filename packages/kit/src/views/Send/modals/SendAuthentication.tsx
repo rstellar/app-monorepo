@@ -5,13 +5,13 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { useIntl } from 'react-intl';
 
 import { Box, Center, Spinner, ToastManager } from '@onekeyhq/components';
-import type { OneKeyError } from '@onekeyhq/engine/src/errors';
-import { OneKeyErrorClassNames } from '@onekeyhq/engine/src/errors';
 import type {
   IEncodedTx,
   ISignedTxPro,
 } from '@onekeyhq/engine/src/vaults/types';
 import { isExternalAccount } from '@onekeyhq/shared/src/engine/engineUtils';
+import type { OneKeyError } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyErrorClassNames } from '@onekeyhq/shared/src/errors/appErrors';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 
 import backgroundApiProxy from '../../../background/instance/backgroundApiProxy';

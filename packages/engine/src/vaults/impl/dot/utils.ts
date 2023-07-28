@@ -1,6 +1,5 @@
 import { IDecodedTxActionType } from '@onekeyhq/engine/src/vaults/types';
-
-import { OneKeyInternalError } from '../../../errors';
+import { OneKeyInternalError } from '@onekeyhq/shared/src/errors/appErrors';
 
 import polkadotSdk from './sdk/polkadotSdk';
 

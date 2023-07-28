@@ -10,12 +10,6 @@ import BigNumber from 'bignumber.js';
 import { groupBy, isEmpty, isNil } from 'lodash';
 
 import type { BaseClient } from '@onekeyhq/engine/src/client/BaseClient';
-import {
-  InvalidAddress,
-  InvalidTransferValue,
-  NotImplemented,
-  OneKeyInternalError,
-} from '@onekeyhq/engine/src/errors';
 import { decrypt } from '@onekeyhq/engine/src/secret/encryptors/aes256';
 import type {
   DBAccount,
@@ -54,6 +48,12 @@ import {
 import { VaultBase } from '@onekeyhq/engine/src/vaults/VaultBase';
 import backgroundApiProxy from '@onekeyhq/kit/src/background/instance/backgroundApiProxy';
 import { formatBalanceDisplay } from '@onekeyhq/kit/src/components/Format';
+import {
+  InvalidAddress,
+  InvalidTransferValue,
+  NotImplemented,
+  OneKeyInternalError,
+} from '@onekeyhq/shared/src/errors/appErrors';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 import { memoizee } from '@onekeyhq/shared/src/utils/cacheUtils';
 

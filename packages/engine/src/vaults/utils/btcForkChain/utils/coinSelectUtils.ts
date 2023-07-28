@@ -7,7 +7,7 @@ import coinSelectSplit from 'coinselect/split';
 import coinSelectUtils from 'coinselect/utils';
 import { isNil } from 'lodash';
 
-import { InsufficientBalance } from '../../../../errors';
+import { InsufficientBalance } from '@onekeyhq/shared/src/errors/appErrors';
 
 import type { IEncodedTxBtc, IUTXOInput, IUTXOOutput } from '../types';
 import type {

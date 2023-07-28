@@ -4,7 +4,7 @@ import { useRoute } from '@react-navigation/native';
 import { useIntl } from 'react-intl';
 
 import { Alert, Center, Spinner } from '@onekeyhq/components';
-import { OneKeyError } from '@onekeyhq/engine/src/errors';
+import { OneKeyError } from '@onekeyhq/shared/src/errors/appErrors';
 
 import { BaseSendConfirmModal } from '../../components/BaseSendConfirmModal';
 import { FeeInfoInputForSpeedUpOrCancel } from '../../components/FeeInfoInput';

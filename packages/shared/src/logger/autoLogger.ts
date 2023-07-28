@@ -1,5 +1,5 @@
 import { NotAutoPrintError } from '../errors/common-errors';
-import { toPlainErrorObject } from '../utils/errorUtils';
+import { toPlainErrorObject } from '../errors/errorUtils';
 
 let prevErrorStack: string | undefined;
 

@@ -2,8 +2,8 @@
 import { HardwareErrorCode } from '@onekeyfe/hd-shared';
 
 import type { LocaleIds } from '@onekeyhq/components/src/locale';
-import type { OneKeyHardwareErrorPayload } from '@onekeyhq/engine/src/errors';
-import { OneKeyHardwareError } from '@onekeyhq/engine/src/errors';
+import type { OneKeyHardwareErrorPayload } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyHardwareError } from '@onekeyhq/shared/src/errors/appErrors';
 
 export enum CustomOneKeyHardwareError {
   NeedOneKeyBridge = 3030,

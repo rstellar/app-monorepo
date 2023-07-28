@@ -11,17 +11,17 @@ import {
   COINTYPE_ADA,
   IMPL_ADA,
 } from '@onekeyhq/shared/src/engine/engineConsts';
-import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
-import platformEnv from '@onekeyhq/shared/src/platformEnv';
-import { memoizee } from '@onekeyhq/shared/src/utils/cacheUtils';
-
 import {
   InsufficientBalance,
   InvalidAddress,
   NotImplemented,
   OneKeyInternalError,
   PreviousAccountIsEmpty,
-} from '../../../errors';
+} from '@onekeyhq/shared/src/errors/appErrors';
+import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
+import platformEnv from '@onekeyhq/shared/src/platformEnv';
+import { memoizee } from '@onekeyhq/shared/src/utils/cacheUtils';
+
 import {
   getDefaultPurpose,
   getLastAccountId,

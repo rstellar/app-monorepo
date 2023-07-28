@@ -8,9 +8,6 @@ import { decrypt } from '@onekeyhq/engine/src/secret/encryptors/aes256';
 import { TransactionStatus } from '@onekeyhq/engine/src/types/provider';
 import type { PartialTokenInfo } from '@onekeyhq/engine/src/types/provider';
 import { getTimeDurationMs } from '@onekeyhq/kit/src/utils/helper';
-import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
-import { memoizee } from '@onekeyhq/shared/src/utils/cacheUtils';
-
 import {
   InvalidAddress,
   InvalidTokenAddress,
@@ -18,7 +15,10 @@ import {
   NotImplemented,
   OneKeyInternalError,
   RecipientHasNotActived,
-} from '../../../errors';
+} from '@onekeyhq/shared/src/errors/appErrors';
+import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
+import { memoizee } from '@onekeyhq/shared/src/utils/cacheUtils';
+
 import {
   IDecodedTxActionType,
   IDecodedTxDirection,

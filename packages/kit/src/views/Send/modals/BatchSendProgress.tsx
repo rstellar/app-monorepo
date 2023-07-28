@@ -13,8 +13,6 @@ import {
   Text,
   ToastManager,
 } from '@onekeyhq/components';
-import type { OneKeyError } from '@onekeyhq/engine/src/errors';
-import { OneKeyErrorClassNames } from '@onekeyhq/engine/src/errors';
 import { TransactionStatus } from '@onekeyhq/engine/src/types/provider';
 import type {
   IEncodedTx,
@@ -22,6 +20,8 @@ import type {
 } from '@onekeyhq/engine/src/vaults/types';
 import { IMPL_SOL } from '@onekeyhq/shared/src/engine/engineConsts';
 import { isExternalAccount } from '@onekeyhq/shared/src/engine/engineUtils';
+import { OneKeyErrorClassNames } from '@onekeyhq/shared/src/errors/appErrors';
+import type { OneKeyError } from '@onekeyhq/shared/src/errors/appErrors';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 
 import backgroundApiProxy from '../../../background/instance/backgroundApiProxy';

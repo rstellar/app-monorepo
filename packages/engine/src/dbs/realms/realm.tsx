@@ -13,9 +13,6 @@ import {
   filterPassphraseWallet,
   handleDisplayPassphraseWallet,
 } from '@onekeyhq/shared/src/engine/engineUtils';
-import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
-// import platformEnv from '@onekeyhq/shared/src/platformEnv';
-
 import {
   AccountAlreadyExists,
   NotImplemented,
@@ -28,7 +25,10 @@ import {
   TooManyImportedAccounts,
   TooManyWatchingAccounts,
   WrongPassword,
-} from '../../errors';
+} from '@onekeyhq/shared/src/errors/appErrors';
+import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
+// import platformEnv from '@onekeyhq/shared/src/platformEnv';
+
 import {
   DERIVED_ACCOUNT_MAX_NUM,
   EXTERNAL_ACCOUNT_MAX_NUM,

@@ -3,8 +3,11 @@ import memoizee from 'memoizee';
 
 import { decrypt } from '@onekeyhq/engine/src/secret/encryptors/aes256';
 import { getTimeDurationMs } from '@onekeyhq/kit/src/utils/helper';
+import {
+  InvalidAddress,
+  OneKeyInternalError,
+} from '@onekeyhq/shared/src/errors/appErrors';
 
-import { InvalidAddress, OneKeyInternalError } from '../../../errors';
 import {
   type Account,
   type AccountCredentialType,

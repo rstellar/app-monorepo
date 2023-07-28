@@ -1,9 +1,5 @@
 import BigNumber from 'bignumber.js';
 
-import {
-  FailedToEstimatedGasError,
-  MimimumBalanceRequired,
-} from '@onekeyhq/engine/src/errors';
 import type { EIP1559Fee } from '@onekeyhq/engine/src/types/network';
 import type { IUnsignedMessageEvm } from '@onekeyhq/engine/src/vaults/impl/evm/Vault';
 import type {
@@ -21,6 +17,10 @@ import {
   backgroundMethod,
 } from '@onekeyhq/shared/src/background/backgroundDecorators';
 import { IMPL_EVM } from '@onekeyhq/shared/src/engine/engineConsts';
+import {
+  FailedToEstimatedGasError,
+  MimimumBalanceRequired,
+} from '@onekeyhq/shared/src/errors/appErrors';
 
 import ServiceBase from './ServiceBase';
 

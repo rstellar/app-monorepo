@@ -4,12 +4,12 @@ import { useEffect } from 'react';
 import { useIntl } from 'react-intl';
 
 import { Dialog, Spinner, ToastManager } from '@onekeyhq/components';
-import { OneKeyErrorClassNames } from '@onekeyhq/engine/src/errors';
 import type { Device } from '@onekeyhq/engine/src/types/device';
 import backgroundApiProxy from '@onekeyhq/kit/src/background/instance/backgroundApiProxy';
+import { OneKeyErrorClassNames } from '@onekeyhq/shared/src/errors/appErrors';
+import { DeviceNotFind } from '@onekeyhq/shared/src/errors/hardwareErrors';
 
 import { deviceUtils } from '../../../utils/hardware';
-import { DeviceNotFind } from '../../../utils/hardware/errors';
 
 export type CreateHwWalletDialogProps = {
   deviceId: string;

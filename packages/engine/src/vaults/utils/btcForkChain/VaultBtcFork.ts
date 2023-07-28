@@ -27,13 +27,6 @@ import {
   COINTYPE_BTC,
   IMPL_BTC,
 } from '@onekeyhq/shared/src/engine/engineConsts';
-import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
-import { memoizee } from '@onekeyhq/shared/src/utils/cacheUtils';
-
-import {
-  getUtxoId,
-  getUtxoUniqueKey,
-} from '../../../dbs/simple/entity/SimpleDbEntityUtxoAccounts';
 import {
   InsufficientBalance,
   InvalidAddress,
@@ -41,7 +34,14 @@ import {
   OneKeyInternalError,
   PreviousAccountIsEmpty,
   UtxoNotFoundError,
-} from '../../../errors';
+} from '@onekeyhq/shared/src/errors/appErrors';
+import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
+import { memoizee } from '@onekeyhq/shared/src/utils/cacheUtils';
+
+import {
+  getUtxoId,
+  getUtxoUniqueKey,
+} from '../../../dbs/simple/entity/SimpleDbEntityUtxoAccounts';
 import {
   getDefaultPurpose,
   getLastAccountId,

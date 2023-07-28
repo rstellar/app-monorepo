@@ -16,11 +16,11 @@ import {
   Tooltip,
   VStack,
 } from '@onekeyhq/components';
-import { OneKeyError } from '@onekeyhq/engine/src/errors';
 import type {
   IEncodedTx,
   IFeeInfoPayload,
 } from '@onekeyhq/engine/src/vaults/types';
+import { OneKeyError } from '@onekeyhq/shared/src/errors/appErrors';
 
 import backgroundApiProxy from '../../../background/instance/backgroundApiProxy';
 import { FormatCurrencyNativeOfAccount } from '../../../components/Format';
