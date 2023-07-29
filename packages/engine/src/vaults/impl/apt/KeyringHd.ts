@@ -5,7 +5,7 @@ import * as SHA3 from 'js-sha3';
 import { batchGetPublicKeys } from '@onekeyhq/engine/src/secret';
 import type { SignedTx, UnsignedTx } from '@onekeyhq/engine/src/types/provider';
 import { COINTYPE_APTOS as COIN_TYPE } from '@onekeyhq/shared/src/engine/engineConsts';
-import { OneKeyInternalError } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyInternalError } from '@onekeyhq/shared/src/errors';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 
 import { Signer } from '../../../proxy';

@@ -1,6 +1,6 @@
 import { secp256k1 } from '@onekeyhq/engine/src/secret/curves';
 import { COINTYPE_ETH as COIN_TYPE } from '@onekeyhq/shared/src/engine/engineConsts';
-import { OneKeyInternalError } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyInternalError } from '@onekeyhq/shared/src/errors';
 
 import { Signer } from '../../../proxy';
 import { AccountType } from '../../../types/account';

@@ -3,8 +3,8 @@
 import type { SignedTx, UnsignedTx } from '@onekeyhq/engine/src/types/provider';
 import { IMPL_EVM } from '@onekeyhq/shared/src/engine/engineConsts';
 import * as engineUtils from '@onekeyhq/shared/src/engine/engineUtils';
-import { OneKeyHardwareError } from '@onekeyhq/shared/src/errors/appErrors';
-import { convertDeviceError } from '@onekeyhq/shared/src/errors/deviceErrorUtils';
+import { OneKeyHardwareError } from '@onekeyhq/shared/src/errors';
+import { convertDeviceError } from '@onekeyhq/shared/src/errors/utils/deviceErrorUtils';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 
 import * as OneKeyHardware from '../../../hardware';

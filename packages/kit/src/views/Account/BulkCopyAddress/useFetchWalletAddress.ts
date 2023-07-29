@@ -9,7 +9,7 @@ import {
   IMPL_COSMOS,
   INDEX_PLACEHOLDER,
 } from '@onekeyhq/shared/src/engine/engineConsts';
-import { OneKeyErrorClassNames } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyErrorClassNames } from '@onekeyhq/shared/src/errors/types/errorTypes';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 import platformEnv from '@onekeyhq/shared/src/platformEnv';
 

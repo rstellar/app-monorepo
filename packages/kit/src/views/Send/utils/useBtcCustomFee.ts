@@ -9,12 +9,12 @@ import type {
   IFeeInfoSelectedType,
 } from '@onekeyhq/engine/src/vaults/types';
 import type { CustomAlert } from '@onekeyhq/kit/src/views/Send/modals/SendEditFee/SendEditFeeCustomForm';
-import type { OneKeyError } from '@onekeyhq/shared/src/errors/appErrors';
+import type { OneKeyError } from '@onekeyhq/shared/src/errors';
 import {
-  OneKeyErrorClassNames,
   OneKeyValidatorError,
   OneKeyValidatorTip,
-} from '@onekeyhq/shared/src/errors/appErrors';
+} from '@onekeyhq/shared/src/errors';
+import { OneKeyErrorClassNames } from '@onekeyhq/shared/src/errors/types/errorTypes';
 
 import backgroundApiProxy from '../../../background/instance/backgroundApiProxy';
 import { useDebounce } from '../../../hooks';

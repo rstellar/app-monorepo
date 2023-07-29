@@ -53,7 +53,7 @@ import {
   InvalidTransferValue,
   NotImplemented,
   OneKeyInternalError,
-} from '@onekeyhq/shared/src/errors/appErrors';
+} from '@onekeyhq/shared/src/errors';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 import { memoizee } from '@onekeyhq/shared/src/utils/cacheUtils';
 

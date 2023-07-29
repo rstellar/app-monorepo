@@ -2,7 +2,7 @@ import { generateUUID } from '@onekeyhq/kit/src/utils/helper';
 import {
   JsonPRCResponseError,
   ResponseError,
-} from '@onekeyhq/shared/src/errors/request-errors';
+} from '@onekeyhq/shared/src/errors';
 import platformEnv from '@onekeyhq/shared/src/platformEnv';
 
 import type { IJsonRpcRequest } from '@onekeyfe/cross-inpage-provider-types';

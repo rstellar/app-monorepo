@@ -19,7 +19,7 @@ import {
   calculateTotalFeeNative,
   calculateTotalFeeRange,
 } from '@onekeyhq/engine/src/vaults/utils/feeInfoUtils';
-import { FailedToEstimatedGasError } from '@onekeyhq/shared/src/errors/appErrors';
+import { FailedToEstimatedGasError } from '@onekeyhq/shared/src/errors';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import platformEnv from '@onekeyhq/shared/src/platformEnv';

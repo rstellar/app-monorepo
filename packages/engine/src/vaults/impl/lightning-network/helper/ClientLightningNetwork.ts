@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import simpleDb from '@onekeyhq/engine/src/dbs/simple/simpleDb';
 import { getTimeDurationMs } from '@onekeyhq/kit/src/utils/helper';
-import { BadAuthError } from '@onekeyhq/shared/src/errors/appErrors';
+import { BadAuthError } from '@onekeyhq/shared/src/errors';
 import { memoizee } from '@onekeyhq/shared/src/utils/cacheUtils';
 
 import { getFiatEndpoint } from '../../../../endpoint';

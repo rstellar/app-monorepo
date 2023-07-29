@@ -10,7 +10,7 @@ import {
   OneKeyError,
   OneKeyHardwareError,
   OneKeyInternalError,
-} from '@onekeyhq/shared/src/errors/appErrors';
+} from '@onekeyhq/shared/src/errors';
 
 import { IDecodedTxActionType } from '../../types';
 import { hexlify, stripHexPrefix } from '../../utils/hexUtils';

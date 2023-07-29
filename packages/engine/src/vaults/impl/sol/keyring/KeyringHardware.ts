@@ -11,8 +11,8 @@ import {
 import {
   NotImplemented,
   OneKeyHardwareError,
-} from '@onekeyhq/shared/src/errors/appErrors';
-import { convertDeviceError } from '@onekeyhq/shared/src/errors/deviceErrorUtils';
+} from '@onekeyhq/shared/src/errors';
+import { convertDeviceError } from '@onekeyhq/shared/src/errors/utils/deviceErrorUtils';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 
 import { getAccountNameInfoByTemplate } from '../../../../managers/impl';

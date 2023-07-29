@@ -1,66 +1,26 @@
-import { Web3RpcError } from '@onekeyfe/cross-inpage-provider-errors';
-import { get } from 'lodash';
-
 /* eslint max-classes-per-file: "off" */
+import { get } from 'lodash';
 
 import type { LocaleIds } from '@onekeyhq/components/src/locale';
 
-export enum OneKeyErrorClassNames {
-  OneKeyError = 'OneKeyError',
-  OneKeyHardwareError = 'OneKeyHardwareError',
-  OneKeyValidatorError = 'OneKeyValidatorError',
-  OneKeyValidatorTip = 'OneKeyValidatorTip',
-  OneKeyAbortError = 'OneKeyAbortError',
-  OneKeyWalletConnectModalCloseError = 'OneKeyWalletConnectModalCloseError',
-  OneKeyAlreadyExistWalletError = 'OneKeyAlreadyExistWalletError',
-  OneKeyErrorInsufficientNativeBalance = 'OneKeyErrorInsufficientNativeBalance',
-}
+import { OneKeyErrorClassNames } from '../types/errorTypes';
 
-export type IOneKeyErrorInfo = Record<string | number, string | number>;
+import { OneKeyError } from './baseErrors';
 
-export type OneKeyHardwareErrorData = {
-  reconnect?: boolean | undefined;
-  connectId?: string;
-  deviceId?: string;
-};
+import type {
+  IOneKeyErrorInfo,
+  OneKeyHardwareErrorData,
+  OneKeyHardwareErrorPayload,
+} from '../types/errorTypes';
 
-export type OneKeyHardwareErrorPayload = {
-  code?: number;
-  error?: string;
-  message?: string;
-  params?: any;
-  connectId?: string;
-  deviceId?: string;
-};
-
-export class OneKeyError<T = Error> extends Web3RpcError<T> {
-  className = OneKeyErrorClassNames.OneKeyError;
-
-  info: IOneKeyErrorInfo;
-
-  key: LocaleIds | string = 'onekey_error';
-
-  constructor(message?: string, info?: IOneKeyErrorInfo) {
-    super(-99999, message || 'Unknown onekey internal error.');
-    this.info = info || {};
-  }
-
-  override get message() {
-    // TODO key message with i18n
-    // @ts-ignore
-    return super.message || this.key;
-  }
-}
-
-class NumberLimit extends OneKeyError {
+export class NumberLimit extends OneKeyError {
   override key = 'generic_number_limitation';
 
   constructor(limit: number) {
     super('', { limit: limit.toString() });
   }
 }
-
-class StringLengthRequirement extends OneKeyError {
+export class StringLengthRequirement extends OneKeyError {
   override key = 'generic_string_length_requirement';
 
   constructor(minLength: number, maxLength: number) {
@@ -70,7 +30,6 @@ class StringLengthRequirement extends OneKeyError {
     });
   }
 }
-
 // Generic errors.
 
 export class NotImplemented extends OneKeyError {
@@ -204,6 +163,11 @@ export class PasswordStrengthValidationFailed extends OneKeyError {
 
 export class InvalidMnemonic extends OneKeyError {
   override key = 'msg__engine__invalid_mnemonic';
+
+  // give the default constructor to ensure unittest expect.toThrow() checking passed
+  constructor() {
+    super('InvalidMnemonic');
+  }
 }
 
 export class MimimumBalanceRequired extends OneKeyError {

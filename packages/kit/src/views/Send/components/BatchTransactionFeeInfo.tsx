@@ -20,7 +20,7 @@ import type {
   IEncodedTx,
   IFeeInfoPayload,
 } from '@onekeyhq/engine/src/vaults/types';
-import { OneKeyError } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyError } from '@onekeyhq/shared/src/errors';
 
 import backgroundApiProxy from '../../../background/instance/backgroundApiProxy';
 import { FormatCurrencyNativeOfAccount } from '../../../components/Format';

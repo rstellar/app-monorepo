@@ -16,7 +16,7 @@ import {
   InvalidTokenAddress,
   NotImplemented,
   OneKeyInternalError,
-} from '@onekeyhq/shared/src/errors/appErrors';
+} from '@onekeyhq/shared/src/errors';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 import { JsonRPCRequest } from '@onekeyhq/shared/src/request/JsonRPCRequest';
 import { memoizee } from '@onekeyhq/shared/src/utils/cacheUtils';

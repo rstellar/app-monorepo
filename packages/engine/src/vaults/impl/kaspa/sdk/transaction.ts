@@ -9,7 +9,7 @@ import {
   hexlify,
   stripHexPrefix,
 } from '@onekeyhq/engine/src/vaults/utils/hexUtils';
-import { OneKeyInternalError } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyInternalError } from '@onekeyhq/shared/src/errors';
 
 import { DEFAULT_SEQNUMBER } from './constant';
 import { UnspentOutput } from './types';

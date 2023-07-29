@@ -1,6 +1,6 @@
 import { slicePathTemplate } from '@onekeyhq/engine/src/managers/derivation';
 import { batchGetPublicKeys } from '@onekeyhq/engine/src/secret';
-import { OneKeyInternalError } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyInternalError } from '@onekeyhq/shared/src/errors';
 
 import {
   getAccountNameInfoByImpl,

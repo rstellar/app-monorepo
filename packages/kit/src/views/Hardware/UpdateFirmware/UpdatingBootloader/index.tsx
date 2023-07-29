@@ -12,8 +12,8 @@ import { useAppSelector } from '@onekeyhq/kit/src/hooks/redux';
 import type { HardwareUpdateRoutesParams } from '@onekeyhq/kit/src/routes/Root/Modal/HardwareUpdate';
 import type { ModalScreenProps } from '@onekeyhq/kit/src/routes/types';
 import { deviceUtils } from '@onekeyhq/kit/src/utils/hardware';
-import type { OneKeyHardwareError } from '@onekeyhq/shared/src/errors/appErrors';
-import * as Errors from '@onekeyhq/shared/src/errors/hardwareErrors';
+import type { OneKeyHardwareError } from '@onekeyhq/shared/src/errors';
+import * as Errors from '@onekeyhq/shared/src/errors';
 import {
   AppUIEventBusNames,
   appUIEventBus,

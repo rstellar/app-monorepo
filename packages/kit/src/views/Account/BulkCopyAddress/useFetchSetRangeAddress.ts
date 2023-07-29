@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl';
 import { ToastManager } from '@onekeyhq/components';
 import type { ImportableHDAccount } from '@onekeyhq/engine/src/types/account';
 import { INDEX_PLACEHOLDER } from '@onekeyhq/shared/src/engine/engineConsts';
-import { OneKeyErrorClassNames } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyErrorClassNames } from '@onekeyhq/shared/src/errors/types/errorTypes';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 import platformEnv from '@onekeyhq/shared/src/platformEnv';
 

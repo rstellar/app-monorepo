@@ -1,6 +1,6 @@
 import { BigNumber } from 'bignumber.js';
 
-import { InsufficientBalance } from '@onekeyhq/shared/src/errors/appErrors';
+import { InsufficientBalance } from '@onekeyhq/shared/src/errors';
 
 import { CONFIRMATION_COUNT } from './constant';
 import { UnspentOutput } from './types';

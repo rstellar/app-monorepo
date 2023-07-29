@@ -21,7 +21,7 @@ import {
   InvalidTokenAddress,
   NotImplemented,
   PendingQueueTooLong,
-} from '@onekeyhq/shared/src/errors/appErrors';
+} from '@onekeyhq/shared/src/errors';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 import platformEnv from '@onekeyhq/shared/src/platformEnv';
 

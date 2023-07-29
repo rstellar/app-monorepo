@@ -13,7 +13,7 @@ import type { HardwareUpdateRoutesParams } from '@onekeyhq/kit/src/routes/Root/M
 import type { ModalScreenProps } from '@onekeyhq/kit/src/routes/types';
 import { setDeviceDoneUpdate } from '@onekeyhq/kit/src/store/reducers/settings';
 import { deviceUtils } from '@onekeyhq/kit/src/utils/hardware';
-import type { OneKeyHardwareError } from '@onekeyhq/shared/src/errors/appErrors';
+import type { OneKeyHardwareError } from '@onekeyhq/shared/src/errors';
 import type { IOneKeyDeviceType } from '@onekeyhq/shared/types';
 
 import {

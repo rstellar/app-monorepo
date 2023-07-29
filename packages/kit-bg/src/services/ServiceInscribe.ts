@@ -56,7 +56,7 @@ import {
   backgroundMethod,
 } from '@onekeyhq/shared/src/background/backgroundDecorators';
 import { OnekeyNetwork } from '@onekeyhq/shared/src/config/networkIds';
-import { InscribeFileTooLargeError } from '@onekeyhq/shared/src/errors/appErrors';
+import { InscribeFileTooLargeError } from '@onekeyhq/shared/src/errors';
 import { JsonRPCRequest } from '@onekeyhq/shared/src/request/JsonRPCRequest';
 import appStorage from '@onekeyhq/shared/src/storage/appStorage';
 import bufferUtils from '@onekeyhq/shared/src/utils/bufferUtils';

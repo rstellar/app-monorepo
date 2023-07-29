@@ -6,7 +6,7 @@ import { SEPERATOR } from '@onekeyhq/shared/src/engine/engineConsts';
 import {
   NotImplemented,
   OneKeyInternalError,
-} from '@onekeyhq/shared/src/errors/appErrors';
+} from '@onekeyhq/shared/src/errors';
 
 import type {
   BlockNativeGasAPIResponse,

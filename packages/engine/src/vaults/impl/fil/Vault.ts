@@ -19,7 +19,7 @@ import { getTimeDurationMs } from '@onekeyhq/kit/src/utils/helper';
 import {
   InvalidAddress,
   OneKeyInternalError,
-} from '@onekeyhq/shared/src/errors/appErrors';
+} from '@onekeyhq/shared/src/errors';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 import { memoizee } from '@onekeyhq/shared/src/utils/cacheUtils';
 

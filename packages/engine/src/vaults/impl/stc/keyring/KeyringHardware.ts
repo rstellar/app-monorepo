@@ -6,8 +6,8 @@
 import { arrayify } from '@ethersproject/bytes';
 
 import { COINTYPE_STC as COIN_TYPE } from '@onekeyhq/shared/src/engine/engineConsts';
-import { OneKeyHardwareError } from '@onekeyhq/shared/src/errors/appErrors';
-import { convertDeviceError } from '@onekeyhq/shared/src/errors/deviceErrorUtils';
+import { OneKeyHardwareError } from '@onekeyhq/shared/src/errors';
+import { convertDeviceError } from '@onekeyhq/shared/src/errors/utils/deviceErrorUtils';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 
 import { AccountType } from '../../../../types/account';

@@ -38,7 +38,7 @@ import type {
   HomeRoutesParams,
   RootRoutesParams,
 } from '@onekeyhq/kit/src/routes/types';
-import type { OneKeyError } from '@onekeyhq/shared/src/errors/appErrors';
+import type { OneKeyError } from '@onekeyhq/shared/src/errors';
 import platformEnv from '@onekeyhq/shared/src/platformEnv';
 
 import walletConnectUtils from '../../components/WalletConnect/utils/walletConnectUtils';

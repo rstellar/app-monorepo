@@ -1,4 +1,4 @@
-import type { InvalidAddress } from '@onekeyhq/shared/src/errors/appErrors';
+import type { InvalidAddress } from '@onekeyhq/shared/src/errors';
 
 import nexaMockData from '../@tests/nexaMockData';
 import { testPrepareAccounts } from '../@tests/nexaPresetCase';

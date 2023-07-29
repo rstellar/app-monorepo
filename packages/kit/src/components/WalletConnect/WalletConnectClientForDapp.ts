@@ -7,7 +7,7 @@ import {
 } from '@walletconnect/core/dist/esm/errors';
 import { merge } from 'lodash';
 
-import { OneKeyWalletConnectModalCloseError } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyWalletConnectModalCloseError } from '@onekeyhq/shared/src/errors';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 
 import backgroundApiProxy from '../../background/instance/backgroundApiProxy';

@@ -7,7 +7,7 @@ import {
   COINTYPE_DOGE,
   IMPL_TBTC,
 } from '@onekeyhq/shared/src/engine/engineConsts';
-import { OneKeyInternalError } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyInternalError } from '@onekeyhq/shared/src/errors';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 
 import { slicePathTemplate } from '../../../managers/derivation';

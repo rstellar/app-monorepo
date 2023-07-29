@@ -18,7 +18,7 @@ import {
   IMPL_KASPA as COIN_IMPL,
   COINTYPE_KASPA as COIN_TYPE,
 } from '@onekeyhq/shared/src/engine/engineConsts';
-import { OneKeyInternalError } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyInternalError } from '@onekeyhq/shared/src/errors';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 
 import {

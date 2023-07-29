@@ -20,7 +20,7 @@ import { getWalletIdFromAccountId } from '@onekeyhq/engine/src/managers/account'
 import type { NFTBTCAssetModel } from '@onekeyhq/engine/src/types/nft';
 import { WALLET_TYPE_WATCHING } from '@onekeyhq/engine/src/types/wallet';
 import { OnekeyNetwork } from '@onekeyhq/shared/src/config/networkIds';
-import { TaprootAddressError } from '@onekeyhq/shared/src/errors/appErrors';
+import { TaprootAddressError } from '@onekeyhq/shared/src/errors';
 
 import backgroundApiProxy from '../../../../../../background/instance/backgroundApiProxy';
 import { useNetwork, useWallet } from '../../../../../../hooks';

@@ -9,7 +9,7 @@ import {
   IMPL_TRON,
   SEPERATOR,
 } from '@onekeyhq/shared/src/engine/engineConsts';
-import { OneKeyInternalError } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyInternalError } from '@onekeyhq/shared/src/errors';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 
 import { getFiatEndpoint } from '../endpoint';

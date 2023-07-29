@@ -25,7 +25,7 @@ import { setVerification } from '@onekeyhq/kit/src/store/reducers/settings';
 import { deviceUtils } from '@onekeyhq/kit/src/utils/hardware';
 import { getTimeStamp, hexlify } from '@onekeyhq/kit/src/utils/helper';
 import { CERTIFICATE_URL } from '@onekeyhq/shared/src/config/appConfig';
-import { OneKeyErrorClassNames } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyErrorClassNames } from '@onekeyhq/shared/src/errors/types/errorTypes';
 
 import type { OnekeyHardwareModalRoutes } from '../../../routes/routesEnum';
 import type { RouteProp } from '@react-navigation/core';

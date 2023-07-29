@@ -12,7 +12,7 @@ import type {
   SignedTxResult,
 } from '@onekeyhq/engine/src/vaults/types';
 import { COINTYPE_KASPA as COIN_TYPE } from '@onekeyhq/shared/src/engine/engineConsts';
-import { OneKeyInternalError } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyInternalError } from '@onekeyhq/shared/src/errors';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 
 import {

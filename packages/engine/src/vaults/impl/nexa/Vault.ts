@@ -6,7 +6,7 @@ import { getTimeDurationMs } from '@onekeyhq/kit/src/utils/helper';
 import {
   InvalidAddress,
   OneKeyInternalError,
-} from '@onekeyhq/shared/src/errors/appErrors';
+} from '@onekeyhq/shared/src/errors';
 
 import {
   type Account,

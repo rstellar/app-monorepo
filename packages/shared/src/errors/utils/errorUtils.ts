@@ -1,17 +1,23 @@
-import platformEnv from '../platformEnv';
+import platformEnv from '../../platformEnv';
 
+/**
+ * Converts an error object into a plain object with specific properties.
+ *
+ * @param {Object} error - The error object to convert. It may have properties such as name, message, stack (js native Error), code, data (Web3RpcError), className, info, key (OneKeyError).
+ * @returns {Object} A plain object with properties: name, message, code, data, className, info, key, stack. If the platform is Android hermes engine, the stack property will be a specific error message.
+ */
 export function toPlainErrorObject(error: {
-  // js native Error
+  // js native Error props
   name?: any;
   message?: any;
   stack?: any;
-  // Web3RpcError
+  // Web3RpcError props
   code?: any;
   data?: any;
-  // OneKeyError
+  // OneKeyError props
   className?: any;
-  info?: any;
   key?: any;
+  info?: any;
 }) {
   return {
     name: error.name,
@@ -28,6 +34,7 @@ export function toPlainErrorObject(error: {
   };
 }
 
+// 生成 jsdoc 文档, 包含一个 example
 export function safeConsoleLogError(error: Error | unknown) {
   if (platformEnv.isNativeAndroid) {
     // sometimes error.stack cause Android hermes engine crash

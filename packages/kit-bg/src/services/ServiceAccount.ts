@@ -72,11 +72,11 @@ import {
   isPassphraseWallet,
 } from '@onekeyhq/shared/src/engine/engineUtils';
 import {
+  DeviceNotOpenedPassphrase,
   OneKeyAlreadyExistWalletError,
-  OneKeyErrorClassNames,
   TooManyHWPassphraseWallets,
-} from '@onekeyhq/shared/src/errors/appErrors';
-import { DeviceNotOpenedPassphrase } from '@onekeyhq/shared/src/errors/hardwareErrors';
+} from '@onekeyhq/shared/src/errors';
+import { OneKeyErrorClassNames } from '@onekeyhq/shared/src/errors/types/errorTypes';
 import {
   AppEventBusNames,
   appEventBus,

@@ -10,11 +10,11 @@ import {
   IMPL_DOT,
   IMPL_XMR,
 } from '@onekeyhq/shared/src/engine/engineConsts';
-import * as errors from '@onekeyhq/shared/src/errors/appErrors';
+import * as errors from '@onekeyhq/shared/src/errors';
 import {
   OneKeyValidatorError,
   OneKeyValidatorTip,
-} from '@onekeyhq/shared/src/errors/appErrors';
+} from '@onekeyhq/shared/src/errors';
 import platformEnv from '@onekeyhq/shared/src/platformEnv';
 
 import * as limits from './limits';

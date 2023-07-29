@@ -2,7 +2,7 @@ import { COINTYPE_ADA as COIN_TYPE } from '@onekeyhq/shared/src/engine/engineCon
 import {
   NotImplemented,
   OneKeyInternalError,
-} from '@onekeyhq/shared/src/errors/appErrors';
+} from '@onekeyhq/shared/src/errors';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 
 import { Signer } from '../../../proxy';

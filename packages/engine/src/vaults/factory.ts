@@ -26,7 +26,7 @@ import {
   IMPL_XMR,
   IMPL_XRP,
 } from '@onekeyhq/shared/src/engine/engineConsts';
-import { OneKeyInternalError } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyInternalError } from '@onekeyhq/shared/src/errors';
 
 import { getNetworkImpl } from '../managers/network.utils';
 import {

@@ -24,7 +24,7 @@ import {
   TooManyImportedAccounts,
   TooManyWatchingAccounts,
   WrongPassword,
-} from '@onekeyhq/shared/src/errors/appErrors';
+} from '@onekeyhq/shared/src/errors';
 
 import {
   DERIVED_ACCOUNT_MAX_NUM,

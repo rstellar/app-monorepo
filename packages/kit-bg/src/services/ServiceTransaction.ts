@@ -20,7 +20,7 @@ import { IMPL_EVM } from '@onekeyhq/shared/src/engine/engineConsts';
 import {
   FailedToEstimatedGasError,
   MimimumBalanceRequired,
-} from '@onekeyhq/shared/src/errors/appErrors';
+} from '@onekeyhq/shared/src/errors';
 
 import ServiceBase from './ServiceBase';
 

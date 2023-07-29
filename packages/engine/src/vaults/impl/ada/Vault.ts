@@ -17,7 +17,7 @@ import {
   NotImplemented,
   OneKeyInternalError,
   PreviousAccountIsEmpty,
-} from '@onekeyhq/shared/src/errors/appErrors';
+} from '@onekeyhq/shared/src/errors';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 import platformEnv from '@onekeyhq/shared/src/platformEnv';
 import { memoizee } from '@onekeyhq/shared/src/utils/cacheUtils';

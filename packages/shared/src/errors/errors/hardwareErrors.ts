@@ -2,8 +2,9 @@
 import { HardwareErrorCode } from '@onekeyfe/hd-shared';
 
 import type { LocaleIds } from '@onekeyhq/components/src/locale';
-import type { OneKeyHardwareErrorPayload } from '@onekeyhq/shared/src/errors/appErrors';
-import { OneKeyHardwareError } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyHardwareError } from '@onekeyhq/shared/src/errors';
+
+import type { OneKeyHardwareErrorPayload } from '../types/errorTypes';
 
 export enum CustomOneKeyHardwareError {
   NeedOneKeyBridge = 3030,
@@ -279,4 +280,8 @@ export class NotInSigningModeError extends OneKeyHardwareError {
 // 未知错误
 export class UnknownHardwareError extends OneKeyHardwareError {
   override data = { reconnect: true };
+}
+
+export class TestError2 extends Error {
+  override message = 'TestError222333111';
 }

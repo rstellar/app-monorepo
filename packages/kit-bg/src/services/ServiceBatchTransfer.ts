@@ -18,7 +18,7 @@ import {
 } from '@onekeyhq/shared/src/background/backgroundDecorators';
 import { CoreSDKLoader } from '@onekeyhq/shared/src/device/hardwareInstance';
 import { IMPL_SOL, SEPERATOR } from '@onekeyhq/shared/src/engine/engineConsts';
-import { OneKeyError } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyError } from '@onekeyhq/shared/src/errors';
 
 import ServiceBase from './ServiceBase';
 

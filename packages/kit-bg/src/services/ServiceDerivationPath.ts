@@ -14,10 +14,10 @@ import {
 } from '@onekeyhq/shared/src/background/backgroundDecorators';
 import { INDEX_PLACEHOLDER } from '@onekeyhq/shared/src/engine/engineConsts';
 import {
-  OneKeyErrorClassNames,
   OneKeyHardwareError,
   OneKeyInternalError,
-} from '@onekeyhq/shared/src/errors/appErrors';
+} from '@onekeyhq/shared/src/errors';
+import { OneKeyErrorClassNames } from '@onekeyhq/shared/src/errors/types/errorTypes';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 
 import ServiceBase from './ServiceBase';

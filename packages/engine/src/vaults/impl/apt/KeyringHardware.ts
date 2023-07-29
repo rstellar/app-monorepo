@@ -4,8 +4,8 @@ import { AptosClient, BCS } from 'aptos';
 
 import type { SignedTx, UnsignedTx } from '@onekeyhq/engine/src/types/provider';
 import { COINTYPE_APTOS as COIN_TYPE } from '@onekeyhq/shared/src/engine/engineConsts';
-import { OneKeyHardwareError } from '@onekeyhq/shared/src/errors/appErrors';
-import { convertDeviceError } from '@onekeyhq/shared/src/errors/deviceErrorUtils';
+import { OneKeyHardwareError } from '@onekeyhq/shared/src/errors';
+import { convertDeviceError } from '@onekeyhq/shared/src/errors/utils/deviceErrorUtils';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 
 import { AccountType } from '../../../types/account';

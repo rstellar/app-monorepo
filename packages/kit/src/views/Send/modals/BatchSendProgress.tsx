@@ -20,8 +20,8 @@ import type {
 } from '@onekeyhq/engine/src/vaults/types';
 import { IMPL_SOL } from '@onekeyhq/shared/src/engine/engineConsts';
 import { isExternalAccount } from '@onekeyhq/shared/src/engine/engineUtils';
-import { OneKeyErrorClassNames } from '@onekeyhq/shared/src/errors/appErrors';
-import type { OneKeyError } from '@onekeyhq/shared/src/errors/appErrors';
+import type { OneKeyError } from '@onekeyhq/shared/src/errors';
+import { OneKeyErrorClassNames } from '@onekeyhq/shared/src/errors/types/errorTypes';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 
 import backgroundApiProxy from '../../../background/instance/backgroundApiProxy';

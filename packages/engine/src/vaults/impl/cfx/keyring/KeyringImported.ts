@@ -1,7 +1,7 @@
 import { secp256k1 } from '@onekeyhq/engine/src/secret/curves';
 import type { SignedTx } from '@onekeyhq/engine/src/types/provider';
 import { COINTYPE_CFX as COIN_TYPE } from '@onekeyhq/shared/src/engine/engineConsts';
-import { OneKeyInternalError } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyInternalError } from '@onekeyhq/shared/src/errors';
 
 import { Signer, Verifier } from '../../../../proxy';
 import { AccountType } from '../../../../types/account';

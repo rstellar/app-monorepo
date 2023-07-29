@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/require-await, new-cap */
 
-import { OneKeyInternalError } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyInternalError } from '@onekeyhq/shared/src/errors';
 import { memoizee } from '@onekeyhq/shared/src/utils/cacheUtils';
 
 import { isAccountCompatibleWithNetwork } from '../managers/account';

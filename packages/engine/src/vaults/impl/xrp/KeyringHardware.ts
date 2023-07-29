@@ -5,9 +5,9 @@ import { COINTYPE_XRP as COIN_TYPE } from '@onekeyhq/shared/src/engine/engineCon
 import {
   NotImplemented,
   OneKeyHardwareError,
-} from '@onekeyhq/shared/src/errors/appErrors';
-import { convertDeviceError } from '@onekeyhq/shared/src/errors/deviceErrorUtils';
-import { UnknownHardwareError } from '@onekeyhq/shared/src/errors/hardwareErrors';
+  UnknownHardwareError,
+} from '@onekeyhq/shared/src/errors';
+import { convertDeviceError } from '@onekeyhq/shared/src/errors/utils/deviceErrorUtils';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 
 import { AccountType } from '../../../types/account';

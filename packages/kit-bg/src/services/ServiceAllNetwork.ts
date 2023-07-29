@@ -36,7 +36,7 @@ import {
 import {
   AllNetworksMinAccountsError,
   AllNetworksUpto3LimitsError,
-} from '@onekeyhq/shared/src/errors/appErrors';
+} from '@onekeyhq/shared/src/errors';
 import {
   AppEventBusNames,
   appEventBus,

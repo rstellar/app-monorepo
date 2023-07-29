@@ -26,14 +26,12 @@ import type {
   IEncodedTx,
   IFeeInfoPayload,
 } from '@onekeyhq/engine/src/vaults/types';
-import {
-  NotImplemented,
-  OneKeyErrorClassNames,
-} from '@onekeyhq/shared/src/errors/appErrors';
+import { NotImplemented } from '@onekeyhq/shared/src/errors';
 import type {
   OneKeyError,
   OneKeyValidatorError,
-} from '@onekeyhq/shared/src/errors/appErrors';
+} from '@onekeyhq/shared/src/errors';
+import { OneKeyErrorClassNames } from '@onekeyhq/shared/src/errors/types/errorTypes';
 import platformEnv from '@onekeyhq/shared/src/platformEnv';
 
 import backgroundApiProxy from '../../../../background/instance/backgroundApiProxy';

@@ -1,6 +1,6 @@
 import uuid from 'react-native-uuid';
 
-import { OneKeyInternalError } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyInternalError } from '@onekeyhq/shared/src/errors';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 
 import type { AccountType, DBAccount } from '../types/account';

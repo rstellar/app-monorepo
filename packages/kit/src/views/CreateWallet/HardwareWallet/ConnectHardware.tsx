@@ -41,15 +41,15 @@ import type {
 } from '@onekeyhq/kit/src/routes/types';
 import type { SearchDevice } from '@onekeyhq/kit/src/utils/hardware';
 import { deviceUtils } from '@onekeyhq/kit/src/utils/hardware';
-import { OneKeyErrorClassNames } from '@onekeyhq/shared/src/errors/appErrors';
-import type { OneKeyHardwareError } from '@onekeyhq/shared/src/errors/appErrors';
+import type { OneKeyHardwareError } from '@onekeyhq/shared/src/errors';
 import {
   BleLocationServiceError,
   InitIframeLoadFail,
   InitIframeTimeout,
   NeedBluetoothPermissions,
   NeedBluetoothTurnedOn,
-} from '@onekeyhq/shared/src/errors/hardwareErrors';
+} from '@onekeyhq/shared/src/errors';
+import { OneKeyErrorClassNames } from '@onekeyhq/shared/src/errors/types/errorTypes';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 import platformEnv from '@onekeyhq/shared/src/platformEnv';
 import { equalsIgnoreCase } from '@onekeyhq/shared/src/utils/stringUtils';

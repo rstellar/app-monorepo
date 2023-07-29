@@ -20,7 +20,7 @@ import {
   IMPL_DOT as COIN_IMPL,
   COINTYPE_DOT as COIN_TYPE,
 } from '@onekeyhq/shared/src/engine/engineConsts';
-import { OneKeyInternalError } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyInternalError } from '@onekeyhq/shared/src/errors';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 
 import { TYPE_PREFIX } from './consts';

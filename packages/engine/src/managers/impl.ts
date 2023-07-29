@@ -52,7 +52,7 @@ import {
   IMPL_XRP,
   getSupportedImpls,
 } from '@onekeyhq/shared/src/engine/engineConsts';
-import { NotImplemented } from '@onekeyhq/shared/src/errors/appErrors';
+import { NotImplemented } from '@onekeyhq/shared/src/errors';
 
 import { AccountType } from '../types/account';
 import { createVaultSettings } from '../vaults/factory.createVaultSettings';

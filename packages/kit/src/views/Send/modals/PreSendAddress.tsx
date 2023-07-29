@@ -24,8 +24,8 @@ import type {
 } from '@onekeyhq/engine/src/vaults/types';
 import { makeTimeoutPromise } from '@onekeyhq/shared/src/background/backgroundUtils';
 import { isLightningNetworkByImpl } from '@onekeyhq/shared/src/engine/engineConsts';
-import { OneKeyErrorClassNames } from '@onekeyhq/shared/src/errors/appErrors';
-import type { OneKeyError } from '@onekeyhq/shared/src/errors/appErrors';
+import type { OneKeyError } from '@onekeyhq/shared/src/errors';
+import { OneKeyErrorClassNames } from '@onekeyhq/shared/src/errors/types/errorTypes';
 
 import backgroundApiProxy from '../../../background/instance/backgroundApiProxy';
 import AddressInput from '../../../components/AddressInput';

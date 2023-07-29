@@ -7,7 +7,7 @@ import {
   InvalidAddress,
   OneKeyInternalError,
   WrongPassword,
-} from '@onekeyhq/shared/src/errors/appErrors';
+} from '@onekeyhq/shared/src/errors';
 import { JsonRPCRequest } from '@onekeyhq/shared/src/request/JsonRPCRequest';
 import { memoizee } from '@onekeyhq/shared/src/utils/cacheUtils';
 

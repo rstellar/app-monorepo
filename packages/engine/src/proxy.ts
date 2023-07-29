@@ -36,7 +36,7 @@ import {
   IMPL_TBTC,
   SEPERATOR,
 } from '@onekeyhq/shared/src/engine/engineConsts';
-import { OneKeyInternalError } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyInternalError } from '@onekeyhq/shared/src/errors';
 import bufferUitls from '@onekeyhq/shared/src/utils/bufferUtils';
 
 import { getBlockNativeGasInfo } from './managers/blockNative';

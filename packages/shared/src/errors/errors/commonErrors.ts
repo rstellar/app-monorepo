@@ -3,8 +3,6 @@ class NotImplementedError extends Error {}
 
 class IncorrectPassword extends Error {}
 
-class InvalidMnemonic extends Error {}
-
 class NotAutoPrintError extends Error {}
 
 class HardwareError extends Error {
@@ -16,7 +14,6 @@ class HardwareError extends Error {
 export {
   NotImplementedError,
   IncorrectPassword,
-  InvalidMnemonic,
   NotAutoPrintError,
   HardwareError,
 };

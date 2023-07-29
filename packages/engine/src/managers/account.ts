@@ -6,7 +6,7 @@ import {
   SEPERATOR,
   isLightningNetwork,
 } from '@onekeyhq/shared/src/engine/engineConsts';
-import { OneKeyInternalError } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyInternalError } from '@onekeyhq/shared/src/errors';
 
 import { AccountType } from '../types/account';
 import {

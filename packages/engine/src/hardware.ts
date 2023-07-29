@@ -17,8 +17,8 @@ import {
   NotImplemented,
   OneKeyHardwareError,
   OneKeyInternalError,
-} from '@onekeyhq/shared/src/errors/appErrors';
-import { convertDeviceError } from '@onekeyhq/shared/src/errors/deviceErrorUtils';
+} from '@onekeyhq/shared/src/errors';
+import { convertDeviceError } from '@onekeyhq/shared/src/errors/utils/deviceErrorUtils';
 import { toBigIntHex } from '@onekeyhq/shared/src/utils/numberUtils';
 
 import { ETHMessageTypes } from './types/message';

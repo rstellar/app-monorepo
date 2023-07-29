@@ -6,8 +6,8 @@ import { useIntl } from 'react-intl';
 import { Dialog, Spinner, ToastManager } from '@onekeyhq/components';
 import type { Device } from '@onekeyhq/engine/src/types/device';
 import backgroundApiProxy from '@onekeyhq/kit/src/background/instance/backgroundApiProxy';
-import { OneKeyErrorClassNames } from '@onekeyhq/shared/src/errors/appErrors';
-import { DeviceNotFind } from '@onekeyhq/shared/src/errors/hardwareErrors';
+import { DeviceNotFind } from '@onekeyhq/shared/src/errors';
+import { OneKeyErrorClassNames } from '@onekeyhq/shared/src/errors/types/errorTypes';
 
 import { deviceUtils } from '../../../utils/hardware';
 

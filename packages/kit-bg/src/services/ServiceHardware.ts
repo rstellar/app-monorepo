@@ -33,13 +33,13 @@ import {
   getHardwareSDKInstance,
 } from '@onekeyhq/shared/src/device/hardwareInstance';
 import { isPassphraseWallet } from '@onekeyhq/shared/src/engine/engineUtils';
-import { OneKeyHardwareError } from '@onekeyhq/shared/src/errors/appErrors';
 import {
   BridgeTimeoutError,
   FirmwareVersionTooLow,
   InitIframeLoadFail,
   InitIframeTimeout,
-} from '@onekeyhq/shared/src/errors/hardwareErrors';
+  OneKeyHardwareError,
+} from '@onekeyhq/shared/src/errors';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 import platformEnv from '@onekeyhq/shared/src/platformEnv';
 import { equalsIgnoreCase } from '@onekeyhq/shared/src/utils/stringUtils';

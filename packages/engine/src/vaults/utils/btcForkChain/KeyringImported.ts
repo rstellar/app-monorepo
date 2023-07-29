@@ -9,7 +9,7 @@ import {
   encrypt,
 } from '@onekeyhq/engine/src/secret/encryptors/aes256';
 import type { SignedTx, UnsignedTx } from '@onekeyhq/engine/src/types/provider';
-import { OneKeyInternalError } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyInternalError } from '@onekeyhq/shared/src/errors';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 
 import { Signer } from '../../../proxy';

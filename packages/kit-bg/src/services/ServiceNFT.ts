@@ -29,7 +29,7 @@ import {
   backgroundMethod,
 } from '@onekeyhq/shared/src/background/backgroundDecorators';
 import { OnekeyNetwork } from '@onekeyhq/shared/src/config/networkIds';
-import { OneKeyInternalError } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyInternalError } from '@onekeyhq/shared/src/errors';
 
 import ServiceBase from './ServiceBase';
 

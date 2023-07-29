@@ -7,7 +7,7 @@ import {
   IMPL_BTC,
   IMPL_TBTC,
 } from '@onekeyhq/shared/src/engine/engineConsts';
-import { OneKeyInternalError } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyInternalError } from '@onekeyhq/shared/src/errors';
 
 import { batchGetPublicKeys } from '../../../../secret';
 import { getAccountDefaultByPurpose } from '../../../utils/btcForkChain/utils';

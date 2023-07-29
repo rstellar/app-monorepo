@@ -17,7 +17,7 @@ import type { Signer, Verifier } from '@onekeyhq/engine/src/types/secret';
 import {
   HardwareError,
   NotImplementedError,
-} from '@onekeyhq/shared/src/errors/common-errors';
+} from '@onekeyhq/shared/src/errors';
 
 import type BigNumber from 'bignumber.js';
 

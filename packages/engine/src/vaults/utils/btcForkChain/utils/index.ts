@@ -2,7 +2,7 @@ import { BIP32Factory } from 'bip32';
 import * as BitcoinJS from 'bitcoinjs-lib';
 import { ECPairFactory } from 'ecpair';
 
-import { NotImplemented } from '@onekeyhq/shared/src/errors/appErrors';
+import { NotImplemented } from '@onekeyhq/shared/src/errors';
 
 import { Tx } from '../../../impl/btc/inscribe/sdk';
 import ecc from '../provider/nobleSecp256k1Wrapper';

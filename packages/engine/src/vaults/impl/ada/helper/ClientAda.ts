@@ -4,7 +4,7 @@ import { isUndefined } from 'lodash';
 
 import { getFiatEndpoint } from '@onekeyhq/engine/src/endpoint';
 import { getTimeDurationMs } from '@onekeyhq/kit/src/utils/helper';
-import { OneKeyInternalError } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyInternalError } from '@onekeyhq/shared/src/errors';
 import { memoizee } from '@onekeyhq/shared/src/utils/cacheUtils';
 
 import type { Token } from '../../../../types/token';

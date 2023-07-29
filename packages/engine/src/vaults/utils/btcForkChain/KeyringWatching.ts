@@ -1,4 +1,4 @@
-import { InvalidAddress } from '@onekeyhq/shared/src/errors/appErrors';
+import { InvalidAddress } from '@onekeyhq/shared/src/errors';
 
 import { AccountType } from '../../../types/account';
 import { KeyringWatchingBase } from '../../keyring/KeyringWatchingBase';

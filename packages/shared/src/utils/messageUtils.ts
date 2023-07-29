@@ -7,7 +7,8 @@ import { validate } from 'jsonschema';
 
 import { ETHMessageTypes } from '@onekeyhq/engine/src/types/message';
 import type { IUnsignedMessageEvm } from '@onekeyhq/engine/src/vaults/impl/evm/Vault';
-import { OneKeyError } from '@onekeyhq/shared/src/errors/appErrors';
+
+import { OneKeyError } from '../errors';
 
 function isValidHexAddress(
   possibleAddress: string,

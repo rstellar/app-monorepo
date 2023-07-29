@@ -6,7 +6,7 @@ import { logger as RNLogger, consoleTransport } from 'react-native-logs';
 
 import { zip } from '@onekeyhq/shared/src/modules3rdParty/react-native-zip-archive';
 
-import { toPlainErrorObject } from '../errors/errorUtils';
+import { toPlainErrorObject } from '../errors/utils/errorUtils';
 import platformEnv from '../platformEnv';
 import appStorage from '../storage/appStorage';
 

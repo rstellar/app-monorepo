@@ -7,7 +7,7 @@ import { Box, Center, ToastManager } from '@onekeyhq/components';
 import type { LocaleIds } from '@onekeyhq/components/src/locale';
 import type { SearchDevice } from '@onekeyhq/kit/src/utils/hardware';
 import { deviceUtils } from '@onekeyhq/kit/src/utils/hardware';
-import { OneKeyErrorClassNames } from '@onekeyhq/shared/src/errors/appErrors';
+import { OneKeyErrorClassNames } from '@onekeyhq/shared/src/errors/types/errorTypes';
 import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 import timelinePerfTrace, {
   ETimelinePerfNames,

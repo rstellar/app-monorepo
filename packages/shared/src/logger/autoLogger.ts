@@ -1,10 +1,15 @@
-import { NotAutoPrintError } from '../errors/common-errors';
-import { toPlainErrorObject } from '../errors/errorUtils';
+import { NotAutoPrintError } from '../errors';
+import { toPlainErrorObject } from '../errors/utils/errorUtils';
 
 let prevErrorStack: string | undefined;
+const isJest =
+  process.env.JEST_WORKER_ID !== undefined || process.env.NODE_ENV === 'test';
 
 const autoLogger = {
   error: (error: Error, ...messages: unknown[]) => {
+    if (isJest) {
+      return;
+    }
     if (process.env.NODE_ENV !== 'production') {
       if (
         error.stack !== prevErrorStack &&
