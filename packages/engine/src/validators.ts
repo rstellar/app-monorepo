@@ -268,11 +268,13 @@ class Validators {
         name.length < limits.ACCOUNT_NAME_MIN_LENGTH ||
         name.length > limits.ACCOUNT_NAME_MAX_LENGTH
       ) {
-        throw new errors.AccountNameLengthError(
-          name,
-          limits.ACCOUNT_NAME_MIN_LENGTH,
-          limits.ACCOUNT_NAME_MAX_LENGTH,
-        );
+        throw new errors.AccountNameLengthError({
+          info: {
+            name,
+            minLength: limits.ACCOUNT_NAME_MIN_LENGTH,
+            maxLength: limits.ACCOUNT_NAME_MAX_LENGTH,
+          },
+        });
       }
     }
     return Promise.resolve(names);

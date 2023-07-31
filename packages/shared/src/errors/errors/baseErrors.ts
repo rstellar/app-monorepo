@@ -1,40 +1,73 @@
 /* eslint-disable max-classes-per-file */
 
 import { Web3RpcError } from '@onekeyfe/cross-inpage-provider-errors';
+import { isNil, isPlainObject, isString } from 'lodash';
 
 import type { LocaleIds } from '@onekeyhq/components/src/locale';
 
-import { OneKeyErrorClassNames } from '../types/errorTypes';
+import type {
+  IOneKeyError,
+  IOneKeyErrorInfo,
+  IOneKeyJsError,
+  OneKeyErrorClassNames,
+} from '../types/errorTypes';
 
-import type { IOneKeyErrorInfo } from '../types/errorTypes';
+// const fakeMessage = 'FAKE_MESSAGE:F43E2460-AB7F-4EA5-9651-7D38C189AB45';
 
-// @ts-ignore
-export interface OneKeyJsError extends Error {
-  // ES5 Error props
-  name?: string;
-  message?: string;
-  stack?: string;
-  // ES2022 Error props
-  cause?: unknown;
-}
+export class OneKeyWeb3RpcError<T = IOneKeyJsError> extends Web3RpcError<T> {}
 
-export class OneKeyWeb3RpcError<T = OneKeyJsError> extends Web3RpcError<T> {}
+export class OneKeyError<
+    InfoT = IOneKeyErrorInfo | any,
+    DataT = IOneKeyJsError | any,
+  >
+  extends OneKeyWeb3RpcError<DataT>
+  implements IOneKeyError<InfoT, DataT>
+{
+  className?: OneKeyErrorClassNames;
 
-export class OneKeyError<T = OneKeyJsError> extends OneKeyWeb3RpcError<T> {
-  className = OneKeyErrorClassNames.OneKeyError;
+  // i18n key
+  key?: LocaleIds = 'onekey_error' as LocaleIds;
 
-  info: IOneKeyErrorInfo;
+  // i18n params
+  info?: InfoT;
 
-  key: LocaleIds | string = 'onekey_error';
+  constructor(errorProps?: IOneKeyError<InfoT, DataT> | string, info?: InfoT) {
+    let msg;
+    let code;
+    let data;
+    let className;
+    let key;
+    let infoData: InfoT | undefined;
+    if (!isString(errorProps) && errorProps && isPlainObject(errorProps)) {
+      ({
+        message: msg,
+        code,
+        data,
+        className,
+        info: infoData,
+        key,
+      } = errorProps);
+    } else {
+      msg = isString(errorProps) ? errorProps : '';
+      code = -99999;
+      infoData = info;
+    }
 
-  constructor(message?: string, info?: IOneKeyErrorInfo) {
-    super(-99999, message || '');
-    this.info = info || {};
+    super(
+      code ?? -99999,
+      // * empty string not allowed in Web3RpcError, give a fakeMessage by default
+      // * can not access this.key before constructor
+      msg ||
+        `Unknown Onekey Internal Error. ${[key].filter(Boolean).join(':')}`,
+      data,
+    );
+
+    if (className) this.className = className;
+    if (key) this.key = key;
+    if (infoData) this.info = infoData;
   }
 
-  override get message() {
-    // TODO key message with i18n
-    // @ts-ignore
-    return super.message || `Unknown onekey internal error. ${this.key}`;
+  get constructorName() {
+    return this?.constructor?.name;
   }
 }

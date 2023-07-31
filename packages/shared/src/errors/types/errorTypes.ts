@@ -1,3 +1,7 @@
+import { any } from 'superstruct';
+
+import type { LocaleIds } from '@onekeyhq/components/src/locale';
+
 export enum OneKeyErrorClassNames {
   OneKeyError = 'OneKeyError',
   OneKeyHardwareError = 'OneKeyHardwareError',
@@ -16,6 +20,30 @@ export type OneKeyHardwareErrorData = {
   connectId?: string;
   deviceId?: string;
 };
+
+// @ts-ignore
+export interface IOneKeyJsError extends Error {
+  // ES5 Error props
+  message?: string;
+  name?: string;
+  stack?: string;
+  // ES2022 Error props
+  cause?: unknown;
+}
+
+export interface IOneKeyError<
+  InfoT = IOneKeyErrorInfo | any,
+  DataT = IOneKeyJsError | any,
+> extends IOneKeyJsError {
+  // Web3RpcError props
+  code?: number;
+  data?: DataT;
+  // OneKeyError props
+  className?: OneKeyErrorClassNames;
+  info?: InfoT;
+  key?: LocaleIds;
+  constructorName?: string;
+}
 
 export type OneKeyHardwareErrorPayload = {
   code?: number;

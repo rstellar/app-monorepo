@@ -66,7 +66,9 @@ function stringifyLog(...args: any[]) {
     if (arg instanceof Error) {
       const error = toPlainErrorObject(arg as any);
       if (process.env.NODE_ENV === 'production') {
-        delete error.stack;
+        if (error && error.stack) {
+          delete error.stack;
+        }
       }
       return error;
     }

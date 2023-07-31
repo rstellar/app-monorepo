@@ -1669,11 +1669,13 @@ class IndexedDBApi implements DBAPI {
                     .length > DERIVED_ACCOUNT_MAX_NUM
                 ) {
                   reject(
-                    new TooManyDerivedAccounts(
-                      DERIVED_ACCOUNT_MAX_NUM,
-                      parseInt(coinType),
-                      parseInt(purpose),
-                    ),
+                    new TooManyDerivedAccounts({
+                      info: {
+                        limit: DERIVED_ACCOUNT_MAX_NUM.toString(),
+                        coinType,
+                        purpose,
+                      },
+                    }),
                   );
                   return;
                 }

@@ -125,9 +125,8 @@ function BatchTransactionFeeInfo(props: Props) {
 
     let message: string | null = null;
     if (feeInfoError instanceof OneKeyError) {
-      if (feeInfoError.key !== 'onekey_error') {
+      if (feeInfoError.key !== ('onekey_error' as any)) {
         message = intl.formatMessage({
-          // @ts-expect-error
           id: feeInfoError.key,
         });
       } else {

@@ -38,7 +38,10 @@ import type {
   HomeRoutesParams,
   RootRoutesParams,
 } from '@onekeyhq/kit/src/routes/types';
-import type { OneKeyError } from '@onekeyhq/shared/src/errors';
+import {
+  type OneKeyError,
+  TooManyHWPassphraseWallets,
+} from '@onekeyhq/shared/src/errors';
 import platformEnv from '@onekeyhq/shared/src/platformEnv';
 
 import walletConnectUtils from '../../components/WalletConnect/utils/walletConnectUtils';
@@ -823,6 +826,20 @@ export const Debug = () => {
                     },
                   },
                 });
+
+                try {
+                  const e1111 = new TooManyHWPassphraseWallets(12);
+                  console.error('TooManyHWPassphraseWallets &&&&&&& ', e1111);
+                  throw new TooManyHWPassphraseWallets(12111);
+                } catch (error) {
+                  console.error(
+                    'test TooManyHWPassphraseWallets ERROR ######',
+                    error,
+                  );
+                }
+
+                const e = new TooManyHWPassphraseWallets(999999);
+                console.error('TooManyHWPassphraseWallets $$$$$ ', e);
               }}
             >
               <Typography.Body1>Open Gas Panel</Typography.Body1>
