@@ -169,7 +169,7 @@ export type IInvalidSameAddressInfo = {
   '0': string;
 };
 export class InvalidSameAddress extends OneKeyError<IInvalidSameAddressInfo> {
-  constructor(props?: IOneKeyError<IInvalidSameAddressInfo>) {
+  constructor(props?: IOneKeyError<IInvalidSameAddressInfo> | string) {
     super(
       normalizeErrorProps(props, {
         defaultMessage: 'InvalidSameAddress',
@@ -207,7 +207,7 @@ export type IInvalidTransferValueInfo = {
   unit: string;
 };
 export class InvalidTransferValue extends OneKeyError<IInvalidTransferValueInfo> {
-  constructor(props?: IOneKeyError<IInvalidTransferValueInfo>) {
+  constructor(props?: IOneKeyError<IInvalidTransferValueInfo> | string) {
     super(
       normalizeErrorProps(props, {
         defaultMessage: 'InvalidTransferValue',
@@ -592,4 +592,12 @@ export class TestAppError2 extends OneKeyError {
 
   // override key is bad practice, use constructor
   override key: LocaleIds = 'Handling_Fee';
+}
+
+export class TestAppError3 extends OneKeyError {
+  override className = OneKeyErrorClassNames.OneKeyAbortError;
+
+  constructor(props?: IOneKeyError | string) {
+    super(normalizeErrorProps(props));
+  }
 }

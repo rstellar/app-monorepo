@@ -80,7 +80,10 @@ export function normalizeErrorProps(
 ) {
   const msg: string =
     (isString(props) ? props : props?.message) || config?.defaultMessage || '';
-  const key = isString(props) ? undefined : props?.key || config?.defaultKey;
+  const key =
+    (isString(props) ? undefined : props?.key) ||
+    config?.defaultKey ||
+    undefined;
   return {
     message: msg,
     key,

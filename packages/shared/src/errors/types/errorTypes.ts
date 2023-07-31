@@ -43,8 +43,6 @@ export interface IOneKeyError<
   info?: InfoT;
   key?: LocaleIds;
   constructorName?: string;
-  // private props
-  meta?: IOneKeyErrorMeta;
 }
 
 export type OneKeyHardwareErrorPayload = {
