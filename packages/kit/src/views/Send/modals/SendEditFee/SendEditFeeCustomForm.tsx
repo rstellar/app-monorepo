@@ -339,7 +339,7 @@ export function SendEditFeeCustomForm(props: ICustomFeeFormProps) {
                   setMaxFeeTip(null);
                 } catch (error) {
                   printError(error);
-                  const e = error as OneKeyValidatorError;
+                  const e = error as OneKeyValidatorError | undefined;
                   if (
                     e?.className === OneKeyErrorClassNames.OneKeyValidatorError
                   ) {

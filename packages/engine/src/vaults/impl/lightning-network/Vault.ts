@@ -170,10 +170,10 @@ export default class Vault extends VaultBase {
   override async validateSendAmount(amount: string): Promise<boolean> {
     const ZeroInvoiceMaxSendAmount = 1000000;
     if (new BigNumber(amount).isGreaterThan(ZeroInvoiceMaxSendAmount)) {
-      throw new MaxSendAmountError(
-        'msg__the_sending_amount_cannot_exceed_int_sats',
-        { 0: ZeroInvoiceMaxSendAmount },
-      );
+      throw new MaxSendAmountError({
+        key: 'msg__the_sending_amount_cannot_exceed_int_sats',
+        info: { 0: ZeroInvoiceMaxSendAmount },
+      });
     }
     return Promise.resolve(true);
   }

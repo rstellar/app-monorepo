@@ -768,10 +768,10 @@ export default class Vault extends VaultBase {
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       const errorMessage = `${errorCode ?? ''} ${message}`;
       if (message.indexOf('Insufficient gas:') !== -1) {
-        throw new OneKeyInternalError(
-          errorMessage,
-          'msg__broadcast_tx_Insufficient_fee',
-        );
+        throw new OneKeyInternalError({
+          message: errorMessage,
+          key: 'msg__broadcast_tx_Insufficient_fee',
+        });
       } else {
         throw new OneKeyInternalError(errorMessage);
       }

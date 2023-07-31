@@ -1866,10 +1866,10 @@ class Engine {
         get(error, 'message', undefined) === 'Wrong response<429>';
 
       if (axiosError || jsonRpcError) {
-        throw new OneKeyInternalError(
-          'Wrong response<429>',
-          'msg__network_request_too_many',
-        );
+        throw new OneKeyInternalError({
+          message: 'Wrong response<429>',
+          key: 'msg__network_request_too_many',
+        });
       }
       throw error;
     }

@@ -114,18 +114,18 @@ export class CosmosNodeClient {
 
     if (code != null && code !== 0) {
       if (rawLog.indexOf('account sequence mismatch') !== -1) {
-        throw new OneKeyInternalError(
-          rawLog,
-          'msg__broadcast_tx_sequence_number_error',
-        );
+        throw new OneKeyInternalError({
+          message: rawLog,
+          key: 'msg__broadcast_tx_sequence_number_error',
+        });
       }
       if (rawLog.indexOf('insufficient fees') !== -1) {
-        throw new OneKeyInternalError(
-          rawLog,
-          'msg__broadcast_tx_Insufficient_fee',
-        );
+        throw new OneKeyInternalError({
+          message: rawLog,
+          key: 'msg__broadcast_tx_Insufficient_fee',
+        });
       }
-      throw new OneKeyInternalError(rawLog);
+      throw new OneKeyInternalError({ message: rawLog });
     }
 
     return resp.data.tx_response?.txhash ?? null;

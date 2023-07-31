@@ -1,5 +1,4 @@
-// eslint-disable-next-line max-classes-per-file
-class NotImplementedError extends Error {}
+/* eslint-disable max-classes-per-file */
 
 class IncorrectPassword extends Error {}
 
@@ -11,9 +10,4 @@ class HardwareError extends Error {
   }
 }
 
-export {
-  NotImplementedError,
-  IncorrectPassword,
-  NotAutoPrintError,
-  HardwareError,
-};
+export { IncorrectPassword, NotAutoPrintError, HardwareError };

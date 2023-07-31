@@ -50,13 +50,13 @@ export function useBtcCustomFeeForm({
       const max = 2000;
       const valueBN = new BigNumber(value);
       if (valueBN.isLessThanOrEqualTo(min) || valueBN.isGreaterThan(max)) {
-        throw new OneKeyValidatorError(
-          'msg__enter_a_fee_rate_between_str_and_str',
-          {
+        throw new OneKeyValidatorError({
+          key: 'msg__enter_a_fee_rate_between_str_and_str',
+          info: {
             min: '0',
             max: '2000',
           },
-        );
+        });
       }
 
       // check balance
@@ -72,18 +72,22 @@ export function useBtcCustomFeeForm({
           });
         }
       } catch (e) {
-        throw new OneKeyValidatorError('msg__insufficient_balance');
+        throw new OneKeyValidatorError({
+          key: 'msg__insufficient_balance',
+        });
       }
 
       if (valueBN.shiftedBy(-8).isLessThan(lowValue)) {
-        throw new OneKeyValidatorTip(
-          'msg__fee_rate_is_low_for_current_network',
-        );
+        throw new OneKeyValidatorTip({
+          key: 'msg__fee_rate_is_low_for_current_network',
+        });
       }
       if (
         valueBN.shiftedBy(-8).isGreaterThan(new BigNumber(highValue).times(10))
       ) {
-        throw new OneKeyValidatorTip('msg__fee_rate_is_higher_than_necessary');
+        throw new OneKeyValidatorTip({
+          key: 'msg__fee_rate_is_higher_than_necessary',
+        });
       }
     },
     [accountId, encodedTx, networkId],

@@ -514,9 +514,12 @@ export default class Vault extends VaultBase {
         err?.message?.includes('Account not found')
       ) {
         if (amountBN.lt(10)) {
-          throw new InvalidTransferValue('form__amount_recipient_activate', {
-            amount: '10',
-            unit: 'XRP',
+          throw new InvalidTransferValue({
+            key: 'form__amount_recipient_activate',
+            info: {
+              amount: '10',
+              unit: 'XRP',
+            },
           });
         } else {
           return true;
@@ -526,9 +529,12 @@ export default class Vault extends VaultBase {
     }
 
     if (balanceBN.minus(10).isLessThan(amountBN)) {
-      throw new InvalidTransferValue('form__amount_above_required_reserve', {
-        amount: '10',
-        unit: 'XRP',
+      throw new InvalidTransferValue({
+        key: 'form__amount_above_required_reserve',
+        info: {
+          amount: '10',
+          unit: 'XRP',
+        },
       });
     }
     return true;

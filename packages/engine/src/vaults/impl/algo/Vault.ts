@@ -582,7 +582,11 @@ export default class Vault extends VaultBase {
           assetId.toString(),
         );
         return Promise.reject(
-          new RecipientHasNotActived(token?.name || assetId),
+          new RecipientHasNotActived({
+            info: {
+              '0': token?.name || assetId,
+            },
+          }),
         );
       }
       if (MINIMUM_BALANCE_REQUIRED_REG_EXP.test(message)) {
@@ -593,10 +597,14 @@ export default class Vault extends VaultBase {
           MINIMUM_BALANCE_REQUIRED_REG_EXP,
         )![1];
         return Promise.reject(
-          new MimimumBalanceRequired(
-            name,
-            new BigNumber(minimumBalance).shiftedBy(-decimals).toFixed(),
-          ),
+          new MimimumBalanceRequired({
+            info: {
+              token: name,
+              amount: new BigNumber(minimumBalance)
+                .shiftedBy(-decimals)
+                .toFixed(),
+            },
+          }),
         );
       }
 

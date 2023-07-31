@@ -956,19 +956,19 @@ export default class Vault extends VaultBase {
         message.indexOf('Invalid Transaction: Inability to pay some fees') !==
         -1
       ) {
-        throw new OneKeyInternalError(
+        throw new OneKeyInternalError({
           message,
-          'msg__broadcast_dot_tx_Insufficient_fee',
-        );
+          key: 'msg__broadcast_dot_tx_Insufficient_fee',
+        });
       }
 
       if (
         message.indexOf('Invalid Transaction: Transaction is outdated') !== -1
       ) {
-        throw new OneKeyInternalError(
+        throw new OneKeyInternalError({
           message,
-          'msg__broadcast_dot_tx_outdated',
-        );
+          key: 'msg__broadcast_dot_tx_outdated',
+        });
       }
 
       throw new OneKeyInternalError(message);
@@ -1170,9 +1170,12 @@ export default class Vault extends VaultBase {
       if (!depositAmountDisplay.amount) return false;
 
       if (accountBalance?.plus(sendAmount).lt(depositAmount)) {
-        throw new InvalidTransferValue('form__amount_recipient_activate', {
-          amount: depositAmountDisplay.amount,
-          unit: network.symbol,
+        throw new InvalidTransferValue({
+          key: 'form__amount_recipient_activate',
+          info: {
+            amount: depositAmountDisplay.amount,
+            unit: network.symbol,
+          },
         });
       }
       return true;

@@ -97,7 +97,12 @@ export default class ServiceTransaction extends ServiceBase {
 
     if (new BigNumber(balanceStr).lt(minimumGas)) {
       const token = await engine.getNativeTokenInfo(params.networkId);
-      throw new MimimumBalanceRequired(token.symbol, minimumGas.toFixed());
+      throw new MimimumBalanceRequired({
+        info: {
+          token: token.symbol,
+          amount: minimumGas.toFixed(),
+        },
+      });
     }
   }
 

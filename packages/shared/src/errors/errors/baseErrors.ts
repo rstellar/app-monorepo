@@ -52,7 +52,6 @@ export class OneKeyError<
       code = -99999;
       infoData = info;
     }
-
     super(
       code ?? -99999,
       // * empty string not allowed in Web3RpcError, give a fakeMessage by default

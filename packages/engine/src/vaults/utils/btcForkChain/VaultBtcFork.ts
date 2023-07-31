@@ -264,7 +264,11 @@ export default class VaultBtcFork extends VaultBase {
       );
       if (!accountExisted) {
         const { label } = getAccountNameInfoByTemplate(network.impl, template);
-        throw new PreviousAccountIsEmpty(label as string);
+        throw new PreviousAccountIsEmpty({
+          info: {
+            '0': label as string,
+          },
+        });
       }
     }
 

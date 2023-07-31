@@ -1,3 +1,5 @@
+import { isString } from 'lodash';
+
 import platformEnv from '../../platformEnv';
 
 import type { IOneKeyError } from '../types/errorTypes';
@@ -65,4 +67,16 @@ export function interceptConsoleErrorWithExtraInfo() {
   };
   // @ts-ignore
   console.error.$isIntercepted = true;
+}
+
+export function normalizeErrorProps(
+  props?: IOneKeyError | string,
+  config?: { defaultMessage: string },
+) {
+  const msg: string =
+    (isString(props) ? props : props?.message) || config?.defaultMessage || '';
+  return {
+    message: msg,
+    ...(isString(props) ? {} : props),
+  };
 }

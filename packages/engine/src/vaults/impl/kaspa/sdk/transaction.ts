@@ -47,10 +47,10 @@ export function toTransaction(tx: IEncodedTxKaspa): Transaction {
   }
 
   if (sendAmount.isLessThan(0)) {
-    throw new OneKeyInternalError(
-      'Insufficient Balance.',
-      'msg__insufficient_balance',
-    );
+    throw new OneKeyInternalError({
+      message: 'Insufficient Balance.',
+      key: 'msg__insufficient_balance',
+    });
   }
 
   const txn = new Transaction()

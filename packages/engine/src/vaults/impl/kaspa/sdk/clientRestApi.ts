@@ -113,14 +113,17 @@ export class RestAPIClient {
         const message: string = get(error, 'response.data.error', '');
 
         if (message.match(/payment of \d+ is dust/)) {
-          throw new OneKeyInternalError(message, 'msg__amount_too_small');
+          throw new OneKeyInternalError({
+            message,
+            key: 'msg__amount_too_small',
+          });
         }
 
         if (message.toLowerCase().indexOf('insufficient balance') !== -1) {
-          throw new OneKeyInternalError(
+          throw new OneKeyInternalError({
             message,
-            'msg__broadcast_dot_tx_Insufficient_fee',
-          );
+            key: 'msg__broadcast_dot_tx_Insufficient_fee',
+          });
         }
 
         throw new OneKeyInternalError(message);

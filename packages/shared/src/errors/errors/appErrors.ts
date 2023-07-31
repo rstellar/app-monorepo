@@ -1,61 +1,87 @@
 /* eslint max-classes-per-file: "off" */
+import { isString } from 'lodash';
+
 import type { LocaleIds } from '@onekeyhq/components/src/locale';
+import type { LocaleKeyInfoMap } from '@onekeyhq/components/src/locale/LocaleKeyInfoMap';
 
 import { OneKeyErrorClassNames } from '../types/errorTypes';
+import { normalizeErrorProps } from '../utils/errorUtils';
 
 import { OneKeyError } from './baseErrors';
 
-import type { IOneKeyErrorInfo } from '../types/errorTypes';
-
-export type IStringLengthRequirementInfo = {
-  minLength: string;
-  maxLength: string;
-};
+import type { IOneKeyError } from '../types/errorTypes';
 
 // Generic errors.
 
 export class NotImplemented extends OneKeyError {
-  constructor(message?: string) {
-    super({
-      message: message || 'OneKeyError: NotImplemented',
-    });
-  }
-
   override key: LocaleIds = 'msg__engine__not_implemented';
+
+  constructor(props?: IOneKeyError | string) {
+    super(
+      normalizeErrorProps(props, {
+        defaultMessage: 'OneKeyError: NotImplemented',
+      }),
+    );
+  }
 }
 
 export class OneKeyInternalError extends OneKeyError {
   override key: LocaleIds = 'msg__engine__internal_error';
 
-  constructor(message?: string, key?: LocaleIds) {
-    super({
-      message: message || 'OneKeyError: Internal error',
-      key,
-    });
+  constructor(props?: IOneKeyError | string) {
+    super(
+      normalizeErrorProps(props, {
+        defaultMessage: 'OneKeyError: InternalError',
+      }),
+    );
   }
 }
 
-export class OneKeyValidatorError extends OneKeyError<IOneKeyErrorInfo> {
+export class OneKeyValidatorError<
+  K extends keyof LocaleKeyInfoMap = any,
+> extends OneKeyError<LocaleKeyInfoMap[K]> {
   override className = OneKeyErrorClassNames.OneKeyValidatorError;
 
-  override key: LocaleIds = 'onekey_error_validator' as any;
+  override key: LocaleIds = 'onekey_error_validator' as LocaleIds;
 
-  constructor(key: LocaleIds, info?: IOneKeyErrorInfo, message?: string) {
+  constructor({
+    key,
+    info,
+    message,
+  }: {
+    key: K;
+    info?: LocaleKeyInfoMap[K];
+    message?: string;
+  }) {
     super({
-      key,
+      key: key as any,
       info,
       message,
     });
   }
 }
 
-export class OneKeyValidatorTip extends OneKeyError<IOneKeyErrorInfo> {
+export class OneKeyValidatorTip<
+  K extends keyof LocaleKeyInfoMap = any,
+> extends OneKeyError<LocaleKeyInfoMap[K]> {
   override className = OneKeyErrorClassNames.OneKeyValidatorTip;
 
-  override key: LocaleIds = 'onekey_tip_validator' as any;
+  override key: LocaleIds = 'onekey_tip_validator' as LocaleIds;
 
-  constructor(key: LocaleIds, info?: IOneKeyErrorInfo, message?: string) {
-    super({ message, info, key });
+  constructor({
+    key,
+    info,
+    message,
+  }: {
+    key: K;
+    info?: LocaleKeyInfoMap[K];
+    message?: string;
+  }) {
+    super({
+      key: key as any,
+      info,
+      message,
+    });
   }
 }
 
@@ -77,10 +103,12 @@ export class InvalidMnemonic extends OneKeyError {
   override key: LocaleIds = 'msg__engine__invalid_mnemonic';
 
   // give the default constructor to ensure unittest expect.toThrow() checking passed
-  constructor() {
-    super({
-      message: 'InvalidMnemonic',
-    });
+  constructor(props?: IOneKeyError) {
+    super(
+      normalizeErrorProps(props, {
+        defaultMessage: 'InvalidMnemonic',
+      }),
+    );
   }
 }
 
@@ -91,56 +119,66 @@ export type IMimimumBalanceRequiredInfo = {
 export class MimimumBalanceRequired extends OneKeyError<IMimimumBalanceRequiredInfo> {
   override key: LocaleIds = 'msg__str_minimum_balance_is_str';
 
-  constructor(token: string, amount: string) {
-    super({
-      info: { token, amount },
-    });
+  constructor(props?: IOneKeyError<IMimimumBalanceRequiredInfo>) {
+    super(
+      normalizeErrorProps(props, {
+        defaultMessage: 'MimimumBalanceRequired',
+      }),
+    );
   }
 }
 
 export type IRecipientHasNotActivedInfo = {
-  '0': string;
+  '0': string; // tokenName
 };
 export class RecipientHasNotActived extends OneKeyError<IRecipientHasNotActivedInfo> {
   override key: LocaleIds = 'msg__recipient_hasnt_activated_str';
 
-  constructor(tokenName: string) {
-    super({
-      info: { '0': tokenName },
-    });
+  constructor(props?: IOneKeyError<IRecipientHasNotActivedInfo>) {
+    super(
+      normalizeErrorProps(props, {
+        defaultMessage: 'RecipientHasNotActived',
+      }),
+    );
   }
 }
 
-export class InvalidAddress extends OneKeyError<IOneKeyErrorInfo> {
+export class InvalidAddress extends OneKeyError {
   override key: LocaleIds = 'msg__engine__incorrect_address';
 
-  constructor(message?: string, info?: IOneKeyErrorInfo) {
-    super({
-      message: message || 'InvalidAddress.',
-      info,
-    });
+  constructor(props?: IOneKeyError) {
+    super(
+      normalizeErrorProps(props, {
+        defaultMessage: 'InvalidAddress',
+      }),
+    );
   }
 }
 
-export class InvalidSameAddress extends OneKeyError<IOneKeyErrorInfo> {
+export type IInvalidSameAddressInfo = {
+  '0': string;
+};
+export class InvalidSameAddress extends OneKeyError<IInvalidSameAddressInfo> {
   override key: LocaleIds = 'form__address_cannot_send_to_myself';
 
-  constructor(message?: string, info?: IOneKeyErrorInfo) {
-    super({
-      message: message || 'InvalidAddress.',
-      info,
-    });
+  constructor(props?: IOneKeyError<IInvalidSameAddressInfo>) {
+    super(
+      normalizeErrorProps(props, {
+        defaultMessage: 'InvalidSameAddress',
+      }),
+    );
   }
 }
 
-export class InvalidAccount extends OneKeyError<IOneKeyErrorInfo> {
+export class InvalidAccount extends OneKeyError {
   override key: LocaleIds = 'msg__engine__account_not_activated';
 
-  constructor(message?: string, info?: IOneKeyErrorInfo) {
-    super({
-      message: message || 'InvalidAccount.',
-      info,
-    });
+  constructor(props?: IOneKeyError) {
+    super(
+      normalizeErrorProps(props, {
+        defaultMessage: 'InvalidAccount',
+      }),
+    );
   }
 }
 
@@ -148,27 +186,31 @@ export class InvalidTokenAddress extends OneKeyError {
   override key: LocaleIds = 'msg__engine__incorrect_token_address';
 }
 
-export class InvalidTransferValue extends OneKeyError<IOneKeyErrorInfo> {
+export type IInvalidTransferValueInfo = {
+  amount: string;
+  unit: string;
+};
+export class InvalidTransferValue extends OneKeyError<IInvalidTransferValueInfo> {
   override key: LocaleIds = 'msg__engine__incorrect_transfer_value';
 
-  constructor(key?: LocaleIds, info?: IOneKeyErrorInfo) {
-    super({
-      message: 'Invalid Transfer Value',
-      info,
-      key: key ?? 'msg__engine__incorrect_transfer_value',
-    });
+  constructor(props?: IOneKeyError<IInvalidTransferValueInfo>) {
+    super(
+      normalizeErrorProps(props, {
+        defaultMessage: 'InvalidTransferValue',
+      }),
+    );
   }
 }
 
-export class TransferValueTooSmall extends OneKeyError<IOneKeyErrorInfo> {
+export class TransferValueTooSmall extends OneKeyError {
   override key: LocaleIds = 'msg__amount_too_small';
 
-  constructor(key?: LocaleIds, info?: IOneKeyErrorInfo) {
-    super({
-      key: key ?? 'msg__amount_too_small',
-      message: 'Transfer Value too small',
-      info,
-    });
+  constructor(props?: IOneKeyError) {
+    super(
+      normalizeErrorProps(props, {
+        defaultMessage: 'TransferValueTooSmall',
+      }),
+    );
   }
 }
 
@@ -180,19 +222,21 @@ export class InsufficientBalance extends OneKeyError {
   // For situations that utxo selection failed.
   override key: LocaleIds = 'form__amount_invalid';
 }
+export type IStringLengthRequirementInfo = {
+  minLength: string | number;
+  maxLength: string | number;
+};
 export class StringLengthRequirement<
   T = IStringLengthRequirementInfo,
 > extends OneKeyError<T> {
   override key: LocaleIds = 'generic_string_length_requirement' as any;
 
-  constructor(minLength: number, maxLength: number) {
-    const info: IStringLengthRequirementInfo = {
-      minLength: minLength.toString(),
-      maxLength: maxLength.toString(),
-    };
-    super({
-      info: info as T,
-    });
+  constructor(props: IOneKeyError<T>) {
+    super(
+      normalizeErrorProps(props, {
+        defaultMessage: 'StringLengthRequirement',
+      }),
+    );
   }
 }
 export class WalletNameLengthError extends StringLengthRequirement {
@@ -218,13 +262,17 @@ export class AccountAlreadyExists extends OneKeyError {
 }
 
 export type IPreviousAccountIsEmptyInfo = {
-  '0': string;
+  '0': string; // accountLabel
 };
 export class PreviousAccountIsEmpty extends OneKeyError<IPreviousAccountIsEmptyInfo> {
   override key: LocaleIds = 'content__previous_str_account_is_empty';
 
-  constructor(accountTypeStr: string, key?: LocaleIds) {
-    super({ key, info: { '0': accountTypeStr } });
+  constructor(props: IOneKeyError<IPreviousAccountIsEmptyInfo>) {
+    super(
+      normalizeErrorProps(props, {
+        defaultMessage: 'PreviousAccountIsEmpty',
+      }),
+    );
   }
 }
 
@@ -314,12 +362,11 @@ export class InvoiceExpiredError extends OneKeyError {
   override key: LocaleIds = 'msg__the_invoice_has_expired';
 }
 
-export class MaxSendAmountError extends OneKeyError<IOneKeyErrorInfo> {
+export type IMaxSendAmountErrorInfo = {
+  '0': number;
+};
+export class MaxSendAmountError extends OneKeyError<IMaxSendAmountErrorInfo> {
   override key: LocaleIds = 'msg__the_sending_amount_cannot_exceed_int_sats';
-
-  constructor(key: string, info?: IOneKeyErrorInfo, message?: string) {
-    super({ message, info });
-  }
 }
 
 export class TaprootAddressError extends OneKeyError {

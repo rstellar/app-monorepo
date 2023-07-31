@@ -56,10 +56,10 @@ export const derivationHdLedger = (mnemonic: string, path: string) => {
       message ===
       'Expected a mnemonic with 24 words (or 25 including a password)'
     ) {
-      throw new OneKeyInternalError(
+      throw new OneKeyInternalError({
         message,
-        'msg__error_mnemonics_can_only_be_12_24',
-      );
+        key: 'msg__error_mnemonics_can_only_be_12_24',
+      });
     }
     throw e;
   }
