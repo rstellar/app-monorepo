@@ -368,6 +368,6 @@ export class UnknownHardwareError extends OneKeyHardwareError {
   override data = { reconnect: true };
 }
 
-export class TestError2 extends Error {
+export class TestHardwareError2 extends Error {
   override message = 'TestError222333111';
 }

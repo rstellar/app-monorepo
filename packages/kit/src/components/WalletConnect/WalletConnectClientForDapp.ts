@@ -184,9 +184,9 @@ export class WalletConnectClientForDapp extends WalletConnectClientBase {
       // node_modules/@walletconnect/react-native-dapp/dist/providers/WalletConnectProvider.js
       this.connector.on(this.EVENT_NAMES.modal_closed, () =>
         reject(
-          new OneKeyWalletConnectModalCloseError(
-            ERROR_QRCODE_MODAL_USER_CLOSED,
-          ),
+          new OneKeyWalletConnectModalCloseError({
+            message: ERROR_QRCODE_MODAL_USER_CLOSED,
+          }),
         ),
       );
       this.connector.on(

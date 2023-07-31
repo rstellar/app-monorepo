@@ -253,7 +253,9 @@ export function coinSelectForOrdinal(
     false,
   );
   if (result.inputs?.length === 0 || !result.inputs) {
-    throw new InsufficientBalance('Failed to select UTXOs for inscription');
+    throw new InsufficientBalance({
+      message: 'Failed to select UTXOs for inscription',
+    });
   }
   const ordUtxo = inputsForCoinSelect.find((item) => Boolean(item.forceSelect));
   const matchedOrdUtxo = result.inputs?.find(

@@ -1,5 +1,7 @@
 import { isString } from 'lodash';
 
+import type { LocaleIds } from '@onekeyhq/components/src/locale';
+
 import platformEnv from '../../platformEnv';
 
 import type { IOneKeyError } from '../types/errorTypes';
@@ -71,12 +73,17 @@ export function interceptConsoleErrorWithExtraInfo() {
 
 export function normalizeErrorProps(
   props?: IOneKeyError | string,
-  config?: { defaultMessage: string },
+  config?: {
+    defaultMessage?: string;
+    defaultKey?: LocaleIds;
+  },
 ) {
   const msg: string =
     (isString(props) ? props : props?.message) || config?.defaultMessage || '';
+  const key = isString(props) ? undefined : props?.key || config?.defaultKey;
   return {
     message: msg,
+    key,
     ...(isString(props) ? {} : props),
   };
 }

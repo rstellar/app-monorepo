@@ -563,7 +563,9 @@ export default class VaultBtcFork extends VaultBase {
     });
 
     if (!inputs || !outputs || isNil(fee)) {
-      throw new InsufficientBalance('Failed to select UTXOs');
+      throw new InsufficientBalance({
+        message: 'Failed to select UTXOs',
+      });
     }
     const totalFee = fee.toString();
     const totalFeeInNative = new BigNumber(totalFee)

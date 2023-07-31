@@ -26,27 +26,19 @@ export class OneKeyError<
   className?: OneKeyErrorClassNames;
 
   // i18n key
-  key?: LocaleIds = 'onekey_error' as LocaleIds;
+  readonly key?: LocaleIds = 'onekey_error' as LocaleIds;
 
   // i18n params
-  info?: InfoT;
+  readonly info?: InfoT;
 
   constructor(errorProps?: IOneKeyError<InfoT, DataT> | string, info?: InfoT) {
     let msg;
     let code;
     let data;
-    let className;
     let key;
     let infoData: InfoT | undefined;
     if (!isString(errorProps) && errorProps && isPlainObject(errorProps)) {
-      ({
-        message: msg,
-        code,
-        data,
-        className,
-        info: infoData,
-        key,
-      } = errorProps);
+      ({ message: msg, code, data, info: infoData, key } = errorProps);
     } else {
       msg = isString(errorProps) ? errorProps : '';
       code = -99999;
@@ -61,9 +53,12 @@ export class OneKeyError<
       data,
     );
 
-    if (className) this.className = className;
-    if (key) this.key = key;
-    if (infoData) this.info = infoData;
+    if (key) {
+      this.key = key;
+    }
+    if (infoData) {
+      this.info = infoData;
+    }
   }
 
   get constructorName() {

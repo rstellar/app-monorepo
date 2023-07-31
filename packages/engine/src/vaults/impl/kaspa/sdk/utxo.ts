@@ -85,9 +85,9 @@ export function selectUTXOs(
   }
 
   if (totalVal < txAmount)
-    throw new InsufficientBalance(
-      `Insufficient balance - need: ${txAmount} KAS, available: ${txAmount} KAS`,
-    );
+    throw new InsufficientBalance({
+      message: `Insufficient balance - need: ${txAmount} KAS, available: ${txAmount} KAS`,
+    });
 
   return {
     utxoIds,

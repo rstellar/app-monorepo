@@ -336,8 +336,10 @@ export default class ServiceAllNetwork extends ServiceBase {
     });
 
     if (maxIndex === -1) {
-      throw new AllNetworksMinAccountsError('', {
-        0: 1,
+      throw new AllNetworksMinAccountsError({
+        info: {
+          0: 1,
+        },
       });
     }
 
@@ -350,8 +352,10 @@ export default class ServiceAllNetwork extends ServiceBase {
     );
 
     if (accountIds.length >= 3) {
-      throw new AllNetworksUpto3LimitsError('', {
-        0: 3,
+      throw new AllNetworksUpto3LimitsError({
+        info: {
+          0: 3,
+        },
       });
     }
 
@@ -366,8 +370,10 @@ export default class ServiceAllNetwork extends ServiceBase {
     const fakeNewAccountId = `${walletId}--${accountMaxIndex}`;
 
     if (allNetworksAccountsMap?.[fakeNewAccountId]) {
-      throw new AllNetworksMinAccountsError('', {
-        0: accountMaxIndex + 2,
+      throw new AllNetworksMinAccountsError({
+        info: {
+          0: accountMaxIndex + 2,
+        },
       });
     }
 
