@@ -15,6 +15,18 @@ import { IMPL_EVM } from '@onekeyhq/shared/src/engine/engineConsts';
 
 import backgroundApiProxy from '../background/instance/backgroundApiProxy';
 import { ModalRoutes, RootRoutes } from '../routes/routesEnum';
+import {
+  selectAccountTokens,
+  selectAccountTokensBalance,
+  selectDisPlayPriceType,
+  selectHideRiskTokens,
+  selectHideSmallBalance,
+  selectIncludeNFTsInTotal,
+  selectKeleMinerOverviews,
+  selectNFTPrice,
+  selectPutMainTokenOnTop,
+  selectTokenPriceMap,
+} from '../store/selectors';
 import { getPreBaseValue } from '../utils/priceUtils';
 import {
   EOverviewScanTaskType,
@@ -211,16 +223,15 @@ export function useAccountTokensOnChain(
   accountId = '',
   useFilter = false,
 ) {
-  const { hideRiskTokens, hideSmallBalance, putMainTokenOnTop } =
-    useAppSelector((s) => s.settings);
+  const hideRiskTokens = useAppSelector(selectHideRiskTokens);
+  const hideSmallBalance = useAppSelector(selectHideSmallBalance);
+  const putMainTokenOnTop = useAppSelector(selectPutMainTokenOnTop);
   const tokens =
-    useAppSelector((s) => s.tokens.accountTokens?.[networkId]?.[accountId]) ??
-    [];
+    useAppSelector(selectAccountTokens)?.[networkId]?.[accountId] ?? [];
   const balances =
-    useAppSelector(
-      (s) => s.tokens.accountTokensBalance?.[networkId]?.[accountId],
-    ) ?? [];
-  const prices = useAppSelector((s) => s.tokens.tokenPriceMap) ?? {};
+    useAppSelector(selectAccountTokensBalance)?.[networkId]?.[accountId] ?? [];
+
+  const prices = useAppSelector(selectTokenPriceMap) ?? {};
 
   const valueTokens = tokens.map((t) => {
     const priceInfo =
@@ -311,7 +322,7 @@ export const useAccountIsUpdating = ({
 };
 
 export function useAccountTokenLoading(networkId: string, accountId: string) {
-  const accountTokens = useAppSelector((s) => s.tokens.accountTokens);
+  const accountTokens = useAppSelector(selectAccountTokens);
 
   const { data } = useAllNetworksWalletAccounts({
     accountId,
@@ -367,8 +378,9 @@ export function useAccountTokens({
   useFilter?: boolean;
   limitSize?: number;
 }) {
-  const { hideRiskTokens, hideSmallBalance, putMainTokenOnTop } =
-    useAppSelector((s) => s.settings);
+  const hideRiskTokens = useAppSelector(selectHideRiskTokens);
+  const hideSmallBalance = useAppSelector(selectHideSmallBalance);
+  const putMainTokenOnTop = useAppSelector(selectPutMainTokenOnTop);
 
   const { data: allNetworksTokens = [], loading: allNetworksTokensLoading } =
     useAccountPortfolios({
@@ -495,11 +507,10 @@ export const useNFTValues = ({
     accountId,
   });
 
-  const nftPrices = useAppSelector((s) => s.nft.nftPrice);
+  const nftPrices = useAppSelector(selectNFTPrice);
+  const disPlayPriceType = useAppSelector(selectDisPlayPriceType);
 
-  const { disPlayPriceType } = useAppSelector((s) => s.nft);
-
-  const prices = useAppSelector((s) => s.tokens.tokenPriceMap);
+  const prices = useAppSelector(selectTokenPriceMap);
 
   const value = useMemo(() => {
     let total = 0;
@@ -536,7 +547,7 @@ export const useAccountValues = (props: {
   accountId: string;
 }) => {
   const { networkId, accountId } = props;
-  const { includeNFTsInTotal } = useAppSelector((s) => s.settings);
+  const includeNFTsInTotal = useAppSelector(selectIncludeNFTsInTotal);
 
   const { data: defis = [] } = useAccountPortfolios({
     networkId,
@@ -610,7 +621,7 @@ export const useTokenBalance = ({
     type: EOverviewScanTaskType.token,
   });
 
-  const balances = useAppSelector((s) => s.tokens.accountTokensBalance);
+  const balances = useAppSelector(selectAccountTokensBalance);
 
   return useMemo(() => {
     if (isAllNetworks(networkId) && token?.coingeckoId) {
@@ -686,7 +697,7 @@ export const useTokenPositionInfo = ({
     accountId,
   });
 
-  const minerOverview = useAppSelector((s) => s.staking.keleMinerOverviews);
+  const minerOverview = useAppSelector(selectKeleMinerOverviews);
 
   useEffect(() => {
     if (isAllNetworks(networkId)) {

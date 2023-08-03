@@ -23,6 +23,7 @@ import {
 
 import dappColourPNG from '../../../../../assets/dapp_colour.png';
 import { useAppSelector, useTranslation } from '../../../../hooks';
+import { selectRuntimeNetworks } from '../../../../store/selectors';
 import { Chains } from '../../Chains';
 import DAppIcon from '../../components/DAppIcon';
 import FavContainer from '../../Explorer/FavContainer';
@@ -89,7 +90,7 @@ const ChainsSelectorItem: FC<{ logoURI?: string; networkId: string }> = ({
 };
 
 const ChainsSelector: FC<{ networkIds: string[] }> = ({ networkIds }) => {
-  const networks = useAppSelector((s) => s.runtime.networks);
+  const networks = useAppSelector(selectRuntimeNetworks);
   const data = useMemo(() => {
     const items: { logoURI?: string; networkId: string }[] = networks
       .filter((network) => networkIds.includes(network.id))

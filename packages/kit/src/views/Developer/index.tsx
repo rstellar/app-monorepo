@@ -52,6 +52,10 @@ import {
 } from '../../routes/routesEnum';
 import { dappClearSiteConnection } from '../../store/reducers/dapp';
 import { refreshWebviewGlobalKey } from '../../store/reducers/status';
+import {
+  selectDappConnections,
+  selectWebviewGlobalKey,
+} from '../../store/selectors';
 import { openUrlByWebview } from '../../utils/openUrl';
 import { GasPanelRoutes } from '../GasPanel/types';
 
@@ -71,8 +75,8 @@ export const Debug = () => {
   const [uri, setUri] = useState('');
   const navigation = useNavigation<NavigationProps>();
   const navigationRoot = useAppNavigation();
-  const connections = useAppSelector((s) => s.dapp.connections);
-  const webviewKey = useAppSelector((s) => s.status.webviewGlobalKey);
+  const connections = useAppSelector(selectDappConnections);
+  const webviewKey = useAppSelector(selectWebviewGlobalKey);
   console.log('Developer Debug page render >>>>>>>');
   const { width, height } = useWindowDimensions();
   const { serviceAccount, engine } = backgroundApiProxy;

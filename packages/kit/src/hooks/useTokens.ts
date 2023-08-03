@@ -9,6 +9,12 @@ import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 
 import backgroundApiProxy from '../background/instance/backgroundApiProxy';
 import { appSelector } from '../store';
+import {
+  selectAccountTokensBalance,
+  selectFiatMap,
+  selectFiatMoneySymbol,
+  selectTokenPriceMap,
+} from '../store/selectors';
 
 import { useAppSelector } from './useAppSelector';
 
@@ -63,7 +69,7 @@ export function useAccountTokensBalance(
   networkId?: string,
   accountId?: string,
 ) {
-  const balances = useAppSelector((s) => s.tokens.accountTokensBalance);
+  const balances = useAppSelector(selectAccountTokensBalance);
   return useMemo(() => {
     if (!networkId || !accountId) {
       return {};
@@ -150,16 +156,14 @@ export const useTokenPrice = ({
   const key = tokenIdOnNetwork
     ? `${networkId}-${tokenIdOnNetwork ?? ''}`
     : networkId;
-  const prices = useAppSelector((s) => s.tokens.tokenPriceMap);
+  const prices = useAppSelector(selectTokenPriceMap);
   const price = prices?.[key]?.[vsCurrency];
   return price ?? fallback;
 };
 
 export const useCurrentFiatValue = () => {
-  const selectedFiatMoneySymbol = useAppSelector(
-    (s) => s.settings.selectedFiatMoneySymbol,
-  );
-  const fiatMap = useAppSelector((s) => s.fiatMoney.map);
+  const selectedFiatMoneySymbol = useAppSelector(selectFiatMoneySymbol);
+  const fiatMap = useAppSelector(selectFiatMap);
   return fiatMap?.[selectedFiatMoneySymbol]?.value || 0;
 };
 
@@ -170,7 +174,7 @@ export const useSimpleTokenPriceValue = ({
   networkId?: string;
   contractAdress?: string;
 }) => {
-  const vsCurrency = useAppSelector((s) => s.settings.selectedFiatMoneySymbol);
+  const vsCurrency = useAppSelector(selectFiatMoneySymbol);
   const price = useTokenPrice({
     networkId: networkId ?? '',
     tokenIdOnNetwork: contractAdress ?? '',

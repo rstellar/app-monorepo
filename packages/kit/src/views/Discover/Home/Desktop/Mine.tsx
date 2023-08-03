@@ -9,6 +9,7 @@ import { Box, Empty, ScrollView } from '@onekeyhq/components';
 import platformEnv from '@onekeyhq/shared/src/platformEnv';
 
 import { useAppSelector } from '../../../../hooks';
+import { selectDiscoverHome } from '../../../../store/selectors';
 import { useTaggedDapps } from '../../hooks';
 import CardView from '../CardView';
 import { DiscoverContext } from '../context';
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
 });
 
 const ListHeaderComponent = () => {
-  const home = useAppSelector((s) => s.discover.home);
+  const home = useAppSelector(selectDiscoverHome);
   if (!home) {
     return null;
   }
@@ -41,7 +42,7 @@ const ListHeaderComponent = () => {
 };
 
 const ListEmptyComponent = () => {
-  const home = useAppSelector((s) => s.discover.home);
+  const home = useAppSelector(selectDiscoverHome);
   return home ? <Empty title="" /> : <EmptySkeleton />;
 };
 
