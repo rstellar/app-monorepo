@@ -1,7 +1,7 @@
 import { useIsVerticalLayout } from '@onekeyhq/components';
 
-import LNURLWithdraw from '../../../views/LightningNetwork/Send/LNURLWithdraw';
 import { LNURLPayRequest } from '../../../views/LightningNetwork/Send/LNURLPayRequest';
+import LNURLWithdraw from '../../../views/LightningNetwork/Send/LNURLWithdraw';
 import { BaseSendRouteScreen } from '../../../views/Send/components/BaseSendRouteScreen';
 import { BatchSendConfirm } from '../../../views/Send/modals/BatchSendConfirm';
 import { BatchSendProgress } from '../../../views/Send/modals/BatchSendProgress';

@@ -9,6 +9,13 @@ import { OnekeyNetwork } from '@onekeyhq/shared/src/config/networkIds';
 import backgroundApiProxy from '../../../background/instance/backgroundApiProxy';
 import { useAppSelector } from '../../../hooks';
 import {
+  selecKeleIncomes,
+  selecKeleNetworkDashboardGlobal,
+  selecKeleOpHistory,
+  selecKelePendingWithdraw,
+  selecKeleUnstakeOverviews,
+  selecKeleWithdrawOverviews,
+  selectAccountTokensBalance,
   selectEthStakingApr,
   selectKeleMinerOverviews,
   selectLidoOverview,
@@ -43,9 +50,7 @@ export function useKeleUnstakeOverview(networkId: string, accountId: string) {
       });
     }
   }, [networkId, accountId]);
-  return useAppSelector(
-    (s) => s.staking.keleUnstakeOverviews?.[accountId]?.[networkId],
-  );
+  return useAppSelector(selecKeleUnstakeOverviews)?.[accountId]?.[networkId];
 }
 
 export function useKeleWithdrawOverview(networkId: string, accountId: string) {
@@ -60,9 +65,7 @@ export function useKeleWithdrawOverview(networkId: string, accountId: string) {
       });
     }
   }, [networkId, accountId]);
-  return useAppSelector(
-    (s) => s.staking.keleWithdrawOverviews?.[accountId]?.[networkId],
-  );
+  return useAppSelector(selecKeleWithdrawOverviews)?.[accountId]?.[networkId];
 }
 
 export function useKeleMinerOverview(networkId?: string, accountId?: string) {
@@ -72,27 +75,23 @@ export function useKeleMinerOverview(networkId?: string, accountId?: string) {
 }
 
 export function useKeleDashboardInfo(networkId?: string) {
-  return useAppSelector(
-    (s) => s.staking.keleNetworkDashboardGlobal?.[networkId ?? ''],
-  );
+  return useAppSelector(selecKeleNetworkDashboardGlobal)?.[networkId ?? ''];
 }
 
 export function useKeleIncomes(networkId?: string, accountId?: string) {
-  return useAppSelector(
-    (s) => s.staking.keleIncomes?.[accountId ?? '']?.[networkId ?? ''],
-  );
+  return useAppSelector(selecKeleIncomes)?.[accountId ?? '']?.[networkId ?? ''];
 }
 
 export function useKeleOpHistory(networkId?: string, accountId?: string) {
-  return useAppSelector(
-    (s) => s.staking.keleOpHistory?.[accountId ?? '']?.[networkId ?? ''],
-  );
+  return useAppSelector(selecKeleOpHistory)?.[accountId ?? '']?.[
+    networkId ?? ''
+  ];
 }
 
 export function usePendingWithdraw(networkId?: string, accountId?: string) {
-  return useAppSelector(
-    (s) => s.staking.kelePendingWithdraw?.[accountId ?? '']?.[networkId ?? ''],
-  );
+  return useAppSelector(selecKelePendingWithdraw)?.[accountId ?? '']?.[
+    networkId ?? ''
+  ];
 }
 
 export function useIntlMinutes(minutes: number) {
@@ -162,10 +161,9 @@ export const useLidoOverview = (
   accountId?: string,
 ): LidoOverview | undefined => {
   const lidoOverview = useAppSelector(selectLidoOverview);
-  const balances = useAppSelector(
-    (s) => s.tokens.accountTokensBalance?.[networkId ?? '']?.[accountId ?? ''],
-  );
-
+  const balances = useAppSelector(selectAccountTokensBalance)?.[
+    networkId ?? ''
+  ]?.[accountId ?? ''];
   return useMemo(() => {
     if (!networkId || !accountId) return undefined;
     const overview = lidoOverview?.[accountId]?.[networkId];

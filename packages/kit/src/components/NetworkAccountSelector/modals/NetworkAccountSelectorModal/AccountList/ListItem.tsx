@@ -8,6 +8,10 @@ import type { IVaultSettings } from '@onekeyhq/engine/src/vaults/types';
 
 import { useActiveWalletAccount, useAppSelector } from '../../../../../hooks';
 import { useNativeTokenBalance } from '../../../../../hooks/useTokens';
+import {
+  selectAccountSelectorMode,
+  selectActiveExternalWalletName,
+} from '../../../../../store/selectors';
 import { formatAmount } from '../../../../../utils/priceUtils';
 import ExternalAccountImg from '../../../../../views/ExternalAccount/components/ExternalAccountImg';
 import { useAccountSelectorChangeAccountOnPress } from '../../../hooks/useAccountSelectorChangeAccountOnPress';
@@ -40,9 +44,7 @@ const ListItem: FC<ListItemProps> = ({
   wallet,
   onLastItemRender,
 }) => {
-  const accountSelectorMode = useAppSelector(
-    (s) => s.accountSelector.accountSelectorMode,
-  );
+  const accountSelectorMode = useAppSelector(selectAccountSelectorMode);
 
   const nativeBalance = useNativeTokenBalance(network?.id, account.id);
 
@@ -60,7 +62,7 @@ const ListItem: FC<ListItemProps> = ({
     networkId: activeNetworkId,
   } = useActiveWalletAccount();
   const activeExternalWalletName = useAppSelector(
-    (s) => s.general.activeExternalWalletName,
+    selectActiveExternalWalletName,
   );
   const isActive = useMemo(
     () =>

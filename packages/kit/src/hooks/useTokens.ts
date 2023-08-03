@@ -10,6 +10,7 @@ import debugLogger from '@onekeyhq/shared/src/logger/debugLogger';
 import backgroundApiProxy from '../background/instance/backgroundApiProxy';
 import { appSelector } from '../store';
 import {
+  selectAccountTokens,
   selectAccountTokensBalance,
   selectFiatMap,
   selectFiatMoneySymbol,
@@ -53,9 +54,8 @@ export function useCurrentNetworkTokenInfoByCoingeckoId(
   coingeckoId: string,
 ): null | Pick<Token, 'coingeckoId' | 'name' | 'symbol' | 'logoURI'> {
   const { networkId, accountId } = useActiveWalletAccount();
-  const accountTokens = appSelector(
-    (s) => s.tokens.accountTokens?.[networkId]?.[accountId] || [],
-  );
+  const accountTokens =
+    appSelector(selectAccountTokens)?.[networkId]?.[accountId];
   return useMemo(() => {
     const token = accountTokens.find((t) => t.coingeckoId === coingeckoId);
     if (!token) {

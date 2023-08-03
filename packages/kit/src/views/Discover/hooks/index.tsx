@@ -9,15 +9,14 @@ import {
   selectDiscoverBookmarks,
   selectDiscoverHome,
   selectShowBookmark,
+  selectUserBrowserHistories,
 } from '../../../store/selectors';
 
 import type { MatchDAppItemType } from '../Explorer/explorerUtils';
 import type { DAppItemType } from '../type';
 
 export function useUserBrowserHistories(): MatchDAppItemType[] {
-  const userBrowserHistories = useAppSelector(
-    (s) => s.discover.userBrowserHistories,
-  );
+  const userBrowserHistories = useAppSelector(selectUserBrowserHistories);
   return useMemo(() => {
     if (!userBrowserHistories) {
       return [];
